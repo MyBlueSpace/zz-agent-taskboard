@@ -274,6 +274,12 @@ if (cmd === 'add') {
     if (verdict === 'approved' && t.status !== 'review') { console.error(`[门禁拒绝] 签字仅限待验收 review 态任务，当前 ${ZH[t.status]}`); process.exit(1); }
     if (verdict === 'rejected' && !o.note) { console.error('打回必须写具体缺项 --note "..."（治理纪律：打回必须写具体缺项）'); process.exit(1); }
     db.prepare('INSERT INTO task_review(task_id,l2,l2_at) VALUES(?,?,?) ON CONFLICT(task_id) DO UPDATE SET l2=excluded.l2, l2_at=excluded.l2_at').run(id, verdict, now());
+    // L2 签字同步落 task.approved_at/approved_by：plan→ready 门禁与审计读的是 task 表这两个字段，
+    // 只写 task_review 会造成「已签字但 approved_at 仍空」的自相矛盾（T196 实例：l2=approved 而 approved_at=null）。
+    // 已有 approved_at（方案阶段用户点头记录）不覆盖，保留最早一次授权时点。
+    if (verdict === 'approved' && !t.approved_at) {
+      db.prepare('UPDATE task SET approved_at=?, approved_by=?, updated_at=? WHERE id=?').run(now(), o.by ?? '用户', now(), id);
+    }
     audit(id, t.status, t.status, o.by ?? '用户', verdict === 'approved' ? '用户签字 sign' : `用户打回 l2-reject：${o.note}`);
   }
   else if (layer === 'l0') { db.prepare('INSERT INTO task_review(task_id,l0) VALUES(?,?) ON CONFLICT(task_id) DO UPDATE SET l0=excluded.l0').run(id, verdict); }
