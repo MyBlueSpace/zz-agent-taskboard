@@ -1,6 +1,72 @@
 {
-  "generated_at": "2026-10-26T07:45:11.995Z",
+  "generated_at": "2026-10-26T09:17:47.349Z",
   "tasks": [
+    {
+      "id": "T196",
+      "title": "三端代码全面审查 → 修复 → 固化（2026-10-26/27 会话）",
+      "status": "review",
+      "epic": null,
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": "S-1161",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": "docs/方案/代码扫描工具链规范.md",
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "10-27",
+      "finished_at": null,
+      "created_at": "2026-10-26T02:03:35.371Z",
+      "updated_at": "2026-10-26T08:59:44.397Z"
+    },
+    {
+      "id": "T197",
+      "title": "K 线补齐与派生全链路（按方案第 2~5 批继续）",
+      "status": "dev",
+      "epic": null,
+      "priority": "中",
+      "owner": "会话@10-29",
+      "owner_session_id": "会话@10-29",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": "docs/方案/K线补齐与派生全链路方案.md",
+      "approved_at": "2026-10-29T10:00:00+08:00",
+      "approved_by": "用户 m00169「AAA 开工」",
+      "branch": "t197-kline-backfill-orchestrator",
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "高",
+      "finished_at": null,
+      "created_at": "2026-10-26T02:03:35.368Z",
+      "updated_at": "2026-10-26T08:02:26.302Z"
+    },
+    {
+      "id": "T198",
+      "title": "K 线检核矩阵扩充：C12 跨周期一致性 + 质量页两个待交付分支",
+      "status": "backlog",
+      "epic": null,
+      "priority": "中",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": "docs/方案/K线检核矩阵-C12跨周期一致性方案.md",
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "10-27",
+      "finished_at": null,
+      "created_at": "2026-10-26T02:03:35.374Z",
+      "updated_at": "2026-10-26T08:01:39.101Z"
+    },
     {
       "id": "T97",
       "title": "量化数据存储架构方案（K线/因子挖掘/回测/实盘接入）",
@@ -66,28 +132,6 @@
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.379Z",
       "updated_at": "2026-10-26T07:06:46.081Z"
-    },
-    {
-      "id": "T196",
-      "title": "三端代码全面审查 → 修复 → 固化（2026-10-26/27 会话）",
-      "status": "dev",
-      "epic": null,
-      "priority": "高",
-      "owner": null,
-      "owner_session_id": "S-1161",
-      "req_id": null,
-      "plan_id": null,
-      "req_doc": null,
-      "plan_doc": "docs/方案/代码扫描工具链规范.md",
-      "approved_at": null,
-      "approved_by": null,
-      "branch": null,
-      "blocked_reason": null,
-      "fix_rounds": 0,
-      "started_at": "10-27",
-      "finished_at": null,
-      "created_at": "2026-10-26T02:03:35.371Z",
-      "updated_at": "2026-10-26T07:06:45.824Z"
     },
     {
       "id": "T204",
@@ -704,50 +748,6 @@
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.376Z",
       "updated_at": "2026-10-26T02:03:35.376Z"
-    },
-    {
-      "id": "T198",
-      "title": "K 线检核矩阵扩充：C12 跨周期一致性 + 质量页两个待交付分支",
-      "status": "backlog",
-      "epic": null,
-      "priority": "中",
-      "owner": null,
-      "owner_session_id": null,
-      "req_id": null,
-      "plan_id": null,
-      "req_doc": null,
-      "plan_doc": "docs/方案/K线数据检核矩阵-设计.md",
-      "approved_at": null,
-      "approved_by": null,
-      "branch": null,
-      "blocked_reason": null,
-      "fix_rounds": 0,
-      "started_at": "10-27",
-      "finished_at": null,
-      "created_at": "2026-10-26T02:03:35.374Z",
-      "updated_at": "2026-10-26T02:03:35.374Z"
-    },
-    {
-      "id": "T197",
-      "title": "K 线补齐与派生全链路（按方案第 2~5 批继续）",
-      "status": "backlog",
-      "epic": null,
-      "priority": "中",
-      "owner": null,
-      "owner_session_id": null,
-      "req_id": null,
-      "plan_id": null,
-      "req_doc": null,
-      "plan_doc": "docs/方案/K线补齐与派生全链路方案.md",
-      "approved_at": null,
-      "approved_by": null,
-      "branch": null,
-      "blocked_reason": null,
-      "fix_rounds": 0,
-      "started_at": "高",
-      "finished_at": null,
-      "created_at": "2026-10-26T02:03:35.368Z",
-      "updated_at": "2026-10-26T02:03:35.368Z"
     },
     {
       "id": "T145",
@@ -2950,7 +2950,30 @@
       "updated_at": "2026-10-26 04:07:52"
     }
   ],
-  "gates": [],
+  "gates": [
+    {
+      "task_id": "T197",
+      "compile": "mvn -pl zz-option-boot compile BUILD SUCCESS（ff2fc6e 后工作区）",
+      "tests": "KlineBackfillOrchestratorImplTest 6 例全绿",
+      "paradigm": "scripts/check_java_paradigm.ps1 PASS",
+      "reconcile": null,
+      "scan": null,
+      "deploy": null,
+      "scope": null,
+      "scope_files": null
+    },
+    {
+      "task_id": "T196",
+      "compile": "mvn -B -q -DskipTests test-compile exit=0（worktree java-t196-main，main tip 576aad6）",
+      "tests": "mvn -B -T 1C test: Tests run 828 / Failures 10 / Errors 6 / Skipped 2。经基线 fd4780a 同批单跑对照实证为既有红（AuthControllerTest 6E=@MockitoBean 上下文装配失败、KlineGreeksBackfillServiceImplTest 2F、ValidationTest 1F=18 个 Controller 缺 @Valid），与本次 t190/t191 合并无关",
+      "paradigm": "scripts/check_java_paradigm.ps1 === RESULT: PASS === exit=0，15 段全 OK:0/OK(new):0（12-15 段仅报存量欠债白名单豁免）",
+      "reconcile": "N/A - 本轮 t190/t191 均为防御性与字段补齐改造（空 catch 补日志、发布链止血、白名单补 upper_limit/lower_limit/pre_settlement），无业务数值计算/口径变更，无数值可对账",
+      "scan": "scripts/check_code_scan.ps1 -Mode full RESULT: PASS exit=0，newP0=0 newP1=316 total=2717，凭证 commit=576aad6 branch=main",
+      "deploy": "N/A - 开发态交付，按用户口径（前端 vite dev / 后端不进容器验证）本轮不做 docker 部署",
+      "scope": null,
+      "scope_files": null
+    }
+  ],
   "items": [
     {
       "id": "IT-TEST-GUARD",
@@ -3014,6 +3037,51 @@
       "files": "[\"docs/方案索引.md\"]",
       "status": "done",
       "plan_section": "§八.文件级改动清单"
+    },
+    {
+      "id": "IT-1",
+      "task_id": "T197",
+      "seq": 0,
+      "item": "第2批 Java：三态任务表(claim/heartbeat)+job/matrix 两表+Store 三档池+Orchestrator(立即/回补/补齐/验收/回滚)+5 端点+单测 6 例",
+      "files": null,
+      "status": "done",
+      "plan_section": "§3.9/§4.1/§4.2/§4.3"
+    },
+    {
+      "id": "IT-2",
+      "task_id": "T197",
+      "seq": 0,
+      "item": "第3批 Java：KlineCsvRetentionTask 保留策略 + 按需导入重写",
+      "files": null,
+      "status": "done",
+      "plan_section": "§3.5"
+    },
+    {
+      "id": "IT-3",
+      "task_id": "T197",
+      "seq": 0,
+      "item": "第3批 Python：write_csv 落 CSV_ROOT/<yyyymmdd>/<future|option> 二级目录",
+      "files": null,
+      "status": "pending",
+      "plan_section": "§4.2"
+    },
+    {
+      "id": "IT-4",
+      "task_id": "T197",
+      "seq": 0,
+      "item": "第4批 Vue：质量页第 5 个 tab 回补矩阵+进度+提交/回滚",
+      "files": null,
+      "status": "pending",
+      "plan_section": "§3.8/§4.4"
+    },
+    {
+      "id": "IT-5",
+      "task_id": "T197",
+      "seq": 0,
+      "item": "第5批：端到端抽查验收（DDL/新数据/补K线/删派生/回滚）",
+      "files": null,
+      "status": "pending",
+      "plan_section": "§5"
     },
     {
       "id": "IT-T21-01",
@@ -3719,6 +3787,86 @@
       "kind": "deploy",
       "at": "2026-10-26T02:03:35.367Z",
       "by_session": "存量迁移"
+    },
+    {
+      "id": 92,
+      "task_id": "T196",
+      "repo": "java",
+      "commit_hash": "a7b7574",
+      "message": "fix(kline): 发布链止血，消费异常不再杀死线程、关停排空队列、丢弃计数可见",
+      "kind": "fix",
+      "at": "2026-10-26T08:59:08.640Z",
+      "by_session": null
+    },
+    {
+      "id": 93,
+      "task_id": "T196",
+      "repo": "java",
+      "commit_hash": "af96819",
+      "message": "fix(backtest): SimContext 空 catch 补日志，组合保证金回退路径加断言",
+      "kind": "fix",
+      "at": "2026-10-26T08:59:08.830Z",
+      "by_session": null
+    },
+    {
+      "id": 94,
+      "task_id": "T196",
+      "repo": "java",
+      "commit_hash": "2a21c28",
+      "message": "fix(kline): Parquet 读取空 catch 补日志并只告警一次",
+      "kind": "fix",
+      "at": "2026-10-26T08:59:08.999Z",
+      "by_session": null
+    },
+    {
+      "id": 95,
+      "task_id": "T196",
+      "repo": "java",
+      "commit_hash": "b6569cf",
+      "message": "fix(option): 账户幂等冲突空 catch 补 WARN 留痕",
+      "kind": "fix",
+      "at": "2026-10-26T08:59:09.177Z",
+      "by_session": null
+    },
+    {
+      "id": 96,
+      "task_id": "T196",
+      "repo": "java",
+      "commit_hash": "21d8f05",
+      "message": "fix(config): 文档自定义器空 catch 补 DEBUG 日志",
+      "kind": "fix",
+      "at": "2026-10-26T08:59:09.344Z",
+      "by_session": null
+    },
+    {
+      "id": 97,
+      "task_id": "T196",
+      "repo": "java",
+      "commit_hash": "d155d59",
+      "message": "merge: t190-kline-publish-hardening into main（L2 发布链硬化 13 文件 +541/-24）",
+      "kind": "merge",
+      "at": "2026-10-26T08:59:09.542Z",
+      "by_session": null
+    },
+    {
+      "id": 98,
+      "task_id": "T196",
+      "repo": "java",
+      "commit_hash": "576aad6",
+      "message": "fix(market,md): 回放帧补齐24字段，涨跌停与昨结算进入白名单使涨跌停风控首次真正生效",
+      "kind": "fix",
+      "at": "2026-10-26T08:59:09.704Z",
+      "by_session": null
+    },
+    {
+      "id": 91,
+      "task_id": "T197",
+      "repo": "java",
+      "commit_hash": "ff2fc6e",
+      "message": "feat(kline,trade): T197 回补编排器落地，T168-M3 实盘补策略编码",
+      "kind": "other",
+      "at": "2026-10-26T08:02:57.246Z",
+      "by_session": "会话@10-29"
     },
     {
       "id": 82,

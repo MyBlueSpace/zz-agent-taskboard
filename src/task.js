@@ -48,7 +48,13 @@ function gitIn(repo, gitArgs) {
   } catch { return null; }
 }
 const hasCommit = (repo, h) => (h && h !== 'legacy' ? (gitIn(repo, `cat-file -t ${h}`) ?? '').trim() === 'commit' : true);
-const inOriginMain = (repo, h) => (h && h !== 'legacy' ? gitIn(repo, `merge-base --is-ancestor ${h} origin/main`) !== null : true);
+// 仓库不在 REPOS 或本地缺失 → 跳过该项（返回 true），与勾稽 4「仓库不在则跳过」同口径；
+// 否则 py 等未登记仓库的凭证会被误判为「不在 origin/main」。
+const inOriginMain = (repo, h) => {
+  if (!h || h === 'legacy') return true;
+  if (!REPOS[repo] || !existsSync(REPOS[repo])) return true;
+  return gitIn(repo, `merge-base --is-ancestor ${h} origin/main`) !== null;
+};
 const showStatFiles = (repo, h) => {
   const stat = gitIn(repo, `-c core.quotepath=false show --stat --stat-width=800 --stat-name-width=800 --format=%H ${h}`);
   if (stat == null) return null;
@@ -167,7 +173,7 @@ if (cmd === 'add') {
     if (fixRounds > 2) { console.error('[两轮即停] 本工单已返工 2 轮，不再自动打回——请上报用户裁决'); process.exit(1); }
     db.prepare('UPDATE task SET fix_rounds=? WHERE id=?').run(fixRounds, id);
   }
-  db.prepare('UPDATE task SET status=?, updated_at=?, started_at=COALESCE(started_at,?) , finished_at=CASE WHEN ?="closed" THEN ? ELSE finished_at END WHERE id=?')
+  db.prepare("UPDATE task SET status=?, updated_at=?, started_at=COALESCE(started_at,?) , finished_at=CASE WHEN ?='closed' THEN ? ELSE finished_at END WHERE id=?")
     .run(to, now(), now(), to, now(), id);
   audit(id, t.status, to, o.by ?? '脚本', o.note ?? null);
   out({ ok: true, id, from: ZH[t.status], to: ZH[to], fix_rounds: fixRounds });
@@ -324,10 +330,14 @@ if (cmd === 'add') {
   // 5 开发↔测试：过自测的任务四灯齐
   db.prepare(`SELECT t.id,t.status,g.compile,g.tests,g.paradigm,g.reconcile FROM task t LEFT JOIN task_gate g ON g.task_id=t.id WHERE t.status IN ('selftest','review','merge_ready','merged','deployed') AND NOT EXISTS (SELECT 1 FROM task_event e WHERE e.task_id=t.id AND e.actor='存量迁移')`).all()
     .forEach(r => { if (!(r.compile && r.tests && r.paradigm && r.reconcile)) broken['缺门禁灯'].push(`${r.id}(${ZH[r.status]}) 四灯未齐`); });
-  // 6 测试↔扫描：scan 灯含 commit 但不在 origin/main
+  // 6 测试↔扫描：scan 灯含 commit 但不在「任一」仓库的 origin/main。
+  // 扫描凭证由 docs 仓库的 scripts/check_code_scan.ps1 生成，但记录的是被扫仓库（通常 java）的 commit，
+  // 故不能硬编码 docs 单仓校验——遍历全部已登记仓库，任一命中即视为有效。
   db.prepare(`SELECT task_id,scan FROM task_gate WHERE scan IS NOT NULL AND scan!=''`).all().forEach(r => {
     const m = String(r.scan).match(/([0-9a-f]{7,40})/i);
-    if (m && !inOriginMain('docs', m[1])) broken['扫描过期'].push(`${r.task_id} scan 凭证 commit ${m[1]} 不在 origin/main（合并前必须全量扫描 P0=0）`);
+    if (!m) return;
+    const hit = Object.keys(REPOS).some(k => inOriginMain(k, m[1]));
+    if (!hit) broken['扫描过期'].push(`${r.task_id} scan 凭证 commit ${m[1]} 不在任一仓库的 origin/main（合并前必须全量扫描 P0=0）`);
   });
   // 7 提交↔任务：commit hash 在对应仓库验真
   db.prepare(`SELECT task_id,repo,commit_hash FROM task_commit WHERE commit_hash!='legacy'`).all().forEach(r => {
