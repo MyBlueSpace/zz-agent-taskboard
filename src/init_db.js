@@ -1,6 +1,6 @@
-// scripts/init_db.js —— 建库+建表（幂等：已存在则跳过建表，仅补缺失表）
-// 用法: node scripts/init_db.js
-// 数据源唯一真相库：ops/taskboard.db（SQLite，单文件，本机唯一写入口见 task.js/collect.js）
+// src/init_db.js —— 建库+建表（幂等：已存在则跳过建表，仅补缺失表）
+// 用法: node src/init_db.js
+// 数据源唯一真相库：data/taskboard.db（SQLite，单文件，本机唯一写入口见 task.js/collect.js）
 // 勾稽引用字段：task.req_id/plan_id/owner_session_id、bug.task_id/fix_commit、accept_item.item_id、task_item.task_id
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
@@ -8,8 +8,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-mkdirSync(path.join(root, 'ops'), { recursive: true });
-const db = new DatabaseSync(path.join(root, 'ops', 'taskboard.db'));
+mkdirSync(path.join(root, 'data'), { recursive: true });
+const db = new DatabaseSync(path.join(root, 'data', 'taskboard.db'));
 
 db.exec('PRAGMA journal_mode = WAL;');
 db.exec('PRAGMA foreign_keys = ON;');
@@ -172,6 +172,6 @@ meta.run('schema_version', '1', now);
 
 const count = db.prepare("SELECT count(*) AS n FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").get();
 const tables = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(r => r.name);
-console.log(`[init_db] OK: ops/taskboard.db 就绪，业务表 ${count.n} 张：${tables.join(', ')}`);
+console.log(`[init_db] OK: data/taskboard.db 就绪，业务表 ${count.n} 张：${tables.join(', ')}`);
 console.log('[init_db] 阈值（meta）：空转黄灯 30 分钟 / 卡门红灯 60 分钟 / 上下文水位提醒 25%');
 db.close();

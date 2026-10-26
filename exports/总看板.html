@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>AI 开发治理总看板</title><style>
+body{font-family:"Microsoft YaHei",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#222}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:#777;font-size:12px;margin-bottom:12px}
+.sum{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.sum .s{background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.sum .s b{font-size:18px;margin-right:4px}.s.red b{color:#d43}.s.green b{color:#187}
+.board{display:grid;grid-template-columns:repeat(12,minmax(150px,1fr));gap:8px;overflow-x:auto;padding-bottom:8px}
+.col{background:#eef0f3;border-radius:8px;padding:8px;min-height:120px}
+.col h3{margin:0 0 8px;font-size:13px;color:#555;display:flex;justify-content:space-between}
+.col h3 .n{background:#fff;border-radius:10px;padding:0 7px;font-size:12px}
+.card{background:#fff;border-radius:6px;padding:8px;margin-bottom:8px;font-size:12px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.card.blocked{border:2px solid #d43;background:#fff5f5}
+.tid{font-weight:700}.pri{font-size:10px;border-radius:3px;padding:1px 4px;margin-left:4px}
+.p高{background:#fde;color:#a00}.p中{background:#eef;color:#337}
+.ttl{margin:3px 0;line-height:1.35}.meta{color:#888;font-size:11px}
+.lamps{display:flex;gap:2px;margin:4px 0;align-items:center}
+.lamp{width:14px;height:14px;border-radius:50%;display:inline-block;font-size:8px;color:#fff;text-align:center;line-height:14px}
+.lamp.green{background:#2a2}.lamp.red{background:#d33}.lamp.gray{background:#bbb}
+.sesslamp{width:8px;height:8px;border-radius:50%;margin-left:auto}.sesslamp.live{background:#2a2}.sesslamp.idle{background:#d90}
+.stats{color:#555}.bugbadge{color:#d43}.docs{color:#999;font-size:10px;margin-top:3px;word-break:break-all}
+.fixr{color:#d43;font-size:10px}.l2ok{color:#187;font-size:10px}
+.gj{margin-top:18px;background:#fff;border-radius:8px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.gj h2{font-size:15px;margin:0 0 8px}.gj table{width:100%;border-collapse:collapse;font-size:12px}
+.gj td,.gj th{border-bottom:1px solid #eee;padding:5px 8px;text-align:left}.gj .ok{color:#187}
+footer{color:#aaa;font-size:11px;margin-top:10px}
+</style></head><body>
+<h1>AI 开发治理总看板</h1>
+<div class="sub">生成于 2026/10/26 09:51:01 · 数据源 zz-agent-taskboard/data/taskboard.db · 制度权威=zz-option-docs/docs/方案/AI开发治理与任务生命周期管理方案.md</div>
+<div class="sum">
+<div class="s"><b>0</b>总任务</div><div class="s"><b>0</b>需求</div><div class="s"><b>0</b>待开工</div><div class="s"><b>0</b>开发中</div><div class="s"><b>0</b>自测中</div><div class="s"><b>0</b>待验收</div><div class="s"><b>0</b>待合并</div><div class="s"><b>0</b>已部署</div><div class="s green"><b>0</b>关闭</div><div class="s"><b>0</b>阻塞</div>
+<div class="s"><b>0</b>BUG 未修</div>
+<div class="s"><b>0</b>勾稽断链</div>
+</div>
+<div class="board">
+<div class="col"><h3>需求<span class="n">0</span></h3></div><div class="col"><h3>方案<span class="n">0</span></h3></div><div class="col"><h3>待开工<span class="n">0</span></h3></div><div class="col"><h3>开发中<span class="n">0</span></h3></div><div class="col"><h3>自测中<span class="n">0</span></h3></div><div class="col"><h3>待验收<span class="n">0</span></h3></div><div class="col"><h3>待合并<span class="n">0</span></h3></div><div class="col"><h3>已合并<span class="n">0</span></h3></div><div class="col"><h3>已部署<span class="n">0</span></h3></div><div class="col"><h3>关闭<span class="n">0</span></h3></div><div class="col"><h3>阻塞<span class="n">0</span></h3></div><div class="col"><h3>取消<span class="n">0</span></h3></div>
+</div>
+<div class="gj"><h2>勾稽对账（四查断链清单）</h2>
+<span class="ok">✔ 四查全部通过，无断链</span>
+</div>
+<footer>zz-agent-taskboard · board.js 生成 · 只读视图，改动走 src/task.js</footer>
+</body></html>

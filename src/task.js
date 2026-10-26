@@ -1,17 +1,17 @@
-// scripts/task.js —— 任务治理唯一写库入口（事实类：任务/状态/门禁/commit/bug/验收）
+// src/task.js —— 任务治理唯一写库入口（事实类：任务/状态/门禁/commit/bug/验收）
 // 用法:
-//   node scripts/task.js add T68 --title "标题" [--status backlog] [--epic 行情链] [--priority 高]
-//   node scripts/task.js move T68 review --by 会话@10-21 --note "L0 证据齐"
-//   node scripts/task.js gate T68 compile "exit 0 @ ..."    (六灯: compile/tests/paradigm/reconcile/scan/deploy/scope)
-//   node scripts/task.js commit T68 docs abc1234 --kind merge --message "..."
-//   node scripts/task.js bug add T68 --title "..." [--severity P1]
-//   node scripts/task.js bug fix BUG-1 --commit abc1234 --by 会话@10-21
-//   node scripts/task.js item add T68 --item "..." --files '["a.md"]' [--section §2.1]
-//   node scripts/task.js item done IT-1
-//   node scripts/task.js accept add T68 --item "..." [--item-id IT-1] [--criterion "..."]
-//   node scripts/task.js accept pass ACC-1 --evidence "..."
-//   node scripts/task.js set T68 plan_doc "docs/方案/xxx.md"
-//   node scripts/task.js show T68 | list [--status review] | check
+//   node src/task.js add T68 --title "标题" [--status backlog] [--epic 行情链] [--priority 高]
+//   node src/task.js move T68 review --by 会话@10-21 --note "L0 证据齐"
+//   node src/task.js gate T68 compile "exit 0 @ ..."    (六灯: compile/tests/paradigm/reconcile/scan/deploy/scope)
+//   node src/task.js commit T68 docs abc1234 --kind merge --message "..."
+//   node src/task.js bug add T68 --title "..." [--severity P1]
+//   node src/task.js bug fix BUG-1 --commit abc1234 --by 会话@10-21
+//   node src/task.js item add T68 --item "..." --files '["a.md"]' [--section §2.1]
+//   node src/task.js item done IT-1
+//   node src/task.js accept add T68 --item "..." [--item-id IT-1] [--criterion "..."]
+//   node src/task.js accept pass ACC-1 --evidence "..."
+//   node src/task.js set T68 plan_doc "docs/方案/xxx.md"
+//   node src/task.js show T68 | list [--status review] | check
 // 纪律：本脚本是唯一写入口（R1）；一切状态迁移先过门禁（R3）；审计只追加（R4）。
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, existsSync } from 'node:fs';
@@ -19,10 +19,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-mkdirSync(path.join(root, 'ops'), { recursive: true });
-const dbPath = path.join(root, 'ops', 'taskboard.db');
+mkdirSync(path.join(root, 'data'), { recursive: true });
+const dbPath = path.join(root, 'data', 'taskboard.db');
 if (!existsSync(dbPath)) {
-  console.error('[task] ops/taskboard.db 不存在，先跑 node scripts/init_db.js');
+  console.error('[task] data/taskboard.db 不存在，先跑 node src/init_db.js');
   process.exit(1);
 }
 const db = new DatabaseSync(dbPath);
