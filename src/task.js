@@ -470,8 +470,32 @@ if (cmd === 'add') {
   }
   out({ ok: true, 补挂账: filled, 活跃无方案: misses });
 
+} else if (cmd === 'discussion') {
+  const sub = rest[0], o = kv(rest.slice(1));
+  if (sub === 'add') {
+    const q = o._.join(' ');
+    if (!q) { console.error('用法: task.js discussion add "问题一句话" [--options "A/B/C"] [--task T68]'); process.exit(1); }
+    const r = db.prepare('INSERT INTO discussion(question,options,status,task_id,created_at) VALUES(?,?,?,?,?)')
+      .run(q, o.options ?? null, 'open', o.task ?? null, now());
+    out({ ok: true, discussion_id: r.lastInsertRowid, status: 'open' });
+  } else if (sub === 'list') {
+    const rows = db.prepare('SELECT * FROM discussion WHERE status=? ORDER BY id DESC').all(o.all ? '%' : 'open');
+    out({ open: rows.filter(x => x.status === 'open').length, items: rows });
+  } else if (sub === 'decide') {
+    const id = Number(o._[0]);
+    const decided = o._.slice(1).join(' ') || o.decided;
+    if (!id || !decided) { console.error('用法: task.js discussion decide 3 "拍板结果原文"'); process.exit(1); }
+    db.prepare("UPDATE discussion SET status='decided', decided=?, decided_at=? WHERE id=? AND status='open'").run(decided, now(), id);
+    const r = db.prepare('SELECT * FROM discussion WHERE id=?').get(id);
+    if (!r) { console.error(`discussion ${id} 不存在或已拍板`); process.exit(1); }
+    out({ ok: true, discussion_id: id, decided });
+  } else {
+    console.error('用法: task.js discussion add|list|decide');
+    process.exit(1);
+  }
+
 } else {
-  console.error(`用法: node scripts/task.js add|move|gate|commit|bug|item|accept|set|review|show|list|check`);
+  console.error(`用法: node scripts/task.js add|move|gate|commit|bug|item|accept|set|review|show|list|check|deliver|abandon|discussion`);
   process.exit(1);
 }
 db.close();

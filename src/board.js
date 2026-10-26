@@ -42,6 +42,8 @@ const checks = db.prepare('SELECT s.session_id, s.at, s.last_active_min, s.note 
 const latestCheck = new Map();
 for (const c of checks) if (!latestCheck.has(c.session_id)) latestCheck.set(c.session_id, c);
 const events = db.prepare('SELECT * FROM task_event ORDER BY task_id, id').all();
+const discussions = db.prepare("SELECT * FROM discussion WHERE status='open' ORDER BY id DESC").all();
+const devAlerts = db.prepare("SELECT * FROM dev_alerts WHERE resolved=0 ORDER BY id DESC LIMIT 50").all();
 
 const byTask = t => ({
   items: items.filter(i => i.task_id === t.id),
@@ -108,6 +110,10 @@ for (const t of tasks) {
       focusItems.push({ lvl:'黄', text:`${t.id} 的执行会话 ${sid} 空转 ${c.last_active_min} 分钟`, act:'处置：去该会话问一句「卡哪了」，或收回任务重新派工' });
   }
 }
+for (const d of discussions)
+  focusItems.push({ lvl:'红', text:`【等你拍板】${d.question}${d.options ? `（${d.options}）` : ''}`, act:`处置：直接回复你的选择（如「1=A 2=B」或「按推荐」），AI 当场落账 discussion decide 并继续推进` });
+for (const a of devAlerts)
+  focusItems.push({ lvl: a.kind === 'stray_write' ? '红' : '黄', text:`【巡检·${a.kind === 'stray_write' ? '清单外写' : '清单外读'}】${a.message}`, act:'处置：确认该文件是否本任务范围；是→把文件补进任务拆解清单（task.js item add）；否→去该会话口头制止并记录（task.js event）' });
 const redCount = focusItems.filter(f => f.lvl === '红').length;
 const yellowCount = focusItems.filter(f => f.lvl === '黄').length;
 // 今天/本周 维度

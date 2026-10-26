@@ -173,6 +173,29 @@ CREATE TABLE IF NOT EXISTS session_stat (
   at              TEXT                       -- 采集时间
 );
 
+-- 待拍板事项（挤牙膏治理：每个未闭环问题一条，拍板后 decided，看板「等你拍板 N 项」）
+CREATE TABLE IF NOT EXISTS discussion (
+  id              INTEGER PRIMARY KEY AUTOINCREMENT,
+  question        TEXT NOT NULL,               -- 问题一句话
+  options         TEXT,                        -- 选项（可选，逗号分隔或自由文本）
+  status          TEXT DEFAULT 'open',         -- open/decided
+  decided         TEXT,                        -- 拍板结果（用户原话摘录）
+  decided_at      TEXT,
+  task_id         TEXT,                        -- 关联任务（可空）
+  created_at      TEXT
+);
+
+-- 开发偏离告警（档 A 巡检：patrol.py 越界写）
+CREATE TABLE IF NOT EXISTS dev_alerts (
+  id              INTEGER PRIMARY KEY AUTOINCREMENT,
+  session_id      TEXT,                        -- 会话 dsh_id
+  task_id         TEXT,                        -- 关联任务
+  kind            TEXT,                        -- stray_file（越界摸文件）/stall（空转）
+  message         TEXT NOT NULL,               -- 告警内容（文件路径/清单对比）
+  at              TEXT,
+  resolved        INTEGER DEFAULT 0
+);
+
 CREATE INDEX IF NOT EXISTS idx_check_session ON session_check(session_id, at);
 `;
 
