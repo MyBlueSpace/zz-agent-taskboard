@@ -14,7 +14,7 @@
 //   node src/task.js show T68 | list [--status review] | check
 // 纪律：本脚本是唯一写入口（R1）；一切状态迁移先过门禁（R3）；审计只追加（R4）。
 import { DatabaseSync } from 'node:sqlite';
-import { mkdirSync, existsSync } from 'node:fs';
+import { mkdirSync, existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -220,7 +220,7 @@ if (cmd === 'add') {
 
 } else if (cmd === 'set') {
   const [id, field, value] = rest;
-  const allowed = ['title','epic','priority','owner','owner_session_id','req_id','plan_id','req_doc','plan_doc','approved_at','approved_by','branch','blocked_reason'];
+  const allowed = ['title','epic','priority','owner','owner_session_id','req_id','plan_id','req_doc','plan_doc','approved_at','approved_by','branch','blocked_reason','started_at','finished_at'];
   if (!allowed.includes(field)) { console.error(`字段 ${field} 不可直接 set，允许: ${allowed.join('/')}`); process.exit(1); }
   db.prepare(`UPDATE task SET ${field}=?, updated_at=? WHERE id=?`).run(value, now(), id);
   out({ ok: true, id, field, value });
@@ -254,7 +254,7 @@ if (cmd === 'add') {
 } else if (cmd === 'check') {
   // 勾稽四查（断链=红灯；输出清单+计数）
   const broken = { 孤儿任务: [], 无证据验收通过: [], 无修复commit的bug: [], 状态与commit不符: [] };
-  const orphans = db.prepare(`SELECT id,status FROM task WHERE status NOT IN ('backlog','plan','cancelled') AND plan_id IS NULL AND plan_doc IS NULL`).all();
+  const orphans = db.prepare(`SELECT id,status FROM task WHERE status NOT IN ('backlog','plan','cancelled','closed') AND plan_id IS NULL AND plan_doc IS NULL`).all();
   orphans.forEach(r => broken['孤儿任务'].push(`${r.id}(${ZH[r.status]}) 无方案挂账 plan_id/plan_doc`));
   db.prepare('SELECT id,task_id FROM accept_item WHERE passed=1 AND (evidence IS NULL OR evidence=\'\')').all()
     .forEach(r => broken['无证据验收通过'].push(`${r.id} 任务 ${r.task_id} passed 但无证据`));
@@ -267,6 +267,62 @@ if (cmd === 'add') {
     });
   let total = 0; for (const k of Object.keys(broken)) total += broken[k].length;
   out({ 勾稽体检: total === 0 ? 'PASS 无断链' : `红灯 ${total} 条断链`, ...broken });
+
+} else if (cmd === 'migrate') {
+  // 存量迁移（一次性）：读 data/migrate_todo.json 建卡；仅空库允许
+  const cnt = db.prepare('SELECT count(*) AS c FROM task').get().c;
+  if (cnt > 0) { console.error(`[migrate] task 表已有 ${cnt} 条，拒绝重复迁移`); process.exit(1); }
+  const list = JSON.parse(readFileSync(path.join(root, 'data', 'migrate_todo.json'), 'utf8').replace(/^\uFEFF/, ''));
+  const mapStatus = s => {
+    const t = String(s || '').replace(/^\*+/, '').trim();
+    if (/搁置/.test(t)) return 'cancelled';
+    if (/阻塞|待拍板|待用户确认|待确认/.test(t)) return 'blocked';
+    if (/待验收/.test(t)) return 'review';
+    if (/合并 main.*部署中|已提交并合并 main|已完成并合并 main/.test(t)) return 'merged';
+    if (/已完成|已上线|已部署并验证|对账已收口|完成并推送/.test(t)) return 'closed';
+    if (/进行中|代码完成|代码与脚本完成|代码已提交|搬迁已完成|待做|待办/.test(t)) return 'dev';
+    if (/未开始/.test(t)) return 'backlog';
+    return 'backlog';
+  };
+  let ok = 0; const fails = []; const dist = {};
+  for (const r of list) {
+    const st = mapStatus(r.status);
+    dist[st] = (dist[st] || 0) + 1;
+    const title = String(r.title || '').trim() || '未命名任务';
+    const pri = ['高', '中', '低'].includes(r.pri) ? r.pri : '中';
+    try {
+      db.prepare('INSERT INTO task(id,title,status,priority,created_at,updated_at) VALUES(?,?,?,?,?,?)').run(r.id, title, st, pri, now(), now());
+      audit(r.id, null, st, '存量迁移', String(r.status || '').slice(0, 200));
+      const m = String(r.status || '').match(/owner[:：]\s*([^）)\s]+)/);
+      if (m) db.prepare('UPDATE task SET owner=? WHERE id=?').run(m[1].trim(), r.id);
+      if (r.start && r.start !== '—') db.prepare('UPDATE task SET started_at=? WHERE id=?').run(String(r.start), r.id);
+      if (st === 'closed' && r.fin && r.fin !== '—') db.prepare('UPDATE task SET finished_at=? WHERE id=?').run(String(r.fin), r.id);
+      if (st === 'closed') db.prepare(`INSERT INTO task_commit(task_id,repo,commit_hash,message,kind,at,by_session) VALUES(?,?,?,?,?,?,?)`).run(r.id, 'docs', 'legacy', '存量迁移：历史部署 commit 未结构化留存', 'deploy', now(), '存量迁移');
+      if (st === 'merged') db.prepare(`INSERT INTO task_commit(task_id,repo,commit_hash,message,kind,at,by_session) VALUES(?,?,?,?,?,?,?)`).run(r.id, 'docs', 'legacy', '存量迁移：历史合并 commit 未结构化留存', 'merge', now(), '存量迁移');
+      ok++;
+    } catch (e) { fails.push(`${r.id}: ${e.message}`); }
+  }
+  out({ ok: fails.length === 0, migrated: ok, total: list.length, dist, fails });
+
+} else if (cmd === 'migrate-plan') {
+  // 存量补挂账（一次性）：从 docs 仓库 todo.md 内容列提取 docs/*.md 路径回填 plan_doc
+  const TODO_MD = 'C:\\Users\\zhangyan\\Documents\\deepseek-harness\\default-workspace\\todo.md';
+  const raw = readFileSync(TODO_MD, 'utf8');
+  const rows = {};
+  for (const ln of raw.split(/\r?\n/)) {
+    const m = ln.match(/^\|\s*(T\d+)\s*\|/);
+    if (!m) continue;
+    const cells = ln.split(/(?<!\\)\|/);
+    const content = (cells[2] || '');
+    const pm = content.match(/docs[\\/][^\s，。；）】、|]+?\.md/);
+    if (pm) rows[m[1]] = pm[0].replace(/\\/g, '/');
+  }
+  let filled = 0; const misses = [];
+  for (const t of db.prepare('SELECT id,status FROM task').all()) {
+    if (rows[t.id]) { db.prepare('UPDATE task SET plan_doc=? WHERE id=?').run(rows[t.id], t.id); filled++; }
+    else if (!['backlog', 'plan', 'cancelled', 'closed'].includes(t.status)) misses.push(t.id);
+  }
+  out({ ok: true, 补挂账: filled, 活跃无方案: misses });
 
 } else {
   console.error(`用法: node scripts/task.js add|move|gate|commit|bug|item|accept|set|review|show|list|check`);

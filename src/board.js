@@ -48,7 +48,7 @@ const byTask = t => ({
 // ---------- 勾稽四查 ----------
 const broken = [];
 for (const t of tasks) {
-  if (!['backlog','plan','cancelled','blocked'].includes(t.status) && !t.plan_id && !t.plan_doc)
+  if (!['backlog','plan','cancelled','closed'].includes(t.status) && !t.plan_id && !t.plan_doc)
     broken.push({ task: t.id, check: '账证相符', msg: '任务已开工但未挂方案（plan_id/plan_doc 均空）' });
   if (t.status === 'merged' && !commits.some(c => c.task_id === t.id && c.kind === 'merge'))
     broken.push({ task: t.id, check: '时序一致', msg: '状态=已合并 但无 kind=merge 的 commit 挂账' });
