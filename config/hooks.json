@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "write|edit",
+        "command": "\"C:\\Program Files\\nvm-nodejs\\node.exe\" \"C:\\Users\\zhangyan\\Documents\\zz-agent-taskboard\\src\\guard_hook.js\""
+      }
+    ]
+  }
+}
