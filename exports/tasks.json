@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T02:30:58.200Z",
+  "generated_at": "2026-10-26T02:38:52.474Z",
   "tasks": [
     {
       "id": "T99",
@@ -60,12 +60,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "方案待拍板6项未决（§15）：①Parquet湖放哪块盘（推荐I:\\kline_lake或C热+I冷折中）②归档触发（推荐每日定时先归档再删）③Java写Parquet（推荐CSV spool+Python转）④是否上ClickHouse（推荐C=现在不上+留接口）⑤历史数据补法（推荐A迁移10年日线+B自累积立即做）⑥MySQL保留窗口（推荐维持7/30天）。拍板即可开工",
       "fix_rounds": 0,
       "started_at": "10-22",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.166Z",
-      "updated_at": "2026-10-26T02:15:45.428Z"
+      "updated_at": "2026-10-26T02:36:21.520Z"
     },
     {
       "id": "T96",
@@ -478,12 +478,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "下单链路安全与一致性加固待拍板：分批实施顺序未拍",
       "fix_rounds": 0,
       "started_at": "2026-10-21",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.031Z",
-      "updated_at": "2026-10-26T02:03:35.031Z"
+      "updated_at": "2026-10-26T02:37:39.115Z"
     },
     {
       "id": "T70",
@@ -1050,12 +1050,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "阻塞原因未结构化留存（旧 todo 状态列仅「阻塞」二字），待你补充原因或拍板处置",
       "fix_rounds": 0,
       "started_at": "10-20",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.894Z",
-      "updated_at": "2026-10-26T02:15:45.294Z"
+      "updated_at": "2026-10-26T02:37:38.959Z"
     },
     {
       "id": "T38",
@@ -1204,12 +1204,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "迁移存疑待你复核：标题标注 2026-10-20 已完成且用户 m00466 已授权执行，但旧 todo 状态列为阻塞——若确已完成，说一声我改为已完成并补账",
       "fix_rounds": 0,
       "started_at": "10-20",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.871Z",
-      "updated_at": "2026-10-26T02:15:45.177Z"
+      "updated_at": "2026-10-26T02:37:38.837Z"
     },
     {
       "id": "T30",
@@ -1314,12 +1314,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "数据恢复系统三方案待拍板（三选一未定），拍板后开发",
       "fix_rounds": 0,
       "started_at": "10-15",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.849Z",
-      "updated_at": "2026-10-26T02:15:45.066Z"
+      "updated_at": "2026-10-26T02:37:38.700Z"
     },
     {
       "id": "T23",
@@ -1886,12 +1886,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "K 线湖运维方案待拍板（方案文档状态=待拍板，滚动清理+增量归档+监控告警待批）",
       "fix_rounds": 0,
       "started_at": "10-25",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.327Z",
-      "updated_at": "2026-10-26T02:03:35.327Z"
+      "updated_at": "2026-10-26T02:37:39.586Z"
     },
     {
       "id": "T136",
@@ -2568,12 +2568,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "K 线存储方案 v2.0 待拍板（详见 K线存储方案-v2-DuckDB-Parquet.md 待拍板项）",
       "fix_rounds": 0,
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.195Z",
-      "updated_at": "2026-10-26T02:15:45.903Z"
+      "updated_at": "2026-10-26T02:37:39.470Z"
     },
     {
       "id": "T106",
@@ -2590,12 +2590,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "K 线 CSV 目录迁移 C 盘→F 盘待拍板（目标盘与停写窗口未定）",
       "fix_rounds": 0,
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.192Z",
-      "updated_at": "2026-10-26T02:15:45.730Z"
+      "updated_at": "2026-10-26T02:37:39.351Z"
     },
     {
       "id": "T105",
@@ -2634,12 +2634,12 @@
       "approved_at": null,
       "approved_by": null,
       "branch": null,
-      "blocked_reason": null,
+      "blocked_reason": "Python 统一技术栈架构与部署方案待拍板 6 项未决（详见方案文档待拍板章），拍板后进入迁移拆解",
       "fix_rounds": 0,
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.184Z",
-      "updated_at": "2026-10-26T02:15:45.564Z"
+      "updated_at": "2026-10-26T02:37:39.231Z"
     },
     {
       "id": "T100",
