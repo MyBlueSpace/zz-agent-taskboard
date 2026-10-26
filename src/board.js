@@ -5,9 +5,12 @@
 // 纪律：只读库；生成物=exports/*（提交 git 跨机只读）；勾稽四查断链清单内置。
 import { DatabaseSync } from 'node:sqlite';
 import { existsSync, mkdirSync, writeFileSync, copyFileSync, readFileSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+const pathSep = path.sep;
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dbPath = path.join(root, 'data', 'taskboard.db');
@@ -47,27 +50,19 @@ const byTask = t => ({
   commits: commits.filter(c => c.task_id === t.id),
 });
 
-// ---------- 勾稽四查 ----------
+// ---------- 勾稽（口径=task.js check 12 对，单一真相源，避免两份逻辑漂移） ----------
+let checkResult = null;
+try {
+  checkResult = JSON.parse(execSync(`"${process.execPath}" "${path.join(root, 'src', 'task.js')}" check`, { encoding: 'utf8', cwd: root, stdio: ['ignore', 'pipe', 'ignore'] }));
+} catch (e) { checkResult = null; }
 const broken = [];
-for (const t of tasks) {
-  if (!['backlog','plan','cancelled','closed'].includes(t.status) && !t.plan_id && !t.plan_doc)
-    broken.push({ task: t.id, check: '账证相符', msg: '任务已开工但未挂方案（plan_id/plan_doc 均空）' });
-  if (t.status === 'merged' && !commits.some(c => c.task_id === t.id && c.kind === 'merge'))
-    broken.push({ task: t.id, check: '时序一致', msg: '状态=已合并 但无 kind=merge 的 commit 挂账' });
-  if ((t.status === 'deployed' || t.status === 'closed') && !commits.some(c => c.task_id === t.id && c.kind === 'deploy'))
-    broken.push({ task: t.id, check: '时序一致', msg: '状态=已部署/关闭 但无 kind=deploy 的 commit（回答不了「线上跑的是哪版」）' });
-  if (t.status === 'closed') {
-    const done = byTask(t).items.filter(i => i.status === 'done').length;
-    if (done < byTask(t).items.length) broken.push({ task: t.id, check: '汇总一致', msg: `任务已关闭但拆解项 ${done}/${byTask(t).items.length} 未完成` });
-    const acc = byTask(t).accepts;
-    if (acc.length && acc.filter(a => a.passed === 1).length < acc.length)
-      broken.push({ task: t.id, check: '汇总一致', msg: `任务已关闭但验收项 ${acc.filter(a=>a.passed===1).length}/${acc.length} 未通过` });
-  }
+if (checkResult) for (const [k, v] of Object.entries(checkResult)) {
+  if (k === '勾稽体检') continue;
+  if (Array.isArray(v)) v.forEach(msg => {
+    const m = String(msg).match(/T\d+/);
+    broken.push({ task: m ? m[0] : '—', check: k, msg: String(msg) });
+  });
 }
-for (const b of bugs) if (b.status === 'fixed' && !b.fix_commit)
-  broken.push({ task: b.task_id, check: '账实相符', msg: `bug ${b.id} 标记 fixed 但无修复 commit` });
-for (const a of accepts) if (a.passed === 1 && !a.evidence)
-  broken.push({ task: a.task_id, check: '账实相符', msg: `验收项 ${a.id} 标记通过但无证据 evidence` });
 
 // ---------- 时间工具（兼容迁移「MM-DD」短格式与 ISO） ----------
 const pad = n => String(n).padStart(2, '0');
@@ -174,6 +169,13 @@ const card = t => {
     <div class="docs">${esc([t.req_doc, t.plan_doc].filter(Boolean).join(' ').slice(0, 90))}</div>
     ${t.fix_rounds ? `<div class="fixr">返工 ${t.fix_rounds} 轮</div>` : ''}
     ${rv?.l2 === 'approved' ? '<div class="l2ok">L2 已签字</div>' : ''}
+    <details class="det"><summary>详情：拆解/验收/证据/commit/bug</summary>
+      <div class="detsec"><b>📐 拆解项（条款×状态）</b>${d.items.length ? d.items.map(i => `<div>${i.status === 'done' ? '✅' : '⬜'} ${esc(i.item)}${i.plan_section ? ' <span class="dim">· ' + esc(i.plan_section) + '</span>' : ''}</div>`).join('') : '<div class="dim">无拆解（方案文件级清单未灌注）</div>'}</div>
+      <div class="detsec"><b>✔ 验收项</b>${d.accepts.length ? d.accepts.map(a => `<div>${a.passed === 1 ? '✅' : '⬜'} ${esc(a.item)}${a.passed === 1 && a.evidence ? ' <span class="dim">· 证据：' + esc(String(a.evidence).slice(0, 80)) + '</span>' : ''}</div>`).join('') : '<div class="dim">无验收项</div>'}</div>
+      <div class="detsec"><b>🔦 门禁证据</b>${LAMPS.map(n => `<div>${lampDot(t.id, n)} ${n}：${esc(String(g[n] ?? '未填').slice(0, 100))}</div>`).join('')}</div>
+      <div class="detsec"><b>🔗 commit 链</b>${d.commits.length ? d.commits.map(c => `<div>${esc(c.repo)} ${esc(c.commit_hash)} <span class="dim">${esc(c.kind)}</span> ${esc(String(c.message ?? '').slice(0, 60))}</div>`).join('') : '<div class="dim">无 commit 挂账（存量 legacy 除外）</div>'}</div>
+      <div class="detsec"><b>🐞 bug</b>${d.bugs.length ? d.bugs.map(b => `<div>${esc(b.id)} ${esc(b.severity)} ${esc(b.status)}：${esc(String(b.title ?? '').slice(0, 60))}${b.fix_commit ? ' · 修复 ' + esc(b.fix_commit) : ''}</div>`).join('') : '<div class="dim">无 bug</div>'}</div>
+    </details>
   </div>`;
 };
 const boardHtml = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>AI 开发治理总看板</title><style>
@@ -196,6 +198,7 @@ h1{font-size:20px;margin:4px 0 2px}.sub{color:#777;font-size:12px;margin-bottom:
 .sesslamp{width:8px;height:8px;border-radius:50%;margin-left:auto}.sesslamp.live{background:#2a2}.sesslamp.idle{background:#d90}
 .stats{color:#555}.bugbadge{color:#d43}.docs{color:#999;font-size:10px;margin-top:3px;word-break:break-all}
 .fixr{color:#d43;font-size:10px}.l2ok{color:#187;font-size:10px}
+.det{margin-top:6px}.detsec{margin:6px 0;padding:4px 8px;background:#fafbfc;border-left:3px solid #cbd5e0;font-size:11px;line-height:1.7}.dim{color:#98a1ad}
 .squal{color:#666;font-size:10px;margin-top:3px;line-height:1.5}
 .gj{margin-top:18px;background:#fff;border-radius:8px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .gj h2{font-size:15px;margin:0 0 8px}.gj table{width:100%;border-collapse:collapse;font-size:12px}
