@@ -164,7 +164,17 @@ ${broken.length === 0 ? '<span class="ok">✔ 四查全部通过，无断链</sp
 writeFileSync(path.join(exportsDir, 'taskboard.html'), boardHtml);
 
 // ---------- 会话看板.html ----------
-const sessionRows = sessions.map(s => {
+// ---------- 会话过滤：归档（空转且 >7 天未活动）不展示 ----------
+const ARCHIVE_DAYS = 7;
+const ARCHIVE_MS = ARCHIVE_DAYS * 86400000;
+const nowTs = Date.now();
+const visibleSessions = sessions.filter(s => {
+  if (s.status === 'active') return true;
+  const at = s.last_active_at ? new Date(s.last_active_at).getTime() : 0;
+  return nowTs - at <= ARCHIVE_MS;
+});
+const archivedCount = sessions.length - visibleSessions.length;
+const sessionRows = visibleSessions.map(s => {
   const c = latestCheck.get(s.id);
   const min = c?.last_active_min;
   const st = s.status === 'idle' ? '🟡 空转' : '🟢 活跃';
@@ -176,7 +186,7 @@ h1{font-size:20px;margin:4px 0 12px}.sub{color:#777;font-size:12px;margin-bottom
 table{width:100%;border-collapse:collapse;background:#fff;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 td,th{border-bottom:1px solid #eee;padding:7px 10px;text-align:left}
 tr:hover{background:#fafafa}
-</style></head><body><h1>会话看板（AI 员工）</h1><div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 空转阈值 30 分钟（meta 表）</div>
+</style></head><body><h1>会话看板（AI 员工）</h1><div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 展示 ${visibleSessions.length} 个会话（活跃 + ${ARCHIVE_DAYS} 天内活动）· 已归档隐藏 ${archivedCount} 个 · 空转阈值 30 分钟（meta 表）</div>
 <table><tr><th>会话</th><th>工作区</th><th>模型</th><th>状态</th><th>最后活动</th><th>备注</th></tr>${sessionRows}</table></body></html>`;
 writeFileSync(path.join(exportsDir, 'sessionboard.html'), sessHtml);
 

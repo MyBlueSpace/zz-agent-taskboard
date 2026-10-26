@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T02:07:50.695Z",
+  "generated_at": "2026-10-26T02:21:20.641Z",
   "tasks": [
     {
       "id": "T02",
@@ -232,7 +232,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -241,7 +241,7 @@
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.184Z",
-      "updated_at": "2026-10-26T02:03:35.184Z"
+      "updated_at": "2026-10-26T02:15:45.564Z"
     },
     {
       "id": "T105",
@@ -276,7 +276,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -285,7 +285,7 @@
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.192Z",
-      "updated_at": "2026-10-26T02:03:35.192Z"
+      "updated_at": "2026-10-26T02:15:45.730Z"
     },
     {
       "id": "T107",
@@ -298,7 +298,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -307,7 +307,7 @@
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.195Z",
-      "updated_at": "2026-10-26T02:03:35.195Z"
+      "updated_at": "2026-10-26T02:15:45.903Z"
     },
     {
       "id": "T108",
@@ -320,7 +320,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "docs/方案/K线存储方案-v2-DuckDB-Parquet.md",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -329,7 +329,7 @@
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.198Z",
-      "updated_at": "2026-10-26T02:03:35.198Z"
+      "updated_at": "2026-10-26T02:15:44.314Z"
     },
     {
       "id": "T109",
@@ -342,7 +342,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -351,7 +351,7 @@
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.201Z",
-      "updated_at": "2026-10-26T02:03:35.201Z"
+      "updated_at": "2026-10-26T02:15:46.891Z"
     },
     {
       "id": "T11",
@@ -386,7 +386,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "docs/方案/K线存储方案-v2-DuckDB-Parquet.md",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -395,7 +395,7 @@
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.204Z",
-      "updated_at": "2026-10-26T02:03:35.204Z"
+      "updated_at": "2026-10-26T02:15:44.437Z"
     },
     {
       "id": "T111",
@@ -430,7 +430,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "docs/方案/K线存储方案-v2-DuckDB-Parquet.md",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -439,7 +439,7 @@
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.212Z",
-      "updated_at": "2026-10-26T02:03:35.212Z"
+      "updated_at": "2026-10-26T02:15:44.545Z"
     },
     {
       "id": "T113",
@@ -452,7 +452,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "docs/方案/K线存储方案-v2-DuckDB-Parquet.md",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -461,7 +461,7 @@
       "started_at": "10-23",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.216Z",
-      "updated_at": "2026-10-26T02:03:35.216Z"
+      "updated_at": "2026-10-26T02:15:44.674Z"
     },
     {
       "id": "T114",
@@ -1090,7 +1090,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1099,7 +1099,7 @@
       "started_at": "10-25",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.343Z",
-      "updated_at": "2026-10-26T02:03:35.343Z"
+      "updated_at": "2026-10-26T02:15:47.013Z"
     },
     {
       "id": "T142",
@@ -1310,7 +1310,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1319,7 +1319,7 @@
       "started_at": "10-14",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.865Z",
-      "updated_at": "2026-10-26T02:03:34.865Z"
+      "updated_at": "2026-10-26T02:15:46.039Z"
     },
     {
       "id": "T196",
@@ -1464,7 +1464,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "docs/方案/K线存储方案-v2-DuckDB-Parquet.md",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1473,7 +1473,7 @@
       "started_at": "10-25",
       "finished_at": null,
       "created_at": "2026-10-26T02:04:09.472Z",
-      "updated_at": "2026-10-26T02:04:09.623Z"
+      "updated_at": "2026-10-26T02:15:44.803Z"
     },
     {
       "id": "T21",
@@ -1486,7 +1486,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "docs/方案/行情链路延时与连续性可观测方案.md",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1495,7 +1495,7 @@
       "started_at": "10-15",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.830Z",
-      "updated_at": "2026-10-26T02:03:34.830Z"
+      "updated_at": "2026-10-26T02:15:38.997Z"
     },
     {
       "id": "T22",
@@ -1508,7 +1508,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1517,7 +1517,7 @@
       "started_at": "10-15",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.843Z",
-      "updated_at": "2026-10-26T02:03:34.843Z"
+      "updated_at": "2026-10-26T02:15:46.180Z"
     },
     {
       "id": "T23",
@@ -1530,7 +1530,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1539,7 +1539,7 @@
       "started_at": "10-15",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.846Z",
-      "updated_at": "2026-10-26T02:03:34.846Z"
+      "updated_at": "2026-10-26T02:15:46.304Z"
     },
     {
       "id": "T24",
@@ -1552,7 +1552,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1561,7 +1561,7 @@
       "started_at": "10-15",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.849Z",
-      "updated_at": "2026-10-26T02:03:34.849Z"
+      "updated_at": "2026-10-26T02:15:45.066Z"
     },
     {
       "id": "T25",
@@ -1640,7 +1640,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1649,7 +1649,7 @@
       "started_at": "10-20",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.868Z",
-      "updated_at": "2026-10-26T02:03:34.868Z"
+      "updated_at": "2026-10-26T02:15:46.429Z"
     },
     {
       "id": "T31",
@@ -1662,7 +1662,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1671,7 +1671,7 @@
       "started_at": "10-20",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.871Z",
-      "updated_at": "2026-10-26T02:03:34.871Z"
+      "updated_at": "2026-10-26T02:15:45.177Z"
     },
     {
       "id": "T33",
@@ -1772,7 +1772,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1781,7 +1781,7 @@
       "started_at": "10-20",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.111Z",
-      "updated_at": "2026-10-26T02:03:35.111Z"
+      "updated_at": "2026-10-26T02:15:46.546Z"
     },
     {
       "id": "T38",
@@ -1816,7 +1816,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -1825,7 +1825,7 @@
       "started_at": "10-20",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.894Z",
-      "updated_at": "2026-10-26T02:03:34.894Z"
+      "updated_at": "2026-10-26T02:15:45.294Z"
     },
     {
       "id": "T40",
@@ -2322,7 +2322,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "无独立方案：T67 实测遗留缺陷修复（m05675/m05903 点名）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -2331,7 +2331,7 @@
       "started_at": "10-21",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.016Z",
-      "updated_at": "2026-10-26T02:03:35.016Z"
+      "updated_at": "2026-10-26T02:15:44.939Z"
     },
     {
       "id": "T69",
@@ -2454,7 +2454,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -2463,7 +2463,7 @@
       "started_at": "2026-10-21",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.076Z",
-      "updated_at": "2026-10-26T02:03:35.076Z"
+      "updated_at": "2026-10-26T02:15:46.663Z"
     },
     {
       "id": "T81",
@@ -2784,7 +2784,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -2793,7 +2793,7 @@
       "started_at": "-",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.163Z",
-      "updated_at": "2026-10-26T02:03:35.163Z"
+      "updated_at": "2026-10-26T02:15:46.777Z"
     },
     {
       "id": "T97",
@@ -2806,7 +2806,7 @@
       "req_id": null,
       "plan_id": null,
       "req_doc": null,
-      "plan_doc": null,
+      "plan_doc": "豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）",
       "approved_at": null,
       "approved_by": null,
       "branch": null,
@@ -2815,7 +2815,7 @@
       "started_at": "10-22",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.166Z",
-      "updated_at": "2026-10-26T02:03:35.166Z"
+      "updated_at": "2026-10-26T02:15:45.428Z"
     },
     {
       "id": "T98",
@@ -15521,121 +15521,5 @@
       "status": "idle"
     }
   ],
-  "broken": [
-    {
-      "task": "T104",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T106",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T107",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T108",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T109",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T110",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T112",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T113",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T141",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T19",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T201",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T21",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T22",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T23",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T24",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T30",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T31",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T37",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T39",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T68",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T76",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T96",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    },
-    {
-      "task": "T97",
-      "check": "账证相符",
-      "msg": "任务已开工但未挂方案（plan_id/plan_doc 均空）"
-    }
-  ]
+  "broken": []
 }
