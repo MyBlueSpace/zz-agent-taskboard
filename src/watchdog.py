@@ -13,12 +13,20 @@
       python src/watchdog.py --interval 10
       python src/watchdog.py --no-feishu
 """
-import re, sys, json, sqlite3, time, urllib.parse, urllib.request
+import re, sys, json, sqlite3, time, urllib.parse, urllib.request, socket
 from pathlib import Path
 
 if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
+# 单实例锁（2026-10-26 计划任务注册配套）：绑定固定端口，失败=已有实例在跑，直接退出
+# 作用：计划任务每 5 分钟兜底触发时，不会叠出多个 watchdog 实例
+_LOCK = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+try:
+    _LOCK.bind(('127.0.0.1', 47651))
+except OSError:
+    sys.exit(0)  # 已有实例在跑，本实例静默退出
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / 'data' / 'taskboard.db'
