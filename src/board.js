@@ -1,7 +1,7 @@
-// src/board.js —— 视图生成器：exports 快照 + 总看板.html + 会话看板.html + todo.md 瘦身视图 + 勾稽断链清单
+// src/board.js —— 视图生成器：exports 快照 + taskboard.html + sessionboard.html + todo.md 瘦身视图 + 勾稽断链清单
 // 用法：
 //   node src/board.js                  # 生成 exports/（json 快照 + 双 HTML + todo.md 瘦身视图）
-//   node src/board.js --deploy         # 额外把 todo.md/总看板.html/会话看板.html 复制到 zz-option-docs 仓库根（批1⑤迁移用）
+//   node src/board.js --deploy         # 额外把 todo.md/taskboard.html/sessionboard.html 复制到 docs 仓库根
 // 纪律：只读库；生成物=exports/*（提交 git 跨机只读）；勾稽四查断链清单内置。
 import { DatabaseSync } from 'node:sqlite';
 import { existsSync, mkdirSync, writeFileSync, copyFileSync, readFileSync } from 'node:fs';
@@ -161,7 +161,7 @@ ${broken.length === 0 ? '<span class="ok">✔ 四查全部通过，无断链</sp
 </div>
 <footer>zz-agent-taskboard · board.js 生成 · 只读视图，改动走 src/task.js</footer>
 </body></html>`;
-writeFileSync(path.join(exportsDir, '总看板.html'), boardHtml);
+writeFileSync(path.join(exportsDir, 'taskboard.html'), boardHtml);
 
 // ---------- 会话看板.html ----------
 const sessionRows = sessions.map(s => {
@@ -178,7 +178,7 @@ td,th{border-bottom:1px solid #eee;padding:7px 10px;text-align:left}
 tr:hover{background:#fafafa}
 </style></head><body><h1>会话看板（AI 员工）</h1><div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 空转阈值 30 分钟（meta 表）</div>
 <table><tr><th>会话</th><th>工作区</th><th>模型</th><th>状态</th><th>最后活动</th><th>备注</th></tr>${sessionRows}</table></body></html>`;
-writeFileSync(path.join(exportsDir, '会话看板.html'), sessHtml);
+writeFileSync(path.join(exportsDir, 'sessionboard.html'), sessHtml);
 
 // ---------- --deploy：复制到 docs 仓库根（批 1⑤ 迁移用） ----------
 if (process.argv.includes('--deploy')) {
@@ -187,12 +187,12 @@ if (process.argv.includes('--deploy')) {
     process.exit(1);
   }
   copyFileSync(path.join(exportsDir, 'todo.md'), path.join(DOCS_ROOT, 'todo.md'));
-  copyFileSync(path.join(exportsDir, '总看板.html'), path.join(DOCS_ROOT, '总看板.html'));
-  copyFileSync(path.join(exportsDir, '会话看板.html'), path.join(DOCS_ROOT, '会话看板.html'));
-  console.log(`[board] --deploy：todo.md/总看板.html/会话看板.html 已复制到 ${DOCS_ROOT}`);
+  copyFileSync(path.join(exportsDir, 'taskboard.html'), path.join(DOCS_ROOT, 'taskboard.html'));
+  copyFileSync(path.join(exportsDir, 'sessionboard.html'), path.join(DOCS_ROOT, 'sessionboard.html'));
+  console.log(`[board] --deploy：todo.md/taskboard.html/sessionboard.html 已复制到 ${DOCS_ROOT}`);
 }
 
-console.log(`[board] 已生成 exports/：tasks.json、todo.md（${tasks.length} 行任务）、总看板.html（断链 ${broken.length} 条）、会话看板.html（${sessions.length} 会话）`);
+console.log(`[board] 已生成 exports/：tasks.json、todo.md（${tasks.length} 行任务）、taskboard.html（断链 ${broken.length} 条）、sessionboard.html（${sessions.length} 会话）`);
 db.close();
 
 // ---------- --serve [port]：本地静态看板服务（node 内置 http，零依赖常驻） ----------
@@ -201,7 +201,7 @@ if (process.argv.includes('--serve')) {
   const port = Number(portArg) || 8970;
   const server = http.createServer((req, res) => {
     const urlPath = decodeURIComponent((req.url || '/').split('?')[0]).replace(/\\/g, '/');
-    const rel = urlPath === '/' ? '总看板.html' : urlPath.replace(/^\//, '');
+    const rel = urlPath === '/' ? 'taskboard.html' : urlPath.replace(/^\//, '');
     const file = path.join(exportsDir, rel);
     if (!file.startsWith(exportsDir)) { res.writeHead(403); res.end('forbidden'); return; }
     try {
@@ -214,8 +214,8 @@ if (process.argv.includes('--serve')) {
     }
   });
   server.listen(port, '127.0.0.1', () => {
-    console.log(`[board] 总看板：http://127.0.0.1:${port}/总看板.html`);
-    console.log(`[board] 会话看板：http://127.0.0.1:${port}/会话看板.html`);
+    console.log(`[board] 总看板：http://127.0.0.1:${port}/taskboard.html`);
+    console.log(`[board] 会话看板：http://127.0.0.1:${port}/sessionboard.html`);
     console.log('[board] 服务常驻运行中，停止=关闭本进程（Ctrl+C）');
   });
 }
