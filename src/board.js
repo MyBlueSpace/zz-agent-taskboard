@@ -4,7 +4,8 @@
 //   node src/board.js --deploy         # 额外把 todo.md/总看板.html/会话看板.html 复制到 zz-option-docs 仓库根（批1⑤迁移用）
 // 纪律：只读库；生成物=exports/*（提交 git 跨机只读）；勾稽四查断链清单内置。
 import { DatabaseSync } from 'node:sqlite';
-import { existsSync, mkdirSync, writeFileSync, copyFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync, copyFileSync, readFileSync } from 'node:fs';
+import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -193,3 +194,28 @@ if (process.argv.includes('--deploy')) {
 
 console.log(`[board] 已生成 exports/：tasks.json、todo.md（${tasks.length} 行任务）、总看板.html（断链 ${broken.length} 条）、会话看板.html（${sessions.length} 会话）`);
 db.close();
+
+// ---------- --serve [port]：本地静态看板服务（node 内置 http，零依赖常驻） ----------
+if (process.argv.includes('--serve')) {
+  const portArg = process.argv[process.argv.indexOf('--serve') + 1];
+  const port = Number(portArg) || 8970;
+  const server = http.createServer((req, res) => {
+    const urlPath = decodeURIComponent((req.url || '/').split('?')[0]).replace(/\\/g, '/');
+    const rel = urlPath === '/' ? '总看板.html' : urlPath.replace(/^\//, '');
+    const file = path.join(exportsDir, rel);
+    if (!file.startsWith(exportsDir)) { res.writeHead(403); res.end('forbidden'); return; }
+    try {
+      const data = readFileSync(file);
+      const ext = path.extname(file);
+      res.writeHead(200, { 'Content-Type': ext === '.html' ? 'text/html; charset=utf-8' : ext === '.json' ? 'application/json; charset=utf-8' : 'text/plain; charset=utf-8' });
+      res.end(data);
+    } catch {
+      res.writeHead(404); res.end('not found');
+    }
+  });
+  server.listen(port, '127.0.0.1', () => {
+    console.log(`[board] 总看板：http://127.0.0.1:${port}/总看板.html`);
+    console.log(`[board] 会话看板：http://127.0.0.1:${port}/会话看板.html`);
+    console.log('[board] 服务常驻运行中，停止=关闭本进程（Ctrl+C）');
+  });
+}
