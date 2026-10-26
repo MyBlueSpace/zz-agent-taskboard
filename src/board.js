@@ -34,6 +34,7 @@ const bugs = db.prepare('SELECT * FROM bug ORDER BY task_id, id').all();
 const commits = db.prepare('SELECT * FROM task_commit ORDER BY task_id, at').all();
 const reviews = new Map(db.prepare('SELECT * FROM task_review').all().map(r => [r.task_id, r]));
 const sessions = db.prepare('SELECT * FROM session ORDER BY id').all();
+const stats = new Map(db.prepare('SELECT * FROM session_stat').all().map(x => [x.session_id, x]));
 const checks = db.prepare('SELECT s.session_id, s.at, s.last_active_min, s.note FROM session_check s ORDER BY s.session_id, s.id DESC').all();
 const latestCheck = new Map();
 for (const c of checks) if (!latestCheck.has(c.session_id)) latestCheck.set(c.session_id, c);
@@ -137,6 +138,15 @@ const todoMd = `# 任务清单（由 zz-agent-taskboard 生成，勿手改；真
 writeFileSync(path.join(exportsDir, 'todo.md'), todoMd);
 
 // ---------- 总看板.html（自包含） ----------
+// 会话质量指标（session_stat= bili 真源）
+const waterLamp = st => {
+  const n = st?.context_tokens;
+  if (n == null) return '—';
+  if (n > 250000) return `🔴 ${(n / 1000).toFixed(0)}K`;
+  if (n > 150000) return `🟡 ${(n / 1000).toFixed(0)}K`;
+  return `🟢 ${(n / 1000).toFixed(0)}K`;
+};
+const fmtTok = n => n == null ? '—' : n > 1000000 ? (n / 1000000).toFixed(1) + 'M' : Math.round(n / 1000) + 'K';
 const lampDot = (taskId, name) => {
   const g = gates.get(taskId);
   const v = g ? g[name] : null;
@@ -153,11 +163,13 @@ const card = t => {
   const cls = t.status === 'blocked' ? 'card blocked' : 'card';
   const sessionLamp = t.owner_session_id && latestCheck.get(t.owner_session_id)
     ? (latestCheck.get(t.owner_session_id).last_active_min > 30 ? 'idle' : 'live') : '';
+  const sstat = t.owner_session_id ? stats.get(t.owner_session_id) : null;
   return `<div class="${cls}">
     <div class="tid">${esc(t.id)} <span class="pri p${esc(t.priority)}">${esc(t.priority)}</span></div>
     <div class="ttl">${esc(t.title)}</div>
     <div class="meta">${esc(t.owner ?? '未认领')}${t.branch ? ' · ' + esc(t.branch) : ''}</div>
     <div class="lamps">${LAMPS.map(n => lampDot(t.id, n)).join('')}<span class="sesslamp ${sessionLamp}"></span></div>
+    ${sstat ? `<div class="squal">👥 ${esc(String(sstat.title ?? '').slice(0, 22))} · ${waterLamp(sstat)} · 压缩${sstat.fold_count ?? 0} · ${fmtTok((sstat.input_tokens ?? 0) + (sstat.output_tokens ?? 0))}</div>` : ''}
     <div class="stats">拆解 ${doneItems}/${d.items.length} · 验收 ${accPassed}/${d.accepts.length}${openBugs ? ` · <b class="bugbadge">BUG×${openBugs}</b>` : ''}</div>
     <div class="docs">${esc([t.req_doc, t.plan_doc].filter(Boolean).join(' ').slice(0, 90))}</div>
     ${t.fix_rounds ? `<div class="fixr">返工 ${t.fix_rounds} 轮</div>` : ''}
@@ -184,6 +196,7 @@ h1{font-size:20px;margin:4px 0 2px}.sub{color:#777;font-size:12px;margin-bottom:
 .sesslamp{width:8px;height:8px;border-radius:50%;margin-left:auto}.sesslamp.live{background:#2a2}.sesslamp.idle{background:#d90}
 .stats{color:#555}.bugbadge{color:#d43}.docs{color:#999;font-size:10px;margin-top:3px;word-break:break-all}
 .fixr{color:#d43;font-size:10px}.l2ok{color:#187;font-size:10px}
+.squal{color:#666;font-size:10px;margin-top:3px;line-height:1.5}
 .gj{margin-top:18px;background:#fff;border-radius:8px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .gj h2{font-size:15px;margin:0 0 8px}.gj table{width:100%;border-collapse:collapse;font-size:12px}
 .gj td,.gj th{border-bottom:1px solid #eee;padding:5px 8px;text-align:left}.gj .ok{color:#187}
@@ -256,6 +269,8 @@ for (const t of tasks) {
   if (!['closed','cancelled','backlog'].includes(t.status)) o.ids.push(t.id);
 }
 const sessName = s => {
+  const st = stats.get(s.id);
+  if (st?.title) return st.title;
   const o = taskBySession.get(s.id);
   const ws = String(s.workspace ?? '').includes('dsh_wechat') ? 'wechat' : 'docs';
   const ids = o && o.ids.length ? o.ids.slice(0, 3).join(',') + (o.ids.length > 3 ? '…' : '') : '无任务';
@@ -278,12 +293,14 @@ const groupsHtml = [['今天', recent.filter(x => dayKey(x.d) === todayKey())],
   ['昨天', recent.filter(x => dayKey(x.d) === yKey)],
   ['更早（7 天内）', recent.filter(x => dayKey(x.d) !== todayKey() && dayKey(x.d) !== yKey)]]
   .filter(([, l]) => l.length)
-  .map(([gname, l], gi) => `<details ${gi === 0 ? 'open' : ''}><summary>${gname}（${l.length} 个）</summary><table><tr><th>会话</th><th>名称（工作区·任务）</th><th>模型</th><th>状态</th><th>活跃度</th><th>在册</th><th>完成</th><th>返工</th><th>体量</th></tr>${l.map(({ s }) => {
+  .map(([gname, l], gi) => `<details ${gi === 0 ? 'open' : ''}><summary>${gname}（${l.length} 个）</summary><table><tr><th>会话</th><th>名称</th><th>模型</th><th>状态</th><th>活跃度</th><th>水位</th><th>Token（缓存命中）</th><th>压缩</th><th>在册</th><th>完成</th><th>返工</th><th>体量</th></tr>${l.map(({ s }) => {
     const c = latestCheck.get(s.id);
+    const st = stats.get(s.id);
     const o = taskBySession.get(s.id);
     const m = c?.last_active_min;
     const act = m == null ? '—' : (m <= 30 ? `🟢 ${m} 分钟前` : `🟡 空转 ${m} 分钟`);
-    return `<tr><td>${esc(String(s.dsh_id ?? s.id).slice(0, 8))}</td><td>${esc(sessName(s))}</td><td>${esc(s.model ?? '')}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td><td>${act}</td><td>${o ? o.inprog : 0}</td><td>${o ? o.done : 0}</td><td>${o && o.rounds ? o.rounds : 0}</td><td>${fmtSize(c?.note)}</td></tr>`;
+    const tok = (st?.input_tokens != null || st?.output_tokens != null) ? `${fmtTok((st?.input_tokens ?? 0) + (st?.output_tokens ?? 0))}（${st?.cache_hit_pct != null ? Math.round(st.cache_hit_pct) + '%' : '—'}）` : '—';
+    return `<tr><td>${esc(String(s.dsh_id ?? s.id).slice(0, 8))}</td><td>${esc(sessName(s))}</td><td>${esc(s.model ?? '')}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td><td>${act}</td><td>${waterLamp(st)}</td><td>${tok}</td><td>${st?.fold_count ?? '—'}</td><td>${o ? o.inprog : 0}</td><td>${o ? o.done : 0}</td><td>${o && o.rounds ? o.rounds : 0}</td><td>${fmtSize(c?.note)}</td></tr>`;
   }).join('')}</table></details>`).join('');
 const sessHtml = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>会话看板</title><style>
 body{font-family:"Microsoft YaHei",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#222}

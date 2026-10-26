@@ -157,6 +157,22 @@ CREATE INDEX IF NOT EXISTS idx_bug_task      ON bug(task_id);
 CREATE INDEX IF NOT EXISTS idx_accept_task   ON accept_item(task_id);
 CREATE INDEX IF NOT EXISTS idx_commit_task   ON task_commit(task_id);
 CREATE INDEX IF NOT EXISTS idx_event_task    ON task_event(task_id);
+-- 会话质量统计（bili /__bili/sessions 唯一真源；session_id→session.id 与任务勾稽）
+CREATE TABLE IF NOT EXISTS session_stat (
+  session_id      TEXT PRIMARY KEY REFERENCES session(id),  -- S-xxx
+  title           TEXT,                      -- 会话标题（bili，如「AI开发多任务调度最佳实践」）
+  context_tokens  INTEGER,                   -- 当前上下文水位
+  input_tokens    INTEGER,                   -- 累计输入 token
+  cached_tokens   INTEGER,                   -- 累计缓存命中 token
+  output_tokens   INTEGER,                   -- 累计输出 token
+  cache_hit_pct   REAL,                      -- 缓存命中率 %
+  fold_count      INTEGER,                   -- 压缩折叠次数
+  blocks          INTEGER,
+  requests        INTEGER,                   -- 请求数
+  live            INTEGER,
+  at              TEXT                       -- 采集时间
+);
+
 CREATE INDEX IF NOT EXISTS idx_check_session ON session_check(session_id, at);
 `;
 

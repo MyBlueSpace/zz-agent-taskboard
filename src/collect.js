@@ -1,9 +1,11 @@
-// src/collect.js —— 会话观测采集（唯一写库入口②：观测类——活跃/空转/粗略水位）
-// 数据源：~/.dsh/sessions/<工作区>/<UUID>/ 目录（LastWriteTime=最后活动；session 档案大小=粗略水位）
+// src/collect.js —— 会话观测采集（唯一写库入口②：观测类——活跃/空转/水位/质量五维）
+// 数据源：
+//   1. ~/.dsh/sessions/<工作区>/<UUID>/ 目录（LastWriteTime=最后活动；档案大小=体量）
+//   2. bili http://127.0.0.1:18787/__bili/sessions（title/上下文水位/token/压缩次数——会话质量唯一真源）
 // 用法：
 //   node src/collect.js                # 干跑：打印将采集的内容，不写库
-//   node src/collect.js --write        # 采集并写库（session upsert + session_check 追加）
-// 纪律：只写 session/session_check 两张观测表；阈值从 meta 表读（idle_warn_min=30，2026-10-28 拍板）。
+//   node src/collect.js --write        # 采集并写库（session upsert + session_check 追加 + session_stat upsert）
+// 纪律：只写 session/session_check/session_stat 三张观测表；阈值从 meta 表读（idle_warn_min=30，2026-10-28 拍板）。
 import { DatabaseSync } from 'node:sqlite';
 import { readdirSync, statSync, existsSync, readFileSync } from 'node:fs';
 import os from 'node:os';
@@ -98,6 +100,22 @@ if (idle.length) {
   for (const r of idle.slice(0, 20)) console.log(`  - ${r.workspace}/${r.dsh_id.slice(0, 12)}… ${r.last_active_min} 分钟前`);
 }
 
+// ---- bili 会话统计（唯一真源：标题/上下文水位/token/压缩次数）----
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+const statByUuid = new Map();
+try {
+  const res = await fetch('http://127.0.0.1:18787/__bili/sessions', { headers: { 'User-Agent': UA } });
+  if (res.ok) {
+    const list = (await res.json()).sessions ?? [];
+    for (const b of list) statByUuid.set(String(b.id).replace(/^session-/, ''), b);
+    console.log(`[collect] bili 会话统计 ${list.length} 条（title/水位/token/压缩）`);
+  } else {
+    console.warn('[collect] bili API HTTP ' + res.status + '（会话质量维跳过）');
+  }
+} catch (e) {
+  console.warn('[collect] bili API 不可用：' + e.message + '（会话质量维跳过）');
+}
+
 if (!doWrite) {
   console.log('[collect] 干跑模式（未写库）。确认无误后加 --write 执行。');
   db.close();
@@ -112,7 +130,23 @@ const upsert = db.prepare(`
 const insertCheck = db.prepare(
   'INSERT INTO session_check(session_id, at, last_active_min, context_pct, note) VALUES (?, ?, ?, NULL, ?)'
 );
+db.exec(`CREATE TABLE IF NOT EXISTS session_stat (
+  session_id TEXT PRIMARY KEY REFERENCES session(id), title TEXT, context_tokens INTEGER,
+  input_tokens INTEGER, cached_tokens INTEGER, output_tokens INTEGER, cache_hit_pct REAL,
+  fold_count INTEGER, blocks INTEGER, requests INTEGER, live INTEGER, at TEXT
+);`);
+const upsertStat = db.prepare(`
+  INSERT INTO session_stat(session_id, title, context_tokens, input_tokens, cached_tokens,
+    output_tokens, cache_hit_pct, fold_count, blocks, requests, live, at)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  ON CONFLICT(session_id) DO UPDATE SET title=excluded.title, context_tokens=excluded.context_tokens,
+    input_tokens=excluded.input_tokens, cached_tokens=excluded.cached_tokens,
+    output_tokens=excluded.output_tokens, cache_hit_pct=excluded.cache_hit_pct,
+    fold_count=excluded.fold_count, blocks=excluded.blocks, requests=excluded.requests,
+    live=excluded.live, at=excluded.at
+`);
 
+let statMatched = 0;
 db.exec('BEGIN');
 try {
   for (const r of rows) {
@@ -122,6 +156,14 @@ try {
     const status = r.idle ? 'idle' : 'active';
     upsert.run(id, r.dsh_id, r.workspace, r.last_active_at, status, nowIso());
     insertCheck.run(id, nowIso(), r.last_active_min, `size=${r.size_kb}KB`);
+    const b = statByUuid.get(String(r.dsh_id).replace(/^session-/, ''));
+    if (b) {
+      statMatched++;
+      upsertStat.run(id, b.title ?? null, b.contextBest?.tokens ?? b.contextTokens ?? null,
+        b.inputTokens ?? null, b.cachedTokens ?? null, b.outputTokens ?? null,
+        b.cacheHitPct ?? null, b.foldCount ?? null, b.blocks ?? null,
+        b.requests ?? null, b.live ? 1 : 0, nowIso());
+    }
   }
   db.exec('COMMIT');
 } catch (e) {
@@ -129,5 +171,5 @@ try {
   throw e;
 }
 
-console.log(`[collect] 已写库：session upsert ${rows.length} 条 + session_check 追加 ${rows.length} 条`);
+console.log(`[collect] 已写库：session upsert ${rows.length} 条 + session_check 追加 ${rows.length} 条 + session_stat upsert ${statMatched} 条（bili 匹配 ${statByUuid.size - statMatched} 条未对上 dsh_id）`);
 db.close();

@@ -18,6 +18,7 @@ h1{font-size:20px;margin:4px 0 2px}.sub{color:#777;font-size:12px;margin-bottom:
 .sesslamp{width:8px;height:8px;border-radius:50%;margin-left:auto}.sesslamp.live{background:#2a2}.sesslamp.idle{background:#d90}
 .stats{color:#555}.bugbadge{color:#d43}.docs{color:#999;font-size:10px;margin-top:3px;word-break:break-all}
 .fixr{color:#d43;font-size:10px}.l2ok{color:#187;font-size:10px}
+.squal{color:#666;font-size:10px;margin-top:3px;line-height:1.5}
 .gj{margin-top:18px;background:#fff;border-radius:8px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .gj h2{font-size:15px;margin:0 0 8px}.gj table{width:100%;border-collapse:collapse;font-size:12px}
 .gj td,.gj th{border-bottom:1px solid #eee;padding:5px 8px;text-align:left}.gj .ok{color:#187}
@@ -33,7 +34,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
 </style></head><body>
 <nav style="margin:10px 0 14px"><a href="/" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📌 今日进展</a>&nbsp;&nbsp;<a href="/taskboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📋 全景看板</a>&nbsp;&nbsp;<a href="/sessionboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">👥 会话看板</a>&nbsp;&nbsp;<a href="/todo.md" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📝 任务清单</a></nav>
 <h1>AI 开发治理总看板</h1><div class="purpose">本页解决：每张工单现在卡在哪——12 阶段全景档案（编号倒序），按需查阅；红灯=阻塞、灰灯=未报门禁。</div>
-<div class="sub">生成于 2026/10/26 10:45:24 · 数据源 zz-agent-taskboard/data/taskboard.db · 制度权威=zz-option-docs/docs/方案/AI开发治理与任务生命周期管理方案.md</div>
+<div class="sub">生成于 2026/10/26 10:51:41 · 数据源 zz-agent-taskboard/data/taskboard.db · 制度权威=zz-option-docs/docs/方案/AI开发治理与任务生命周期管理方案.md</div>
 <div class="sum">
 <div class="s red"><b>9</b>红·需处理</div>
 <div class="s"><b>1</b>黄·需关注</div>
@@ -53,6 +54,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">宿主端口探活自愈（Docker/WSL 重启后端口映射失效，待拍板）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -62,6 +64,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">下单与实时行情面板修复</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -71,6 +74,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链四差值口径+行情源异常判定（三页面统一）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -80,6 +84,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情 WS 广播端空转优化（M12 候选·**待用户拍板**）：把「无在线用户判断」提前到帧入口（现每帧仍做 `new</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -89,6 +94,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">修 origin/main 基线红（5 类 18 个测试失败：12 failures + 6 errors）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -98,6 +104,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线检核矩阵扩充：C12 跨周期一致性 + 质量页两个待交付分支</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/K线数据检核矩阵-设计.md</div>
     
@@ -107,6 +114,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线补齐与派生全链路（按方案第 2~5 批继续）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/K线补齐与派生全链路方案.md</div>
     
@@ -116,6 +124,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">保证金参数时效机制：①前置核对 combo_x 三值现行一致性 ②参数卡（sys_config.remark 格式）③核</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -125,6 +134,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">CFFEX 接入实施：5 过滤点放开 + 字典 INSERT CFFEX + 期货分支 EXISTS 坑 + EOD 窗</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -134,6 +144,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">py `deploy/prod/docker-compose.yml` 三个服务（gateway-shfe / dce</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -143,6 +154,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">Redis key TTL 全量治理（已定稿未落地：op:task/ack/lock/cfg/md/alert:dedu</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -152,6 +164,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">死代码清理 + 审计残项（TABLE 分支 versionUplift 恒 0、Composer 单条 update、前</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -161,6 +174,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">多腿优先级分解 + 持仓属性限制（§5.2 贪心分解、§5.3 套保-投机）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -170,6 +184,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">质量门禁实跑（.qualitygate/ 工程化 PMD/SpotBugs，Blocker/Critical 清零）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -179,6 +194,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">PRD §4.3 宽跨公式勘误（max+0.5×min → MAX(两腿保证金)+另一腿权利金×U）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -188,6 +204,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">批 5 规则配置页改造 + 机会页横截面评分（0.35+0.25+0.25+0.15）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -197,6 +214,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">批 4 盘中实时价收尾（op_md_quote 快照链路空表修复 + 订阅 + 实时刷新）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -206,6 +224,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">压力测试模块（PRD 全量：IV×价格热力图/85%·100% 等值线/逐腿曲线/账户汇总/历史重放；含回测方案四类 A</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -215,6 +234,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">机会发现补全（PRD 9 类缺 6 类 + sell_plan 等 6 表零建 + 生命周期 + 快照回放 + 复盘假想</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -224,6 +244,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">菜单/角色权限（sys_menu 3 目录 + 12 页面 + 角色授权，SQL 已备好）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -233,6 +254,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">remote-mobile 插件升级覆盖验证（login-page.js/client.js 三处修复会被上游覆盖）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -242,6 +264,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">期权 Greeks 回补 + CSV 二次复核（冷启动已全部完成）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -251,6 +274,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情延时彻底解决</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -260,6 +284,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">品种代码大写写入端修复</div>
     <div class="meta">会话@10-21</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">无独立方案：T67 实测遗留缺陷修复（m05675/m05903 点名）</div>
     
@@ -269,6 +294,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链路 KPI 延时精度修复</div>
     <div class="meta">会话@10-20；代码已提交</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -278,6 +304,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">顶栏实时行情判定改造：java `fae7a59`（4 文件+shouldLive 单测 5 绿+门禁 PASS）/ v</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -287,6 +314,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">夜盘网关心跳类型崩溃修复（`max(字符串, float)` → `'&gt;' not supported between</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -296,6 +324,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情落库「缺失语义」根治 + 条目同步全字段 + 模拟推流禁伪造量仓（代码已提交）；**待验证**：实时链不再把 OI/</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -305,6 +334,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线湖分区键改 trade_date+双物理列（原 T144 编号重复）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/K线存储方案-v2-DuckDB-Parquet.md</div>
     
@@ -314,6 +344,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">三端代码全面审查 → 修复 → 固化（2026-10-26/27 会话）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/代码扫描工具链规范.md</div>
     
@@ -323,6 +354,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情 CPU 整治 M1-M11 明晚 CPU 终审：10-15 晚 21:00-23:00 全品种夜盘同口径对比基线（</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -332,6 +364,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">实盘交易网关重构（Java 重写 + 账户枚举 + 回放自动执行）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/tqsdk调研-A-交易账户.md</div>
     
@@ -341,6 +374,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线模块 `nullifyFakeVolume` ERROR（2026-10-25 01:45 回测部署验证时发现，属</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -350,6 +384,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线湖分区重组（解决 10 万小文件）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/K线存储方案-v2-DuckDB-Parquet.md</div>
     
@@ -359,6 +394,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">Redis 全量快照出口 `md:snapshot:all` + SOD 预热</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -368,6 +404,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线读取改造：删旧日线表 + Java 接入 DuckDB/Parquet 湖</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/K线存储方案-v2-DuckDB-Parquet.md</div>
     
@@ -377,6 +414,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链路延时与连续性可观测（M14）：**已实施完成并上线 + 审查修复批次完成 + 全指标 info 口径说明完成 +</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/行情链路延时与连续性可观测方案.md</div>
     
@@ -386,6 +424,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">恢复「K 线数据」页面（数据源改 Parquet 湖 legacy 层）+ 删旧表</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/K线存储方案-v2-DuckDB-Parquet.md</div>
     
@@ -395,6 +434,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线数据湖重建功能（页面按钮，可反复重建）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/K线存储方案-v2-DuckDB-Parquet.md</div>
     
@@ -404,6 +444,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">先停掉 K 线滚动清理</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -413,6 +454,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">技术栈与量化转型评估（决策留档）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -422,6 +464,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K线表空间瘦身</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -431,6 +474,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">期权冷启动（OI&gt;500 口径 3,518 合约 × 11 周期）+ CSV 独立目录 + Java 子目录扫描</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -440,6 +484,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">CSV 落库确认（台账 PENDING→DONE 以落库为准）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -449,6 +494,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K线冷启动 CSV 通道</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -458,6 +504,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">禁止 Redis SCAN 全库遍历（写铁律+门禁）+ 委托价校验 + 信息量明细布局</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -467,6 +514,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">信息量监控「今日·账户级」明细表口径修复</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -476,6 +524,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线数据源切换收口</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -485,6 +534,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K线写库并发冲突根治（按表路由写调度器）+ 两个既有缺陷</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -494,6 +544,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">交易链路两项修复</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -503,6 +554,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">保证金计算内存化（P0~P4 全部已交付）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -512,6 +564,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">nginx 上游改用宿主固定 IP（2026-10-22 登录 502 根治，已完成）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -521,6 +574,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K线数据完整性兜底机制</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -530,6 +584,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K线质量监控页面列口径说明</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -539,6 +594,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K线冷启动阶段 2/3 全量回补</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -548,6 +604,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K线数据独立 schema</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -557,6 +614,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">交易网关账户清单 30 天 TTL + 15 分钟定时刷新</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -566,6 +624,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">下单全流程飞书通知+系统告警补齐</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -575,6 +634,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">下单页盘口库快照兜底</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -584,6 +644,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">交易面板资金分钟落库与在线状态推送</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -593,6 +654,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">下单面板盘口与开平优化</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -602,6 +664,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">成交/挂单/资金三问题修复</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -611,6 +674,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线压测+对账+部署收尾</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -620,6 +684,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">组合 K 线（多腿）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -629,6 +694,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线质量监控</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -638,6 +704,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线冷启动初始化</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -647,6 +714,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线回补链路</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -656,6 +724,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线前端图表页</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -665,6 +734,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线查询与下发</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -674,6 +744,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线多级合成+全周期落库分级</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -683,6 +754,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">实时 K 线落库（15s 聚合核心+落库闭环，用户 m00837 指定先做）</div>
     <div class="meta">会话@10-21；任务分支</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -692,6 +764,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">下单全流程开盘实测</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -701,6 +774,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">品种代码大小写双层修复（T47 遗留）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -710,6 +784,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">下单失败根因修复+全流程全场景测试</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -719,6 +794,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链路延时异常心跳帧假值根治</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -728,6 +804,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">监控页图表改一行3个</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -737,6 +814,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">多会话工作区隔离（用户 m00002 冲突优化）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -746,6 +824,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">账户编辑两个 bug</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -755,6 +834,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">三工程 hook merge 完成提交豁免</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -764,6 +844,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">main 禁止直接开发/提交（分支门禁）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -773,6 +854,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">交易账户选择持久化</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -782,6 +864,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链延时分段与丢帧分布（m05695 开工）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -791,6 +874,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链性能修复（CPU 高+列表排序乱跳）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -800,6 +884,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链路监控页重构</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -809,6 +894,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情落库链合并（实时行情与 greeks 一个动作落库）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -818,6 +904,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链路监控持久化 + update_time 语义修复</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -827,6 +914,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">数据湖「增量导入/取消」入口补齐并部署（T138 前端漏合并修复）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -836,6 +924,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">防自欺后两件 + 前端样本外验证页</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -845,6 +934,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">样本外滚动 WalkForward（防自欺三件套第一件）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -854,6 +944,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">回测湖分区适配 + 策略回看环形窗口（省内存）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -863,6 +954,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">MySQL K 线分表新增 `trading_date` 交易日字段</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -872,6 +964,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线湖运维落地：trading_date 列 + MySQL 滚动清理 + 增量导入按钮 + 告警监控</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -881,6 +974,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">C/D/E/F 四项（期权规则选合约 / 组合保证金 / 冲击成本 / 信号页增强）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -890,6 +984,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">行情链涨跌停/昨结算字段 + 实盘下单校验</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -899,6 +994,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">交易日历服务（夜盘归属）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -908,6 +1004,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">全部菜单页改为同标签页内部打开（去掉剩余 20 处 openInNewTab）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -917,6 +1014,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">实盘/回测页面被踢回登录页（用户 m00584「实盘和回测那些页面 我一点就跳到登录页让我重新登录」→ m00636「实</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -926,6 +1024,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">实盘四项补齐 + 三层对账（用户 m07935「一起做」、m08165「继续」）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -935,6 +1034,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">实盘监控与告警（用户 m07664「B 一起铺」）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/实盘监控与告警方案.md</div>
     
@@ -944,6 +1044,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">声明式策略 Spec 接入回测入口（用户 m07465「继续」）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -953,6 +1054,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">Java 重启导致 Vue 被迫重新登录（用户 m00002「现在java每次重启，vue都需要重新登录，这不合理，改成</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -962,6 +1064,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">三链 IV/Greeks 统一收尾（快照/实时/重算三链 bs_greeks）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -971,6 +1074,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子→策略→回测端到端演示（用户 m06707「你用创建个新的因子，里面尽量多的用到足够多的算子，再创建个策略 要使用到</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -980,6 +1084,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子算子手册（用户 m06648「你需要把算子分门别类写清楚到一个表格里。包括名称 说明 用法 示例」）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -989,6 +1094,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子增删改完整化（用户 m06484「因子能在页面上创建么和删除么」+ m06488「要做，但是我没看到 创建」）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -998,6 +1104,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子表达式引擎（EXPR 类型，自研 AST，用户 m06151「ok」批准开工）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1007,6 +1114,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子测评图表数据回传（Python 只返序列 JSON，Vue 用 ECharts 画，PNG 仅存档）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1016,6 +1124,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子评分体系 + 列表结论化展示</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1025,6 +1134,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子测评完整报告接进 worker（alphalens 16 图替换 4 图，用户 m05384「要把它接进 worke</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1034,6 +1144,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子测评规则判定与页面展示</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1043,6 +1154,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子库扩充（C，用户 m04901「继续」）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1052,6 +1164,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">实盘接入一期（C，用户 m03748「Ab做完做c，也是先不用部署，但是得推送代码」）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1061,6 +1174,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">因子二期：SQL 因子执行器 + Python 测评链路 + 因子详情页</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1070,6 +1184,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">撮合完整化（回测引擎，用户 m03375「A 撮合完整化 具体一些」+ m03382 拍板）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1079,6 +1194,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">手续费统一入口 TradeFeeEngine（用户 m01137 明确另开会话处理，回测会话先忽略手续费）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1088,6 +1204,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">回测模块第一期：引擎骨架跑通一条完整回测</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/回测模块需求方案.md</div>
     
@@ -1097,6 +1214,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线每日增量归档（Java + DuckDB，不删数据）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1106,6 +1224,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">Python 容器统一 compose 管理</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1115,6 +1234,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">人机协作边界与 AI 稳定性约束（长期原则留档）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1124,6 +1244,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">量化数据存储架构方案（K线/因子挖掘/回测/实盘接入）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -1133,6 +1254,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">下单链路安全与一致性加固</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/下单链路安全与一致性审查报告.md</div>
     
@@ -1142,6 +1264,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">九期网手续费保证金自动导入</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -1151,6 +1274,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">数据链路性能审视 P0 三件（用户 m00466「做」授权执行，2026-10-20 完成）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -1160,6 +1284,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">数据恢复系统功能（三方案待拍板后开发）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -1169,6 +1294,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线湖运维方案落地：MySQL 滚动清理 + 增量归档按钮 + 监控告警</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">docs/方案/K线湖运维方案-MySQL滚动清理与增量归档.md</div>
     
@@ -1178,6 +1304,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线存储方案 v2.0（MySQL 热层 + DuckDB/Parquet 温层）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -1187,6 +1314,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">K 线 CSV 目录迁移 C 盘 → F 盘</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -1196,6 +1324,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">Python 统一技术栈架构与部署方案（三方并存 + 前端并行工程）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
     
@@ -1205,6 +1334,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">数据初始化与增量同步测试收尾（待用户确认）</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     
@@ -1214,6 +1344,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     <div class="ttl">Java 端 MySQL 性能优化 P2 收尾（仅剩 B4/B5：同步链路+Composer 逐条 updateById</div>
     <div class="meta">未认领</div>
     <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs"></div>
     

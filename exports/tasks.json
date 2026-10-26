@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T02:45:24.135Z",
+  "generated_at": "2026-10-26T02:51:41.207Z",
   "tasks": [
     {
       "id": "T99",
@@ -5738,7 +5738,7 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.822Z",
       "last_active_at": "2026-10-26T01:38:00.943Z",
-      "status": "active"
+      "status": "idle"
     },
     {
       "id": "S-1183",
@@ -5748,6 +5748,66 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.822Z",
       "last_active_at": "2026-10-26T01:54:19.762Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1184",
+      "dsh_id": "fc1898f2-1593-4546-8684-3f43c552ab1c",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T02:50:33.516Z",
+      "last_active_at": "2026-10-26T02:11:37.528Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1185",
+      "dsh_id": "81b4c6f7-9f88-468c-9fab-c22dee623523",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T02:50:33.517Z",
+      "last_active_at": "2026-10-26T02:17:29.572Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1186",
+      "dsh_id": "6ee4b3c7-f01e-4277-9dbb-e6416735d187",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T02:50:33.517Z",
+      "last_active_at": "2026-10-26T02:22:39.473Z",
+      "status": "active"
+    },
+    {
+      "id": "S-1187",
+      "dsh_id": "29df8b36-7e78-4214-a8c4-7795e3a80d34",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T02:50:33.517Z",
+      "last_active_at": "2026-10-26T02:28:28.911Z",
+      "status": "active"
+    },
+    {
+      "id": "S-1188",
+      "dsh_id": "38cd029b-4229-4ef5-b189-795770dc7bbb",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T02:50:33.517Z",
+      "last_active_at": "2026-10-26T02:40:30.098Z",
+      "status": "active"
+    },
+    {
+      "id": "S-1189",
+      "dsh_id": "e69fffa2-eb16-4366-91f4-4d3aed671b3c",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T02:50:33.517Z",
+      "last_active_at": "2026-10-26T02:46:31.265Z",
       "status": "active"
     },
     {
