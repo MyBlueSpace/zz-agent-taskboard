@@ -1,0 +1,1042 @@
+﻿[
+    {
+        "id":  "T38",
+        "pri":  "高",
+        "fin":  "10-20",
+        "start":  "10-20",
+        "title":  "main 禁止直接开发/提交（分支门禁）",
+        "status":  "已完成（四文件全部落地推送；方案 B/C 用户 2026-10-20 拍板不落地、维持 A；java 共享工作区本地 main 落后 origin/main 2 提交=另一会话未提交改动致 ff 被拒，留待其提交后 ff）"
+    },
+    {
+        "id":  "T36",
+        "pri":  "高",
+        "fin":  "10-20",
+        "start":  "10-20",
+        "title":  "交易账户选择持久化",
+        "status":  "已完成（v1 不完整：a740d87→c7f94c0 合并 main+部署 18088，但用户 m00583 复测刷新仍回退→端到端复现钉死根因=接口返回 id 为字符串 \"6\"，readSavedAccountId 只认 number+find 严格相等双失配→修复 2 处（读回兼容 string+String 比较）commit 3ade4e4 已 push main→Playwright 双向复测 PASS（TQSim/国泰 切换→刷新→恢复）→容器 18088 已再部署 18:49（stores.DWArr406.js 含修复））"
+    },
+    {
+        "id":  "T21",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "10-15",
+        "title":  "行情链路延时与连续性可观测（M14）：**已实施完成并上线 + 审查修复批次完成 + 全指标 info 口径说明完成 +",
+        "status":  "待验收"
+    },
+    {
+        "id":  "T13",
+        "pri":  "高",
+        "fin":  "10-20",
+        "start":  "10-09",
+        "title":  "三链 IV/Greeks 统一收尾（快照/实时/重算三链 bs_greeks）",
+        "status":  "**已完成（并入 T31，2026-10-20 T31 三件落地）**：实时链 java 直算唯一引擎（16cf89d）+ 批量链 java 直算直落（cf0851d）+ py 两条残留删除（8987393）"
+    },
+    {
+        "id":  "T14",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "10-10",
+        "title":  "Java 端 MySQL 性能优化 P2 收尾（仅剩 B4/B5：同步链路+Composer 逐条 updateById",
+        "status":  "搁置（10 天未动，待重新排期）"
+    },
+    {
+        "id":  "T15",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "10-10",
+        "title":  "数据初始化与增量同步测试收尾（待用户确认）",
+        "status":  "搁置（10 天未动，待重新排期）"
+    },
+    {
+        "id":  "T22",
+        "pri":  "高",
+        "fin":  "10-15 代码已提交",
+        "start":  "10-15",
+        "title":  "行情落库「缺失语义」根治 + 条目同步全字段 + 模拟推流禁伪造量仓（代码已提交）；**待验证**：实时链不再把 OI/",
+        "status":  "进行中（待验证）"
+    },
+    {
+        "id":  "T23",
+        "pri":  "高",
+        "fin":  "10-15 代码已提交",
+        "start":  "10-15",
+        "title":  "夜盘网关心跳类型崩溃修复（`max(字符串, float)` → `\u0027\u003e\u0027 not supported between ",
+        "status":  "进行中（待观察）"
+    },
+    {
+        "id":  "T24",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "10-15",
+        "title":  "数据恢复系统功能（三方案待拍板后开发）",
+        "status":  "阻塞（待用户拍板 Q 项）"
+    },
+    {
+        "id":  "T25",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "10-19",
+        "title":  "行情链路监控持久化 + update_time 语义修复",
+        "status":  "**进行中**：Java 侧全部完成并部署验证（缺陷 A `8d8aad9`、功能 B+遗留波 `4860a9f`、夜盘三缺陷修复 `17f070a`；快照 5 分钟一行落库实测 ✓）；**待做**：③前端监控页日期/时段历史查询未开工——侦察已完成：页面 `src\\views\\option\\op-md-latency\\index.vue`（745 行：汇总卡片+查询表单 L145-270+折线图+明细表）；改造点=表单加 el-date-picker+开始/结束 el-time-picker、选日期切历史模式（调 GET /api/v1/md/monitor/snapshots 分页、停 3 秒实时刷新）、清空恢复实时；API 层=新建 `src\\api\\option\\md-monitor\\index.ts`+`types.ts`（PageResult\u003cMdMonitorSnapshotVO\u003e 26 字段）"
+    },
+    {
+        "id":  "T28",
+        "pri":  "高",
+        "fin":  "10-19 23:50",
+        "start":  "10-19",
+        "title":  "行情落库链合并（实时行情与 greeks 一个动作落库）",
+        "status":  "**已完成**：java `d485a41`（9 files +84/-418）已部署验证——30 秒 monitor RPUSH 3825 帧全进 op:task:quote（794 enriched 带 iv 口径正确、1407 期货帧恢复实时落库）、quote_enriched 零新数据、队列无积压、库 MAX(greeks_ts) 从 10-15 19:41 恢复实时更新（23:44 后 138 行）+期货 update_time 464 行；编译/门禁/相关单测全绿；全量 10 失败=历史遗留"
+    },
+    {
+        "id":  "T29",
+        "pri":  "高",
+        "fin":  "01:55",
+        "start":  "10-20",
+        "title":  "行情链路监控页重构",
+        "status":  "已完成（遗留日盘验证）"
+    },
+    {
+        "id":  "T19",
+        "pri":  "高",
+        "fin":  "10-15 凌晨 M1-M11 全部实施：java ae25470/e1cda98/b321d3e/26d7e90、py eea19bd（M4+M8+M3）；M10 redis 持久化瘦身（appendonly no+save 放宽）；M11 帧时间戳单调去重（旧帧重放根因，java 闲时 45%→5.5%）；py 提交 md_gateway.py 待办",
+        "start":  "10-14",
+        "title":  "行情 CPU 整治 M1-M11 明晚 CPU 终审：10-15 晚 21:00-23:00 全品种夜盘同口径对比基线（",
+        "status":  "进行中（终审待执行）"
+    },
+    {
+        "id":  "T30",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "10-20",
+        "title":  "顶栏实时行情判定改造：java `fae7a59`（4 文件+shouldLive 单测 5 绿+门禁 PASS）/ v",
+        "status":  "进行中（待用户拍板部署时机：夜盘时段重启断链+生产 web 502 现存+他会话 hist 修复可能重启需错开）"
+    },
+    {
+        "id":  "T31",
+        "pri":  "高",
+        "fin":  "10-20 08:30",
+        "start":  "10-20",
+        "title":  "数据链路性能审视 P0 三件（用户 m00466「做」授权执行，2026-10-20 完成）",
+        "status":  "**已完成（代码全部提交推送；部署待用户确认部署方案）**"
+    },
+    {
+        "id":  "T33",
+        "pri":  "高",
+        "fin":  "10-20 09:45",
+        "start":  "10-20",
+        "title":  "行情链性能修复（CPU 高+列表排序乱跳）",
+        "status":  "**已完成**：java 579679c/5d85457/d9406ee、vue b2ab9b1/631bd1c 全部提交推送并部署 test 容器验证；单测（InboundQuoteBusTest 4+GreeksCalculatorTest 4+GreeksReconcileTest 对账）绿、门禁七项全 0 PASS"
+    },
+    {
+        "id":  "T34",
+        "pri":  "高",
+        "fin":  "2026-10-20 14:50",
+        "start":  "10-20",
+        "title":  "行情链延时分段与丢帧分布（m05695 开工）",
+        "status":  "已完成（代码全部提交两仓库 t34-md-segments：java d1737ca/21e4278/d6929ff、vue 6e76265/7f821f8/fb3db5c；单测 27 绿+门禁 PASS；部署验证：14:39 重启后 summary total=1602 全 normal/断流 0、三段 p95=行情源 1738/传输 190/处理 190、接口实测通过；日盘全天验证 p50=5ms/p95=10ms 链路真实健康、CPU 356.7%→115.6%；分支合并 main 待另一会话 t32 收工后进行）"
+    },
+    {
+        "id":  "T41",
+        "pri":  "高",
+        "fin":  "10-20",
+        "start":  "10-20",
+        "title":  "账户编辑两个 bug",
+        "status":  "已完成（java d480851→0b28194 merge main；vue 5a25468→6261904 merge main；验证=mvn compile EXIT=0+七项门禁 PASS / vue-tsc EXIT=0；接口绿测 A0402「账户名称不能为空」+库行数不变；Playwright 编辑弹窗实测 30.00/0.00=库 0.30/0 ×100 ✓；6520 dev server 已服务修复版（curl HIT）；遗留缺口 2 项待用户拍板=deploy_guard check-build 窗口无分支复查（本次事故实锤）+vue commit-msg 无 MERGE_HEAD 豁免）"
+    },
+    {
+        "id":  "T40",
+        "pri":  "高",
+        "fin":  "10-20",
+        "start":  "10-20",
+        "title":  "三工程 hook merge 完成提交豁免",
+        "status":  "已完成（vue 37bce9c/py a8a9b60 合并 main 并验证豁免端到端；java e32d678 替代方案 push 0eddd1f..e32d678 合并 main（工作区被另一会话部署 worktree zz-java-deploy2 占用 checkout main 被拒，ancestor-check exit=0 后走 §0.6 ①(c) 替代方案），origin/main 的 hook 已复验含 MERGE_HEAD 豁免段；AGENTS 两处同步随 docs 4f3d3f7 已提交；java 工作区已切回 t39-jiuqiu-fee-margin 归还）"
+    },
+    {
+        "id":  "T39",
+        "pri":  "高",
+        "fin":  "10-20 20:30",
+        "start":  "10-20",
+        "title":  "九期网手续费保证金自动导入",
+        "status":  "**已完成**（java 6 新增+7 修改合并 main 08099fb/1eafa87/bbb81b1；vue 2 文件 d41c84f/4a47be2；DDL 建表+回填 2 批次已执行；部署实测自动导入 833 行 5 交易所 SUCCESS；两轮 bug 修复=0 行复用（包装完整 HTML 文档）+SKIPPED 口径（校验停用+二次确认）；用户 m01066「点完了，没问题了」验收；遗留待拍板=台账 id 4 脏数据删否、校验恢复口径）"
+    },
+    {
+        "id":  "T83",
+        "pri":  "中",
+        "fin":  "10-22",
+        "start":  "10-22",
+        "title":  "nginx 上游改用宿主固定 IP（2026-10-22 登录 502 根治，已完成）",
+        "status":  "已完成"
+    },
+    {
+        "id":  "T84",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "10-22",
+        "title":  "宿主端口探活自愈（Docker/WSL 重启后端口映射失效，待拍板）",
+        "status":  "未开始（待用户拍板方案）"
+    },
+    {
+        "id":  "T04",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "机会发现补全（PRD 9 类缺 6 类 + sell_plan 等 6 表零建 + 生命周期 + 快照回放 + 复盘假想",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T05",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "压力测试模块（PRD 全量：IV×价格热力图/85%·100% 等值线/逐腿曲线/账户汇总/历史重放；含回测方案四类 A",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T06",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "批 4 盘中实时价收尾（op_md_quote 快照链路空表修复 + 订阅 + 实时刷新）",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T07",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "批 5 规则配置页改造 + 机会页横截面评分（0.35+0.25+0.25+0.15）",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T09",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "质量门禁实跑（.qualitygate/ 工程化 PMD/SpotBugs，Blocker/Critical 清零）",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T12",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "Redis key TTL 全量治理（已定稿未落地：op:task/ack/lock/cfg/md/alert:dedu",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T02",
+        "pri":  "低",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "remote-mobile 插件升级覆盖验证（login-page.js/client.js 三处修复会被上游覆盖）",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T03",
+        "pri":  "低",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "菜单/角色权限（sys_menu 3 目录 + 12 页面 + 角色授权，SQL 已备好）",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T08",
+        "pri":  "低",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "PRD §4.3 宽跨公式勘误（max+0.5×min → MAX(两腿保证金)+另一腿权利金×U）",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T10",
+        "pri":  "低",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "多腿优先级分解 + 持仓属性限制（§5.2 贪心分解、§5.3 套保-投机）",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T11",
+        "pri":  "低",
+        "fin":  "—",
+        "start":  "—",
+        "title":  "死代码清理 + 审计残项（TABLE 分支 versionUplift 恒 0、Composer 单条 update、前",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T16",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "10-14",
+        "title":  "py `deploy/prod/docker-compose.yml` 三个服务（gateway-shfe / dce ",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T17",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "10-14",
+        "title":  "CFFEX 接入实施：5 过滤点放开 + 字典 INSERT CFFEX + 期货分支 EXISTS 坑 + EOD 窗",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T18",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "10-14",
+        "title":  "保证金参数时效机制：①前置核对 combo_x 三值现行一致性 ②参数卡（sys_config.remark 格式）③核",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T20",
+        "pri":  "中",
+        "fin":  "—",
+        "start":  "10-15",
+        "title":  "行情 WS 广播端空转优化（M12 候选·**待用户拍板**）：把「无在线用户判断」提前到帧入口（现每帧仍做 `new ",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T51",
+        "pri":  "高",
+        "fin":  "10-21 10:16",
+        "start":  "10-21",
+        "title":  "实时 K 线落库（15s 聚合核心+落库闭环，用户 m00837 指定先做）",
+        "status":  "进行中（owner: 会话@10-21；任务分支 t51-kline-realtime）→ **已完成（10-21 10:16 部署上线验证通过）**：java 2d1be09（merge）——容器启动无 ERROR、KlineAggregator 打点（接收帧 95345/在桶合约/存续 1768）、BarPublisher 已发布 16503/失败批次 0、76 张品种分表自动懒建、各表 15s bar 落库实测（如 op_kline_bar_MA 731 行 OHLC/volume/filled 正常）；期间部署暴露 OpKlineBarMapper 缺 @Mapper 已修（417e358）"
+    },
+    {
+        "id":  "T53",
+        "pri":  "高",
+        "fin":  "10-21 10:52",
+        "start":  "10-21",
+        "title":  "K 线查询与下发",
+        "status":  "**已完成（10-21 10:52 部署上线验证通过）**：java 1d98163（merge）——REST /api/v1/kline/bars（KlineBarController+KlineQueryServiceImpl：Redis 惰性缓存 2 天 TTL+DB 兜底+symbol→品种动态表名路由）+BarPublisher 扩展（落库成功后逐根 WS /topic/kline/{symbol}/{period} 推送+缓存键 DEL）；单测 25/25 绿（KlineQueryServiceImplTest 8+BarPublisherTest 4+KlineAggregatorTest 13 回归）+PMD prio≤2=0+SpotBugs rank≤9=0；容器日志 BarPublisher「WS 已推 45523/WS 失败 0」、op_kline_bar_AU 2148 行延续 bar 539 根 filled=1 实测；接口不在 permit-all 白名单（A0230 鉴权拦截正常），数值对账走 DB+日志，待 T54 前端带登录态实测"
+    },
+    {
+        "id":  "T54",
+        "pri":  "高",
+        "fin":  "10-21 12:00",
+        "start":  "10-21",
+        "title":  "K 线前端图表页",
+        "status":  "**已完成（10-21 12:00 部署上线验证通过）**：vue 7a2addd（merge，分支 t54-kline-chart 4da7aa5）——/op/op-kline-chart klinecharts@10.1.0 v10 DataLoader 模式（getBars init/backward REST 升序+subscribeBar STOMP 增量幂等合并）+合约远程搜索+金银原油快捷入口；vue-tsc/eslint 双绿+frontend-code-review 自审修 2 must-fix（bars→ref 响应式、v-if→v-show 初始化时序）；deploy check/claim PASS、构建 19.96s、dist-test 3 chunk 命中、18088 http 200；接口带登录态实测待用户点开页面验证"
+    },
+    {
+        "id":  "T52",
+        "pri":  "高",
+        "fin":  "10-21 13:30",
+        "start":  "10-21",
+        "title":  "K 线多级合成+全周期落库分级",
+        "status":  "**已完成（10-21 13:30 部署上线验证通过）**：前半（12:09）实时 bar 快照统一出口上线（KlineInProgressPublisher 订阅感知+因子内存直取+多图布局+交互功能）；后半（13:30）多级合成核心上线——MultiPeriodAggregator 10 级上卷（日线=夜盘归次日/周线=ISO 周一）、HvCalculator 期货 HV20/60/120（tafunc 口径 O(1) 增量）、BarPublisher 落库分级（30s/1m 不落库照推 WS、FUTURE 带 HV）、KlineBarCleanupTask @Scheduled 每日 16:00 滚动清理（15s 滚 7 交易日/5m-1h 滚 30 交易日）、前端 11 级周期选择器。六测试类 46 用例全绿+PMD prio≤2=0+SpotBugs rank≤9=0；java a2cc8bd/vue 6daccdb 合并 main 部署验证（聚合 6165 帧/落库 0 失败/订阅感知生效/18088 200）"
+    },
+    {
+        "id":  "T55",
+        "pri":  "中",
+        "fin":  "10-21 14:40",
+        "start":  "10-21",
+        "title":  "K 线回补链路",
+        "status":  "**已完成（10-21 14:40 部署上线端到端验证通过）**：py 新 worker op_kline_backfill_worker（独立进程独立 TqApi，BRPOP op:backfill:kline→15s 直拉→分片推 op:task:kline BACKFILL）；java kline/backfill 新包 6 类（KlineConsumer Redis 中转解 option↔kline 环→KlineBackfillConsumer→Processor 期货 HV 重放+期权 Greeks 重算→batchUpsert→WS）；启动缺口回补（Bootstrap 延迟 5 分钟扫 filled=1 缺口）+POST /api/v1/kline/backfill 手动；v1 简化=不做 30 分钟定时滚动（惰性补齐+启动一次性+手动覆盖）。实测=Bootstrap 扫描 1980 缺口合约→worker 拉取→持续落库 240 根/批→DB op_kline_bar_AU 13:30-14:36 共 7089 行；单测 11 绿+门禁双绿；java 754cc22/py 3f89937"
+    },
+    {
+        "id":  "T56",
+        "pri":  "future}_{品种小写}_{short",
+        "fin":  "long}（short=15/30/60s、mid=300~3600s、long=7200s+；档位全词=下划线两侧禁单字母；顺序类型→品种→档位）；m05458 拍板全周期落库（撤销 P2 30s/1m 不落库）；75 旧表→450 新档表迁移（AU/AG/SC 对账零差）→旧表 DROP；java 8236ba9",
+        "start":  "mid",
+        "title":  "K 线冷启动初始化",
+        "status":  "**已完成（10-21 16:00 部署上线；18:20 三档拆表升级收尾）**：py 新命令 op_kline_init（--stage 1/2/3 分级灰度：1=金银原油/2=分批/3=全量；11 周期全直拉 P10 窗口表+QPS 10/s+跳过当日+断点游标+失败清单+进度）；java Processor 多周期化+GET /api/v1/kline/init/progress。冷启动阶段 1 实测（金银原油 129 合约 1419 请求 0 失败）。**m05507/m05516/m05673/m05726/m05764 连环拍板三档拆表**：op_kline_bar_{option"
+    },
+    {
+        "id":  "T57",
+        "pri":  "中",
+        "fin":  "10-21 19:10",
+        "start":  "10-21",
+        "title":  "K 线质量监控",
+        "status":  "**已完成（10-21 19:10 部署上线验证通过）**：java c9f1a53/vue 8351d88（merge，分支 t57-kline-monitor）——三检核打点（连续性缺口两类根因 FRAME_LOST/SCHEDULER_FAIL、跨休市不算；时效性四档只统计活跃合约；桶分布完成率/翻桶异常/翻桶 P95）+15s 心跳落 op_kline_monitor_snapshot+三接口 realtime/snapshots/trend+五条告警规则（MdAlertService+SETNX 5 分钟+阈值 yml）；前端 /op/op-kline-monitor 双 Tab（实时质量 8 KPI+时效四档+滞后榜+缺口明细带根因 tag；历史趋势四线图+分页明细）；单测 38 绿（新增 13）+PMD/SpotBugs kline 双绿+type-check/eslint 双绿；心跳实测 19:02:25 起每 15 秒一行；DDL 首跑 PS 管道中文乱码失败→docker cp+utf8mb4 补救建表；接口 401=登录态鉴权正常"
+    },
+    {
+        "id":  "T58",
+        "pri":  "低",
+        "fin":  "2026-10-21 19:30",
+        "start":  "2026-10-21 18:20",
+        "title":  "组合 K 线（多腿）",
+        "status":  "**已完成（10-21 19:30 部署上线）**：java 49dc3d1/vue 1093aec；后端 ComboKlineAggregator（register/unregister/onLegBar/onLegSnapshot/tick TTL+翻桶）+KlineComboController（/api/v1/kline/combo）+KlineAggregator 8 参挂载；前端 api/op-kline-combo.ts+KlineChartPanel comboId 模式+图表页组合格子（URL comboLegs 注册/关闭注销/持久化排除）+矩阵页「K 线」入口+openPage openComboKlinePage；单测 10 用例+11 类 kline 回归 97 绿；PMD prio≤2=0/SpotBugs rank≤9=0；jar combo 条目 5/vue chunk 命中 comboLegs/18088=200"
+    },
+    {
+        "id":  "T59",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "2026-10-21 21:00",
+        "title":  "K 线压测+对账+部署收尾",
+        "status":  "**对账已收口（2026-10-22 01:00）**：①open 口径全量验证定案（au2611 15s 7989/7999=99.87%，不符 100% 在开盘边界→段内 open=上一根 close、跨段首帧价）已修复上线 java 6082d5d；②顺带修 2 个真 bug（BarCalendar 凌晨日期多一天 plusDays(1) / parseFrameTime 只认 14 字符致 19 位带毫秒字符串回落 now()）；③清理错误日期数据 25,445 行/54 表；④终对账 369 根 15s：AU open 98.4%/close 97.6%/vol 100%，AG open 95.9%/vol 99.2%，SC open 61.8%（稀薄品种快照采样物理上限）；长周期 1h/日线 100%；⑤当日数据补齐验证（今天 15s~1h 全时段有数据）。压测（955 帧/s 模拟推流）仍需用户批准推流后执行"
+    },
+    {
+        "id":  "T61",
+        "pri":  "高",
+        "fin":  "10-21 11:30",
+        "start":  "10-21",
+        "title":  "下单面板盘口与开平优化",
+        "status":  "已完成（10-21 11:30 部署验证：java e022563（ContractPickVO+preClose、canClose null→0、GET /trade/option-quote/{symbol}）/ vue cc9c587（盘口增强+默认对手价+去平今+prefill 修复）；实测 search 63 条 preClose=13967、option-quote 00000 iv=2.2455 delta=0.83、容器无 ERROR；涨跌幅两位小数口径 m03570）"
+    },
+    {
+        "id":  "T62",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "10-21",
+        "title":  "交易面板资金分钟落库与在线状态推送",
+        "status":  "已完成（java 4293434/vue 2a19a8e：分钟落库实测 11:28/29/30 三条 COUNTER 行、history/series 64 点、watchdog conn 广播、三态横幅）"
+    },
+    {
+        "id":  "T68",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "10-21",
+        "title":  "品种代码大写写入端修复",
+        "status":  "进行中（owner: 会话@10-21）"
+    },
+    {
+        "id":  "T69",
+        "pri":  "高",
+        "fin":  "10-21",
+        "start":  "10-21",
+        "title":  "下单全流程飞书通知+系统告警补齐",
+        "status":  "已完成（java dbd3943→main 9d235dc 部署；TradeNotifyService 四事件 submit/ack/fill/reject + MdAlertService.notify 不去重 + trade-live 机器人；端到端实测 trade-live 飞书推送 10 条 http=200，含提交+失败两类；遗留 py 超时判 TIMEOUT 优化）"
+    },
+    {
+        "id":  "T70",
+        "pri":  "—",
+        "fin":  "出工报告 18:35-18:55 段",
+        "start":  "2026-10-21",
+        "title":  "交易网关账户清单 30 天 TTL + 15 分钟定时刷新",
+        "status":  "已完成（java a1cea71→main 482802b 部署；info.log 18:46:24 刷新日志；Redis sim/real TTL≈2591753s）"
+    },
+    {
+        "id":  "T73",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "2026-10-21",
+        "title":  "下单链路安全与一致性加固",
+        "status":  "已完成 （待拍板分批实施）"
+    },
+    {
+        "id":  "T74",
+        "pri":  "高",
+        "fin":  "2026-10-21 20:55",
+        "start":  "2026-10-21 20:30",
+        "title":  "K线数据独立 schema",
+        "status":  "已完成"
+    },
+    {
+        "id":  "T75",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "2026-10-23",
+        "title":  "K线冷启动阶段 2/3 全量回补",
+        "status":  "**已完成 2026-10-23**"
+    },
+    {
+        "id":  "T87",
+        "pri":  "高",
+        "fin":  "2026-10-22 14:45",
+        "start":  "2026-10-22 14:05",
+        "title":  "K线写库并发冲突根治（按表路由写调度器）+ 两个既有缺陷",
+        "status":  "已完成（java 6b0fbb1/31bee5b 已部署，实测 DEADLOCK=0/ERRORS=0）"
+    },
+    {
+        "id":  "T88",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "java `718f0bd`（main）",
+        "title":  "K 线数据源切换收口",
+        "status":  "已完成（2026-10-22 15:45，已部署验证四计数全 0）"
+    },
+    {
+        "id":  "T89",
+        "pri":  "中",
+        "fin":  "待 T88 合并后提交",
+        "start":  "2026-10-22 15:00",
+        "title":  "信息量监控「今日·账户级」明细表口径修复",
+        "status":  "已完成代码+提交（java `017e51f` 6 files +290、单测 8/8 绿、门禁九项 PASS；vue `8037732` → main `f83fa7d` 已部署 HTTP 200）；**java 部署待 T88 部署 worktree（java-deploy-t88）释放 main 后执行**"
+    },
+    {
+        "id":  "T90",
+        "pri":  "高",
+        "fin":  "2026-10-22 18:10",
+        "start":  "2026-10-22 16:20",
+        "title":  "禁止 Redis SCAN 全库遍历（写铁律+门禁）+ 委托价校验 + 信息量明细布局",
+        "status":  "已完成代码+提交（java `b866287`→main `ca3e2cc`、py `45f23e4`→main `938416d`、vue `1a28853`→main `1ab6058`；单测 `OrderPriceGuardTest` 11/11 + `TradeCmdServiceImplTest` 4/4 绿、门禁十项全 OK PASS；三端部署验证中）"
+    },
+    {
+        "id":  "T82",
+        "pri":  "已完成：java 7f6b41d（8 线程真实并行 core=max=32 + 非阻塞 RPOP + 缺口巡检 + JVM 8G 实证 MaxHeapSize=8G）；实测容器 CPU 96%→224%、吞吐 2.5→10 条/秒、ERRORS=0",
+        "fin":  "-",
+        "start":  "高",
+        "title":  "K线数据完整性兜底机制",
+        "status":  "已完成 2026-10-22"
+    },
+    {
+        "id":  "T81",
+        "pri":  "低",
+        "fin":  "2026-10-21 23:15",
+        "start":  "2026-10-21 23:10",
+        "title":  "K线质量监控页面列口径说明",
+        "status":  "已完成（10-21 23:15 部署）"
+    },
+    {
+        "id":  "T76",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "2026-10-21",
+        "title":  "行情延时彻底解决",
+        "status":  "未开始（先记录待办，等下单问题改完再做）"
+    },
+    {
+        "id":  "T85",
+        "pri":  "高",
+        "fin":  "2026-10-22（P0~P4）",
+        "start":  "2026-10-22",
+        "title":  "保证金计算内存化（P0~P4 全部已交付）",
+        "status":  "P0 已完成（java `3264f40`→已部署 test 容器；单测 7/7 绿、门禁七项 PASS、行情零丢帧 p95 18-20ms、STOMP 实测帧带 margin=1357.80 与公式验算一致）；P0/P1/P2 已完成（P1P2：java `0fa74ab` + 修复 `3e8d188` + 合并 `cc0ad86`，已部署 test 容器（11:35 重启 32s、快照加载 569ms）；下单实测 `[perf]` 指纹+保证金 **9~15ms**（T82 基线 49~105ms）；`GET /api/v1/margin/cache/state` 实测 version=1/期货 926/期权 27510/品种 87/X 系数 3/账户 3——`MarginService` 统一入口、`OptionMarginFacadeService` 委托、事件驱动快照刷新、`/api/v1/margin/cache/{state,reload}` 运维接口；单测 23/23 绿、门禁七项 PASS）；P3/P4 已完成（java `30567cd` → merge `0e3a78b`，9 文件 +37/−49，删除 `OptionMarginFacadeService` 兼容层；`ComboMatrixServiceImpl` 2 处 / `OpportunityServiceImpl` 1 处 / `OpOptionContractServiceImpl` 1 处改走 `MarginService`；`MarginService` 新增 `singleLeg`；单测 18/18 绿、门禁七项 PASS；已部署 test 容器）"
+    },
+    {
+        "id":  "T86",
+        "pri":  "高",
+        "fin":  "2026-10-22",
+        "start":  "2026-10-22",
+        "title":  "交易链路两项修复",
+        "status":  "已完成（py `9e311c8`→merge `be67a56`、java `d8fb15a`→merge `bf05ebd`；py 单测 6/6、java 单测 14/14、门禁七项 PASS；网关重启登录成功、java 部署 STARTED 42s、部署后零 ERROR；**模拟盘覆盖测试 28 条全部跑通**（T4 无持仓平仓被柜台拒→request 正确回 FAILED，是假成功修复的直接证据），报告 `docs/测试报告/T86-休市拒单修复-模拟盘覆盖测试-2026-10-22.md`；测试暴露 3 项既有缺陷（错误码 B0001、限价 0 被接受、撤单不校验存在性）；休市拒单端到端验证待 15:00 收盘后）"
+    },
+    {
+        "id":  "T91",
+        "pri":  "高",
+        "fin":  "2026-10-22 18:36",
+        "start":  "2026-10-22 16:40",
+        "title":  "K线冷启动 CSV 通道",
+        "status":  "已完成（java `5a42ef6`、py `85bde87`；11 级全量 8,992 文件 / 2,328.7 万行落库）"
+    },
+    {
+        "id":  "T92",
+        "pri":  "高",
+        "fin":  "2026-10-22 19:40",
+        "start":  "2026-10-22 19:20",
+        "title":  "CSV 落库确认（台账 PENDING→DONE 以落库为准）",
+        "status":  "已完成（java `3af7fe6` + `87a25f9` 已部署：删台账 12 条→重启→自动重跑齐平；人工置 4 条 PENDING→重启→重跑齐平；`rb_15s_rows` 全程 94,892 幂等不变；ERRORS=0）"
+    },
+    {
+        "id":  "T93",
+        "pri":  "高",
+        "fin":  "py 59d7921→94cfd62 / java f53ab97→9bdcf91",
+        "start":  "2026-10-22 19:40",
+        "title":  "期权冷启动（OI\u003e500 口径 3,518 合约 × 11 周期）+ CSV 独立目录 + Java 子目录扫描",
+        "status":  "**已完成 2026-10-23 12:49**：11/11 级 · 38,650 文件 / 9,347.4 万行 · 0 FAILED"
+    },
+    {
+        "id":  "T35",
+        "pri":  "java cd1fa8f / vue 22b6873 已合并 main 并部署（restart 15:28:54 Started 30.936s）；接口实测四差值字段与 14 桶分布就绪；盘中数值待夜盘 21:00 验证",
+        "fin":  "",
+        "start":  "owner: 会话@10-20",
+        "title":  "行情链四差值口径+行情源异常判定（三页面统一）",
+        "status":  "2026-10-20 15:35"
+    },
+    {
+        "id":  "T37",
+        "pri":  "高",
+        "fin":  "—",
+        "start":  "10-20",
+        "title":  "行情链路 KPI 延时精度修复",
+        "status":  "进行中（owner: 会话@10-20；代码已提交 fb19eaf 并合并 main（09cc5da..fb19eaf）；单测 27 绿+门禁 PASS；**部署待另一会话释放主工作区后走 deploy_guard 五步**，夜盘 21:00 前完成并验证盘中 p50/p95 精确值）"
+    },
+    {
+        "id":  "T42",
+        "pri":  "高",
+        "fin":  "10-20 21:50",
+        "start":  "10-20",
+        "title":  "多会话工作区隔离（用户 m00002 冲突优化）",
+        "status":  "已完成（10-20 21:50：遗留三项全闭环=post-commit rev-parse 修复 java 65e30a8/vue 0325b5c/py a6bf625、T37 worktree+分支清理、deploy_guard wait-rotate+release 实测通过；合并交付 java 9f43bc7/vue b8151f2/py b7da839）"
+    },
+    {
+        "id":  "T43",
+        "pri":  "高",
+        "fin":  "10-20",
+        "start":  "10-20",
+        "title":  "监控页图表改一行3个",
+        "status":  "已完成（vue 16271d7→merge main ed5cf97；vue-tsc EXIT=0；6520 curl style 模块 HIT repeat(3,1fr)）"
+    },
+    {
+        "id":  "T45",
+        "pri":  "2026-10-20 22:27 部署验证：delay 85→0，p50=5/p95=11ms；提交 9868879，main 865cc80；阈值口径维持毫秒（m08695 拍板）",
+        "fin":  "",
+        "start":  "",
+        "title":  "行情链路延时异常心跳帧假值根治",
+        "status":  "已完成"
+    },
+    {
+        "id":  "T46",
+        "pri":  "docs/方案/下单与实时行情面板修复方案.md；出工报告 2026-10-21 T46 段",
+        "fin":  "",
+        "start":  "",
+        "title":  "下单与实时行情面板修复",
+        "status":  "2026-10-21 14:00 部署验证：java 0484154 / vue 5946c2e；search 接口 59/50 条 00000；preview 无 instrumentType 无令牌自动解析 FUTURE/OPTION 00000（au2612 marginPerLot=142473.60）；vue 产物 contracts/search HIT"
+    },
+    {
+        "id":  "T47",
+        "pri":  "高",
+        "fin":  "10-21 01:05",
+        "start":  "10-21",
+        "title":  "下单失败根因修复+全流程全场景测试",
+        "status":  "已完成（10-21 01:05：java 4b8485b/vue bb09e5a 合并 main 部署；P0 全链路 9 步实测通——preview 46345.20→place SUCCESS 带横线 requestId 过 py 校验→挂单→撤单 FINISHED；P1 防重 4 项全过；遗留=品种代码大小写不一致致 A 组落 DEFAULT 兜底（待用户定 A 代码归一/B 数据大写））"
+    },
+    {
+        "id":  "T48",
+        "pri":  "高",
+        "fin":  "10-21 01:30",
+        "start":  "10-21",
+        "title":  "品种代码大小写双层修复（T47 遗留）",
+        "status":  "已完成（10-21 01:30：B 复核剩余小写 0 行；A 单测 10 例绿、合并 f912a38 部署；bandHit 实测「A组期货 第1档」）"
+    },
+    {
+        "id":  "T49",
+        "pri":  "高",
+        "fin":  "10-21 09:30",
+        "start":  "10-21",
+        "title":  "下单全流程开盘实测",
+        "status":  "已完成（10-21 09:30：P0 挂撤 1.27s、P1 下单到成交 \u003c1s、P2 infoCount=22 bandHit=A组期货第1档；报告 docs/方案/下单全流程开盘实测计划与报告.md 第 3 章；发现 3 缺陷已转入 T60）"
+    },
+    {
+        "id":  "T60",
+        "pri":  "高",
+        "fin":  "10-21 10:15",
+        "start":  "10-21",
+        "title":  "成交/挂单/资金三问题修复",
+        "status":  "已完成（10-21 10:15 部署后验证：新挂单 insert_date_time=10:12:23.905、新成交 trade_date_time=10:12:59.352 均落库；平仓后 0 仓行被删；下单/撤单/成交全链路 00000。java 58d449b / vue 44e3656，T51 容器故障后二次验证通过）"
+    },
+    {
+        "id":  "T63",
+        "pri":  "高",
+        "fin":  "10-21 13:05",
+        "start":  "10-21",
+        "title":  "下单页盘口库快照兜底",
+        "status":  "已完成（10-21 13:05：第一版 java 373a565/vue f34c81d；**第二版 java ed46c60→main 1a16d90 部署**；实测 ag2612 bid=13960/1 ask=13961/1、MA611 bid=3403/36 ask=3404/12、期权 MA611C3300 bid=197/1 ask=225/1，经 nginx 00000；py 旧方案改动已回滚）"
+    },
+    {
+        "id":  "T95",
+        "pri":  "高",
+        "fin":  "10-23",
+        "start":  "10-22",
+        "title":  "K线表空间瘦身",
+        "status":  "已完成（java `376b7c8` refactor(kline): drop 3 chinese text columns from kline tables (T95)；DDL 466 张已执行——MySQL 实测 `op_kline_bar_option_ag_short` **32 列**、`OpKlineBar.java` 当前 main **29 个字段**（原 32）、`OpKlineBarMapper.batchUpsert` INSERT/VALUES 列清单已同步；表空间实测 data 12.19GB + idx 5.01GB = **17.2GB**）"
+    },
+    {
+        "id":  "T96",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "-",
+        "title":  "期权 Greeks 回补 + CSV 二次复核（冷启动已全部完成）",
+        "status":  "待做"
+    },
+    {
+        "id":  "T97",
+        "pri":  "高",
+        "fin":  "10-22 23:55",
+        "start":  "10-22",
+        "title":  "量化数据存储架构方案（K线/因子挖掘/回测/实盘接入）",
+        "status":  "已完成（方案 v1.0 落盘待拍板，813 行；未动任何代码/DDL/部署，符合方案先行纪律）"
+    },
+    {
+        "id":  "T98",
+        "pri":  "高",
+        "fin":  "10-22 00:15",
+        "start":  "10-22",
+        "title":  "技术栈与量化转型评估（决策留档）",
+        "status":  "已完成（评估文档落盘；用户明确「全部落盘存档」；**未开工任何代码**，4 个待决策项待用户拍板）"
+    },
+    {
+        "id":  "T99",
+        "pri":  "高",
+        "fin":  "10-23 00:45",
+        "start":  "10-22",
+        "title":  "先停掉 K 线滚动清理",
+        "status":  "已完成（已部署验证：main@c079949，jar 内 `cleanup.enabled=false` + class 带 `@ConditionalOnProperty`，容器重启 Started 28.275s / ERROR 0）"
+    },
+    {
+        "id":  "T100",
+        "pri":  "中",
+        "fin":  "10-23 01:10",
+        "start":  "10-22",
+        "title":  "人机协作边界与 AI 稳定性约束（长期原则留档）",
+        "status":  "已完成（v1.0 落盘；文档类，无代码改动）"
+    },
+    {
+        "id":  "T104",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-23",
+        "title":  "Python 统一技术栈架构与部署方案（三方并存 + 前端并行工程）",
+        "status":  "待用户确认（文档 v1.2 已落盘 1,076 行 / 43,370 字符，含 **§5.8 Python 长期运行的生产实践**（内存模型/三种泄漏/四层防线/进程生命周期/tqsdk 序列铁律/七条检查项）与 §6.1 逐服务 `mem_limit`；确认后出功能迁移方案 + 任务拆解）"
+    },
+    {
+        "id":  "T105",
+        "pri":  "高",
+        "fin":  "10-23 10:15",
+        "start":  "10-23",
+        "title":  "Python 容器统一 compose 管理",
+        "status":  "已完成（py `db2065b` 推送；容器全部由 compose 管理，6 个服务 mem_limit 生效）"
+    },
+    {
+        "id":  "T106",
+        "pri":  "高",
+        "fin":  "10-23 12:20",
+        "start":  "10-23",
+        "title":  "K 线 CSV 目录迁移 C 盘 → F 盘",
+        "status":  "搬迁已完成；配置改动待拍板（列入方案 v2.0 批次 1）"
+    },
+    {
+        "id":  "T107",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-23",
+        "title":  "K 线存储方案 v2.0（MySQL 热层 + DuckDB/Parquet 温层）",
+        "status":  "待拍板（v2.0 文档已落盘；未动任何代码/DDL/部署）"
+    },
+    {
+        "id":  "T108",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-23",
+        "title":  "K 线读取改造：删旧日线表 + Java 接入 DuckDB/Parquet 湖",
+        "status":  "代码完成已合并；部署+删表+归档任务待做"
+    },
+    {
+        "id":  "T109",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-23",
+        "title":  "Redis 全量快照出口 `md:snapshot:all` + SOD 预热",
+        "status":  "**代码完成、编译绿、门禁 PASS、单测 6/6、已部署 java main 288a7db；待夜盘 20:55 SOD 预热 + 21:00 后 `HLEN md:snapshot:all` 增长验证**"
+    },
+    {
+        "id":  "T110",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-23",
+        "title":  "K 线湖分区重组（解决 10 万小文件）",
+        "status":  "**代码与脚本完成；湖重建与 main 合并均等数据质量检核完成后做**（用户 m01007「mysql数据先不能删，数据质量检核还么做完…还需要重新初始化到DuckDB」）。注意：新路径 Java 代码若先于新湖上线，旧布局湖将 glob 不到 → 必须「重建湖 + 部署」同一批"
+    },
+    {
+        "id":  "T111",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-23",
+        "title":  "K 线每日增量归档（Java + DuckDB，不删数据）",
+        "status":  "**功能已完成，删除保持关闭**（`kline.cleanup.enabled=false` + `kline.archive.delete-enabled=false`，MySQL 41.3GB 一行不删）。**待办**：①`delete-enabled` 打开需等数据质量检核完成、用户放行 ②湖重建后归档才有意义（当前湖是旧布局）③合并 main 必须与湖重建同批"
+    },
+    {
+        "id":  "T112",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-23",
+        "title":  "K 线数据湖重建功能（页面按钮，可反复重建）",
+        "status":  "**功能已完成并合并 main**；重建实际执行由用户点按钮（可多次重建，幂等）"
+    },
+    {
+        "id":  "T113",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-23",
+        "title":  "恢复「K 线数据」页面（数据源改 Parquet 湖 legacy 层）+ 删旧表",
+        "status":  "**代码已完成并合并 main，部署中**"
+    },
+    {
+        "id":  "T114",
+        "pri":  "高",
+        "fin":  "10-23",
+        "start":  "10-23",
+        "title":  "回测模块第一期：引擎骨架跑通一条完整回测",
+        "status":  "进行中（t114-backtest 分支）→ **已完成并部署**（2026-10-23 23:25）：引擎+撮合+Parquet+ecj 热编译+异步任务+批量提交+多周期数据+回测计划（plan+item 两表）+并行执行（parallelism=2）+任务落库三表（run/daily/trade）+策略在线编辑（源码版本表+保存即编译+发布）+前端 6 页；容器 `Started YouLaiBootApplication`、页面 `/backtest/*` 200；java `b943f60` / vue `d779fec`；**手续费接入（2026-10-23 23:50）**：回测引擎经 `FeeServiceAdapter` 转调 T115 `FeeService`（回测/实盘同一入口）、规则链加「同品种其他合约」层、规则缺失兜底期货 20 元/手·期权 10 元/手、平今/平昨按「持仓开仓交易日 == 成交交易日」判定且交易日取 K 线 `trade_date` 列（java `1bea31b`→merge `377d3c0`）；**因子模块一期（2026-10-24 00:40）**：3 张表（op_factor_def/version/eval）+ 4 内置因子（hv_ratio_20_60/iv_rank_60d/cross_sec_iv_rank/term_slope）+ 计算落 Parquet 湖 `factor/{code}/version={v}/` + 回测 `requireFactors` 预加载进 `ctx.factor()` + 页面因子列表/触发计算/值预览（java `9f3f543`+`bcc4b60`→merge `a109750`；vue `fce2e80`→merge `9f144d0`）"
+    },
+    {
+        "id":  "T115",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-23",
+        "title":  "手续费统一入口 TradeFeeEngine（用户 m01137 明确另开会话处理，回测会话先忽略手续费）",
+        "status":  "**已完成并部署（java 73d4e57 / vue 478a7f1，2026-10-23 23:14）**；**第二轮整改已部署（java ffc2a36 / vue a4494ad，2026-10-24 00:33）**：入参收敛 5 参（期货/期权与品种由合约代码自判，m01054）、`close(base,todayLots,hisLots)` 平仓先平今后平昨两段计费（m01106）、未知合约兜底期货 20/期权 10 元绝不抛异常阻断下单（m01094）、`op_fee_rule` 枚举 `@Pattern` 硬校验 + 保存时归一/反查 ref_id/交易所（前端 levelType 去 future/option 脏值、品种改下拉、取消 refId/exchange 手输，m01042）；**第三轮加固已部署（java `b835104`，2026-10-24 00:54）**：①唯一键改解析维度 `uk_rule_scope(instrument_type,level_type,product_code,symbol,side)` + 6 个 CHECK + 业务键列 NOT NULL；②删除改**物理删除**（逻辑删除的行占着唯一键，同维度规则再也录不进去，m01445 拍板 A）；③`reload()` 按 id 升序 + 同维度重复 ERROR 告警（汇总行含「冲突维度」）+ 枚举 trim/大小写归一；④保存前 `assertNotDuplicated` 查重；⑤规则补手册缺口 **97 行**（LR 3、IO/MO/HO 6、AG2604 1、FU/HC/RB2612 9、LC2607–2706 36+LC2710 3、PS2607–2706 36+PS2710 3）→ 总量 **503 行**；⑥实测（youlai/123456 + 模拟盘6）：MA611 期货 3.00 元/手、MA612P2225 期权 0.50 元/手、AP611 平今 10.00 vs 开仓 5.00、fu2612 合约级 1.50 vs fu2611 品种级 3.00、lc2612 合约级 11.20/手"
+    },
+    {
+        "id":  "T116",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-24",
+        "title":  "撮合完整化（回测引擎，用户 m03375「A 撮合完整化 具体一些」+ m03382 拍板）",
+        "status":  "**已上线（2026-10-24 01:25）**：①②③④ 已部署验证（真实回测 6 笔/手续费 120/期末 1,023,400 与改动前一致=无回归；流动性 10% 对日线 1 手无影响符合预期）；⑤⑥ 待做"
+    },
+    {
+        "id":  "T117",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子二期：SQL 因子执行器 + Python 测评链路 + 因子详情页",
+        "status":  "已完成并部署（2026-10-24 09:05）：MinIO 报告图（桶 factor-reports 匿名只读）+ worker 容器 3 进程常驻（REDIS_DB=7、日线价格快照缓存 `_eval/prices_daily.parquet` 0.3MB 避免 bind mount 扫 10 万文件、无 scipy 的 Spearman、分组门槛放宽）；实测 id=6 任务 DONE、IC=0.0407、样本 86 天、4 图 URL 全 200；代码已推送 java d4b44ec / vue d9edd50 / py e1817aa"
+    },
+    {
+        "id":  "T118",
+        "pri":  "已部署验证（管理面）",
+        "fin":  "10-24",
+        "start":  "高",
+        "title":  "实盘接入一期（C，用户 m03748「Ab做完做c，也是先不用部署，但是得推送代码」）",
+        "status":  "**已部署并验证管理面**（2026-10-24 09:12）：容器 `Started 32s`；实测 CREATE/START/PARAM_CHANGE(热更新 before→after)/STOP/CIRCUIT_BREAK 五类事件全落库、kill-all 返回 stopped=1；历史 K 线加载**曾报「表 op_kline_bar_future_au_short 不存在」**——根因 K 线真源已迁 `zz_option_kline` 库（489 表），live 走 Parquet 湖新布局又读不到旧分区，最终以 `KlineQueryService`（@DS kline）为准 + 失败降级不阻断（java `7a6b97a`）；**信号触发待交易日**（10-24 为周六，实时 bar 事件不产生）；代码 java `7140668`/`7a6b97a`、vue `3b00bb6`"
+    },
+    {
+        "id":  "T119",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子库扩充（C，用户 m04901「继续」）",
+        "status":  "已完成并部署（2026-10-24 09:27）：门禁十项全 0；`GET /api/v1/backtest/factors` → count=9（新 5 个 CODE/v1/DRAFT，页面 `/backtest/factor` 200、详情 params/builtin 正常）；java `b4d4457`→merge `f24805b`"
+    },
+    {
+        "id":  "T120",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子测评规则判定与页面展示",
+        "status":  "已完成并部署验证（2026-10-24 10:50）：java `10bd6d0`、vue `fb22e07`、py `01ec1ea`；容器 Started 33s、页面 200；测评 id=7 DONE（grade 谨慎使用、halfLife 1、summary 已落 metrics_json）"
+    },
+    {
+        "id":  "T121",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子测评完整报告接进 worker（alphalens 16 图替换 4 图，用户 m05384「要把它接进 worke",
+        "status":  "**已完成并部署验证（2026-10-24 10:20）**：worker 镜像重建（含 alphalens-reloaded/statsmodels/scipy/seaborn）、容器 3 进程常驻；端到端 task 9 DONE、**16 图 + 16 条解读**（`11_info_table.png` 标题「IC 统计表（核心：有没有信号）」、read「本次 5D：IC +0.206、ICIR +0.27、胜率 60.2%，方向显著但稳定性不足。」）、图片 URL HTTP 200；坑：容器内 pandas 2.3 已移除 `freq=\u00271M\u0027` → 改 `by_time=\"ME\"`（带回退）；py `6cbc734`→merge `09418eb`、vue `3906528`→merge `b1c9f8e`；前端 dist-test 重建（34.69s）"
+    },
+    {
+        "id":  "T122",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子评分体系 + 列表结论化展示",
+        "status":  "**已完成并部署验证（2026-10-24 11:45）**：report.py 重写（metrics_of/score_of/generate 返回 metrics/series/scoring）、worker.py verdict_from_alphalens、java `f240b0a`→`0c8187c`、vue `f155fa0`+`43daf35`→`9fffa3a`、py `bc4600a`→`c5bff68`+`2a2bff3`→`3eddc86`；计算 momentum_20（4953 行）+ 测评 id=10 DONE（IC -0.3253、ICIR -0.4935、样本 96、score 84 良好、regime 趋势、verdict 谨慎使用）；overview 接口全字段返回"
+    },
+    {
+        "id":  "T123",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子测评图表数据回传（Python 只返序列 JSON，Vue 用 ECharts 画，PNG 仅存档）",
+        "status":  "**已完成并部署验收（2026-10-24 12:05）**：py `a4d4e27`→merge `bf3c010`、vue `b4114b7`→merge `1b86966`；端到端测评 DONE 回传 **14 个 series 键**（spread/quantileCum/turnover/autocorr/monthlyIc/icHist/qq 全有数据；icTable 4 行 / returnsTable 5 行 / quantileStats 5 行）；worker 镜像重建 3 进程、dist-test 重建 VUE_EXIT=0、type-check TSC_EXIT=0；页面 `/backtest/factor/momentum_20` 与 `/backtest/factor` 均 200"
+    },
+    {
+        "id":  "T124",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子表达式引擎（EXPR 类型，自研 AST，用户 m06151「ok」批准开工）",
+        "status":  "**已完成并部署验证（2026-10-24 13:50）**：java `73ba844`→merge `8decf8e`（表达式引擎）+ `6f23ae2`→merge `e1bae58`（EXPR 取源码修复 NPE）、vue `909d683`→merge `291c166`（新建因子对话框）；端到端 `POST /factors` 新建 `momentum_20_expr`（`close / delay(close, 20) - 1`）→ 计算 4953 行 → 与内置 `momentum_20` 逐 bar 对账 **MAXDIFF 0.0**；容器 Started 31.5s、页面 200"
+    },
+    {
+        "id":  "T125",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子增删改完整化（用户 m06484「因子能在页面上创建么和删除么」+ m06488「要做，但是我没看到 创建」）",
+        "status":  "**已完成并部署验证（2026-10-24 14:06）**：java `e9c3a9e`→merge `5206e38`、vue `829b7e9`→merge `c2aabdd`；端到端 CREATE 200/EXPR/DRAFT/v1 → SAVE_SOURCE v2 → VERSIONS 2 条 → DISABLE/ENABLE 200 → DELETE 200 → 列表 0 条，内置因子删除返回 B0001 拒绝；产物 `js/factor.QvECJutQ.js` 含「编辑源码」「更多」，页面 `/backtest/factor` 200"
+    },
+    {
+        "id":  "T126",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子算子手册（用户 m06648「你需要把算子分门别类写清楚到一个表格里。包括名称 说明 用法 示例」）",
+        "status":  "**已完成并部署（2026-10-24 15:20）**：vue `2eff259`→merge `bbe62a9`（已推送）；产物 `OperatorHelp.DSiA4M8R.js`（7,655 字节，含「线性衰减」「delay(close, 5)」）+ `factor.BMAasKUq.js` 引用组件；type-check TSC_EXIT=0、build 36.97s；页面 `/backtest/factor` 200"
+    },
+    {
+        "id":  "T127",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "因子→策略→回测端到端演示（用户 m06707「你用创建个新的因子，里面尽量多的用到足够多的算子，再创建个策略 要使用到",
+        "status":  "**已完成并部署验证（2026-10-24 15:40）**：策略 compileStatus=SUCCESS、回测 50 笔开平配对成交、无风控误拒；演示脚本 `.ai/demo_combo.py`"
+    },
+    {
+        "id":  "T130",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "Java 重启导致 Vue 被迫重新登录（用户 m00002「现在java每次重启，vue都需要重新登录，这不合理，改成",
+        "status":  "**已完成并验证（容器部署待用户同意）**：Playwright 端到端 10/10 通过（登录落 localStorage、后端不可用保留令牌不跳登录、恢复后自动进业务页、A0230 清令牌跳登录、新浏览器会话免登录）；`vue-tsc --noEmit` TSC_EXIT=0、eslint 0 error；vue `24b8791`→merge `9f83159`（已推送）、java `029f321`→merge `8f50155`（已推送）"
+    },
+    {
+        "id":  "T131",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-24",
+        "title":  "声明式策略 Spec 接入回测入口（用户 m07465「继续」）",
+        "status":  "**已完成并推送（2026-10-24 15:55），未部署**（用户 m07615「等一下再部署，其他会话在导入 mysql 数据」）：SpecParserTest 3/3、SpecStrategyTest 6/6、SpecChaseTimeoutTest 2/2 全绿；`mvn compile` EXIT=0；门禁十项全 0 PASS；java `8066922`、vue `35468b4` 已推送 origin/main"
+    },
+    {
+        "id":  "T132",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-24",
+        "title":  "实盘监控与告警（用户 m07664「B 一起铺」）",
+        "status":  "**P1 已完成并推送（2026-10-24 17:05），未部署**：java `e64ba5e`→merge `7c521ac`、vue `d57a538`→merge `380ba24`；`mvn compile` EXIT=0、`vue-tsc` TSC_EXIT=0、build 20.60s；待做：告警 25 条规则 + 飞书、风控硬线 6 条、状态持久化/崩溃恢复/对账、信号回填"
+    },
+    {
+        "id":  "T133",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "实盘四项补齐 + 三层对账（用户 m07935「一起做」、m08165「继续」）",
+        "status":  "**已完成并部署验证（2026-10-24 19:50）**：`mvn compile` EXIT=0、`LiveAlertServiceTest` 4/4、`LiveRiskGuardTest` 6/6、门禁十项全 0 PASS；java `489879d`→merge `d63f98f` + 对账 `29b72b4`（主工作区 merge 推送）、vue `2a5c282`→merge 推送；容器 `Started YouLaiBootApplication in 36.356 seconds`（compose stop/rm/up，无 ERROR）、`GET /api/v1/live/reconcile` → `code=00000 count=0`（当前无实例，对账通过）、页面 `/live/reconcile` 200、产物 `js/reconcile.UbnmBgot.js` 含「实盘对账」"
+    },
+    {
+        "id":  "T134",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "实盘/回测页面被踢回登录页（用户 m00584「实盘和回测那些页面 我一点就跳到登录页让我重新登录」→ m00636「实",
+        "status":  "**已完成并部署验证**：`vue-tsc --noEmit` TSC_EXIT=0、eslint 0 error；vue `96d3596`→merge `68e5e4d`（已推送）；`pnpm run build --mode test` EXIT=0（40s），`dist-test/version.json`=`1792843360458` 与容器内一致；java 无需改动（`POST /api/v1/auth/login` → `\"expiresIn\":86400` 证明 T130 的 24h 配置在 T133 部署时已生效）"
+    },
+    {
+        "id":  "T135",
+        "pri":  "中",
+        "fin":  "2026-10-24 20:10",
+        "start":  "2026-10-24 20:05",
+        "title":  "全部菜单页改为同标签页内部打开（去掉剩余 20 处 openInNewTab）",
+        "status":  "已完成"
+    },
+    {
+        "id":  "T136",
+        "pri":  "高",
+        "fin":  "10-24",
+        "start":  "10-24",
+        "title":  "交易日历服务（夜盘归属）",
+        "status":  "**已完成并推送 main（2026-10-24 21:05）**：补表 `TOTAL=766 MIN=2016-01-05 MAX=2026-12-03`、回测期 125 个交易日、周末全部 `is_trading_day=0`；`TradingCalendarServiceTest` 7/7、相关 9 个测试类 TEST_EXIT=0；门禁十项全 0 PASS；java `f64a638`→merge `c44f4b9` 已推送"
+    },
+    {
+        "id":  "T137",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-25",
+        "title":  "K 线湖运维方案落地：MySQL 滚动清理 + 增量归档按钮 + 监控告警",
+        "status":  "**待拍板**（文档已落盘，未动代码）；待定两项：①干跑开关是否加 ②1800s/3600s 的 250 天是否调小"
+    },
+    {
+        "id":  "T138",
+        "pri":  "高",
+        "fin":  "10-25",
+        "start":  "10-25",
+        "title":  "行情链涨跌停/昨结算字段 + 实盘下单校验",
+        "status":  "**已完成并推送 main（2026-10-25）**：java `81c4f58`→merge `27ae227`、py `37e06a6`→merge `b09360e`；`TEST_EXIT=0`（LiveRiskGuardTest/MarginEnricherTest/FeeServiceTest/MarginServiceTest/QuoteSnapshotPublisherTest/QuoteWarmupServiceTest/OrderPriceGuardTest）；门禁十项全 0 PASS；主工作区误改已用 patch 搬迁纠正"
+    },
+    {
+        "id":  "T139",
+        "pri":  "高",
+        "fin":  "10-25",
+        "start":  "10-25",
+        "title":  "C/D/E/F 四项（期权规则选合约 / 组合保证金 / 冲击成本 / 信号页增强）",
+        "status":  "**已完成并推送（2026-10-25）**：java `2e4539e`→merge `e1bb4da`（10 文件 +305/−20）；vue `7177e40`→merge `42a4276`；TEST_EXIT=0、TSC_EXIT=0、门禁 PASS；**部署验证 + 组合保证金实证（2026-10-25 01:40）**：jar 320,375,234 字节、容器 `Started YouLaiBootApplication in 40.762 seconds`、`parallelism=2`、页面 200；`ComboMarginInBacktestTest` 同品种两腿期权卖方 `COMBO=98000.00` vs `SINGLE_SUM=125000.00`（组合省 21.6%）"
+    },
+    {
+        "id":  "T140",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-25",
+        "title":  "K 线湖运维落地：trading_date 列 + MySQL 滚动清理 + 增量导入按钮 + 告警监控",
+        "status":  "**已完成并验证，未合并 main，未部署**：java `5f36cb3` → `3a065ff` → `b655d4e` → `da1122a`（分支 `t138-kline-trading-date`，**该分支名与既有 T138「行情链涨跌停字段」编号冲突，属历史遗留，本条目正式编号 T140**）、vue `8908eee`（分支 `t138-kline-lake-ops`）、docs `28e2b2b` + `2bf86be`；验证 `COMPILE_EXIT=0`、`Tests run: 43, Failures: 0, Errors: 0`（T140 补测：KlineArchiveTaskTest 6 + KlineBarArchiverTest 5 + KlineLakeRebuildServiceTest 8）、门禁十项全 0 PASS、`vue-tsc` TSC_EXIT=0、`py_compile` PY_EXIT=0；**收尾三处（用户 m03945「改」，2026-10-25 15:11-15:20）**：①`KlineBarCleanupTask` cron `0 0 16` → `0 0 17`（与 `KlineArchiveTask` 的 16:00 错开，避免两路 DuckDB 同时 ATTACH MySQL）②清理任务执行前抢 `op:kline:lake:busy`（`cleanup()` 拆出 `doCleanup`，TTL 3h，`finally` 释放）③`kline.archive.lookback-trading-days` `250` → `5`（让每日归档成为真增量，250 天历史改由页面全量重建补齐）。验证 `Tests run: 25, Failures: 0, Errors: 0` + 门禁十项全 0 PASS；提交 java `eee9cea` → merge `f9f13f4` 已推送（**未部署**，用户 m04085 定「不能跑」）。待做：部署（容器仍是旧 jar：清理仍按 16:00、无锁、归档仍回看 250 日）+ 湖重建/重导（option 低频 7~8 组缺）+ MySQL 删除开关放行"
+    },
+    {
+        "id":  "T141",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-25",
+        "title":  "K 线模块 `nullifyFakeVolume` ERROR（2026-10-25 01:45 回测部署验证时发现，属",
+        "status":  "待办（K 线会话处理）"
+    },
+    {
+        "id":  "T142",
+        "pri":  "高",
+        "fin":  "10-26",
+        "start":  "10-25",
+        "title":  "MySQL K 线分表新增 `trading_date` 交易日字段",
+        "status":  "**已完成（2026-10-26）**（用户 m00375「开工」拍板后一次做完）：①DDL 已完成——模板 + 481 分表 = 482 张均有 `trading_date`（迁移脚本 docs `5fc88e5` 的 01/02，实测 481/481 加列成功）；②写入链路已完成——java `dd00df9`（`OpKlineBar` 加字段 / mapper 三处补列 / 新建 `kline/support/KlineTradingDayResolver`(@DS master) 复用 `TradingCalendarService.currentTradingDay` / `batchUpsert` 整批填充 / 单测 11 个全绿含 4 个真实样例）+ `aa35721`（归档高频 `PARTITION_BY` 对齐湖内 `trade_date`，`trading_date` 留作物理列）已合并 main `3af280f` 推送；③历史回补已完成——481/481 表、**121,143,472 行**更新，逐表 `COUNT(*) WHERE trading_date IS NULL` 合计 **0 行**（`.ai/t142_verify.log`：rows_out=481 / total_nulls=0 / nonzero_tables=0），脚本 exit 0；④读侧补齐——`KlineBarQuery.tradingDate` + `queryDb` 过滤 + `KlineBarVO.tradingDate`（java `7c02fc2`）；⑤部署验证——`docker compose restart` 后 `Started YouLaiBootApplication in 68.361 seconds`、ERROR=0；⑥方案留档 `docs/方案/K线MySQL表加交易日字段-实施方案.md`。遗留：2026-12-04 后日历续期、检核项接入 `KlineQualityCheckServiceImpl`"
+    },
+    {
+        "id":  "T143",
+        "pri":  "高",
+        "fin":  "10-26",
+        "start":  "10-26",
+        "title":  "回测湖分区适配 + 策略回看环形窗口（省内存）",
+        "status":  "**已完成并推送（java 77ea7de→a259ca5；按日加载 7dfe27e→7599450）**：编译 EXIT=0、9 个回测测试类全绿、门禁十项全 0 PASS；**A 引擎按日迭代已完成**（`MarketDataFeed.tradingDays()` + `SimContext.setFeed()` + `BacktestEngine` 双层循环抽取 `processBar` + `BacktestRunService.dayFeedProvider`，配置 `backtest.daily-loading` 默认 true；内存与回测区间解耦）；待做：湖/MySQL 数据源分层（C，依赖 T142 的 MySQL `trading_date`）"
+    },
+    {
+        "id":  "T144",
+        "pri":  "高",
+        "fin":  "10-26",
+        "start":  "10-26",
+        "title":  "样本外滚动 WalkForward（防自欺三件套第一件）",
+        "status":  "**已完成并推送（java 58470c0 → merge c8c7c82）**：编译 EXIT=0、单测 7/7 TEST_EXIT=0、门禁十项全 0 PASS；遗留：前端「样本外验证」tab、参数敏感性热力图、实盘快照校验"
+    },
+    {
+        "id":  "T144",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-25",
+        "title":  "K 线湖分区键改 `trade_date` + `trading_date`/`bar_date` 双物理列（T140 ",
+        "status":  "**代码已提交并合并 main（`1290de4`）；湖重导已中断，缺口待补**。中断时（用户 m03865 指令）22 组完成 14 组，湖内 **424 个 .parquet / 1,443 MB**：future 11 组全齐（353 文件 / 320.3 MB）；option 仅 p15（12 文件/385.7 MB）、p30（20/369.3 MB）、p60（38/367.7 MB），`p300` 只有 1 个 0 MB 空壳，`p900`~`p604800` 七组全缺。**补齐方式**：走页面「全量重建」按钮（用户 m03926 要求用系统功能触发，不给脚本加 `--only` 旁路）；2026-10-25 15:11 用户 m04085 定「不能跑」（另一会话在导 MySQL），暂缓。另核对：`bar_test` 93 文件/2 MB、`_col_test` 3 文件/10 MB 为调试残留待清理；`bar_old_*` 零残留（重建从未成功触发）"
+    },
+    {
+        "id":  "T145",
+        "pri":  "高",
+        "fin":  "10-26",
+        "start":  "10-26",
+        "title":  "防自欺后两件 + 前端样本外验证页",
+        "status":  "**已完成并推送**：java `d1ad99a` → merge `0b87a28`、vue `bb81a15` → merge `f5d4610`；编译 EXIT=0、单测 EXIT=0、门禁十项全 0 PASS、TSC_EXIT=0；未部署"
+    },
+    {
+        "id":  "T197",
+        "pri":  "**第 1 批完成 + T194 P0 修复已合并 main（`62d7ef3`）+ 部署（`STARTED 45.607s`、health 200）；第 2~5 批未开始**",
+        "fin":  "10-27",
+        "start":  "高",
+        "title":  "K 线补齐与派生全链路（按方案第 2~5 批继续）",
+        "status":  "2026-10-25~27 会话（方案 m07503 / 继续 m07531）"
+    },
+    {
+        "id":  "T196",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-27",
+        "title":  "三端代码全面审查 → 修复 → 固化（2026-10-26/27 会话）",
+        "status":  "**进行中（合并阶段，2026-10-27）**：java main 2 个未推送提交已推送（`e62939a..38529af`）；**java t195 已合并 main（`f5b8aae`，扫描 `RESULT: PASS` P0=0，先合原因=main 基线 11 个 P0 只有 t195 能清零，否则后续分支扫描全 FAIL）**；t192 分支保鲜 merge origin/main 完成（`e93ff06`，无冲突，带入 T194 Kline 重构 41 文件）；**基线红已确证（2026-10-27 全量实测，5 类 18 个失败）**——main `38529af` 全量 `mvn test` 红类：`ArchitectureTest`（2 failures：27 条 Controller→Mapper violations + 27 条包循环）、`AuthControllerTest`（6 errors：Spring Boot 4.0.5 下 Jackson2 ObjectMapper 无 bean）、`KlineBackfillProcessorTest`（7 failures：T182 加 TradingCalendarService 依赖测试未 mock + closesBefore 期不符）、`KlineGreeksBackfillServiceImplTest`（2 failures：T194 实现/测试不匹配，batchUpdateGreeks 未调用）、`ValidationTest`（1 failure：18 个 Controller 缺 @Valid，`24d0f94` 起的框架规约测试=历史欠债），`TOTAL tests=701, failures=12, errors=6`，**非待合并分支引入**（t192 分支 715 tests 红清单完全一致）；合并门禁按事实修正为「编译绿 + 本分支测试绿 + 全量红清单不新增（相对 5 类基线）+ 扫描 P0=0 + paradigm 全 0」；基线红修复立项 T199（T198 已被第 173 行「检核矩阵扩充」占用）；分支持有提交：t188 `81f4960`+`de7dd11`、t189 `9151d1e`、t190 `a7b7574`/`af96819`/`2a21c28`/`b6569cf`/`21d8f05`、t191 `1d145a6`、t195 `c7c2cae`/`d5709e0`/`46b817a`、py-t188 `faf4489`、py-t191 `d90a9bb`、vue-t188 `3af8869`、vue-t189 `acf971a`；测试 java 76 + py 5 全绿（指定测试类）；**下一步=逐批合并 java（t195 已合；剩余顺序 t192→t187→t188→t189→t190→t191）→ py t188/t191 → vue t188/t189（后台 job pwsh-231 门禁 v3）**；基线红清单与 T194 引入缺陷已记录在 docs/代码审查/2026-10-26-四路改动复核报告.md（该报告未记录基线红清单，基线红以 2026-10-27 全量 mvn test 实测为准）"
+    },
+    {
+        "id":  "T198",
+        "pri":  "中",
+        "fin":  "-",
+        "start":  "10-27",
+        "title":  "K 线检核矩阵扩充：C12 跨周期一致性 + 质量页两个待交付分支",
+        "status":  "**未开始（2026-10-27 立项）**"
+    },
+    {
+        "id":  "T199",
+        "pri":  "中",
+        "fin":  "-",
+        "start":  "10-27",
+        "title":  "修 origin/main 基线红（5 类 18 个测试失败：12 failures + 6 errors）",
+        "status":  "未开始"
+    },
+    {
+        "id":  "T168",
+        "pri":  "高",
+        "fin":  "-",
+        "start":  "10-26",
+        "title":  "实盘交易网关重构（Java 重写 + 账户枚举 + 回放自动执行）",
+        "status":  "进行中（M3 卡点：fill 落库）"
+    },
+    {
+        "id":  "T200",
+        "pri":  "高",
+        "fin":  "10-26",
+        "start":  "10-26",
+        "title":  "数据湖「增量导入/取消」入口补齐并部署（T138 前端漏合并修复）",
+        "status":  "**已完成并部署（2026-10-26）**：vue main `cbd69af` 已推送、`dist-test` 已覆盖；页面「数据湖」tab 现有「全量重建 / 增量导入 / 取消」三按钮 + 速率展示（bytesPerSec/rowsPerSec）+ 历史表「类型」列（全量重建/增量导入）与 `cancelled` 状态。**遗留复核（2026-10-26 08:28 三项全部闭环）**：①**已清理 10 个已合并 worktree + 同名本地分支**（t108-kline-lake / t58-kline-combo / t63-quote-snapshot / t73-hardening / t80-trade-fix / t81-kline-monitor-info / t100-kline-quality-page / t114-backtest-ui / t157-kline-greeks-ui2 / t165-kline-consistency-ui），`git worktree list` 剩 5 个（main 主工作区 + 保留 4 个未合并：t171-kline-progress-ui a6d4eb3、t177-kline-ui-rule-entry f8e4dda 已移交 T198；t188-live-real-guard 3af8869、t189-trade-timeout-state acf971a 属 T196 合并范围），远端 `origin/t32-md-perf` 未动；②**dist-test 已从 main `c521602` 重建部署**——`pnpm build --mode test`（= `vue-tsc --noEmit \u0026\u0026 vite build --mode test`）`built in 44.44s`、503 文件、08:28:54 写盘；nginx 容器 `zz-option-vue-test` 静态挂载 `…\\zz-option-vue\\dist-test → /usr/share/nginx/html`，写盘即生效无需重启；线上 `GET /js/KlineLakeTab.CZ4_q-tu.js` HTTP 200 / 10514B，`增量导入/全量重建/取消/incremental/cancel/bytesPerSec/rowsPerSec/rebuild` 八词全 True，`op-kline-monitor.Ct4mGm54.js` 正确引用该 chunk；T141 三态同步上线（`op-account.B0Hu4w3M.js` 含 SIM_SERVER/SIM_LOCAL、`strategy.DwCGvyZc.js` 含 SIM_LOCAL）；③**java `f9f13f4` 已确认部署、无需重做**——容器 StartedAt `2026-10-25T17:50:29Z`（北京 10-26 01:50）跑的就是宿主机 jar 10-26 01:49:21，jar 内 `KlineBarCleanupTask` 含 `0 0 17`+`op:kline:lake:busy`、`KlineArchiveTask` 含 `0 0 16`、`application.yml` 有 `kline.archive.lookback-trading-days: 5`"
+    }
+]
