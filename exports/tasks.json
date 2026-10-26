@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-26T09:17:47.349Z",
+  "generated_at": "2026-10-26T09:18:37.432Z",
   "tasks": [
     {
       "id": "T196",
       "title": "三端代码全面审查 → 修复 → 固化（2026-10-26/27 会话）",
-      "status": "review",
+      "status": "merged",
       "epic": null,
       "priority": "高",
       "owner": null,
@@ -21,7 +21,7 @@
       "started_at": "10-27",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.371Z",
-      "updated_at": "2026-10-26T08:59:44.397Z"
+      "updated_at": "2026-10-26T09:18:18.536Z"
     },
     {
       "id": "T197",
@@ -3844,7 +3844,7 @@
       "repo": "java",
       "commit_hash": "d155d59",
       "message": "merge: t190-kline-publish-hardening into main（L2 发布链硬化 13 文件 +541/-24）",
-      "kind": "merge",
+      "kind": "merge-branch",
       "at": "2026-10-26T08:59:09.542Z",
       "by_session": null
     },
@@ -3854,7 +3854,7 @@
       "repo": "java",
       "commit_hash": "576aad6",
       "message": "fix(market,md): 回放帧补齐24字段，涨跌停与昨结算进入白名单使涨跌停风控首次真正生效",
-      "kind": "fix",
+      "kind": "merge",
       "at": "2026-10-26T08:59:09.704Z",
       "by_session": null
     },
@@ -4437,6 +4437,14 @@
       "l1_note": null,
       "l2": "approved",
       "l2_at": "2026-10-26T03:29:06.557Z"
+    },
+    {
+      "task_id": "T196",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-26T09:17:58.915Z"
     }
   ],
   "sessions": [

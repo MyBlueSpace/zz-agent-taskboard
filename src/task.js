@@ -344,7 +344,7 @@ if (cmd === 'add') {
     if (!hasCommit(r.repo, r.commit_hash)) broken['commit验真失败'].push(`${r.task_id} ${r.repo} ${r.commit_hash} 在仓库中不存在（伪造/抄错）`);
   });
   // 8 提交↔合并：merged 的 merge commit 必须在 origin/main
-  db.prepare(`SELECT t.id,c.commit_hash FROM task t JOIN task_commit c ON c.task_id=t.id AND c.kind='merge' AND c.commit_hash!='legacy' WHERE t.status IN ('merged','deployed','closed')`).all().forEach(r => {
+  db.prepare(`SELECT t.id,c.repo,c.commit_hash FROM task t JOIN task_commit c ON c.task_id=t.id AND c.kind='merge' AND c.commit_hash!='legacy' WHERE t.status IN ('merged','deployed','closed')`).all().forEach(r => {
     if (!inOriginMain(r.repo ?? 'docs', r.commit_hash)) broken['未合并说合并'].push(`${r.id} merge commit ${r.commit_hash} 不在 origin/main`);
   });
   // 9 合并↔部署：deployed/closed 的 deploy commit 必须在 origin/main
