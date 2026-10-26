@@ -12,9 +12,13 @@
 //   node src/task.js accept pass ACC-1 --evidence "..."
 //   node src/task.js set T68 plan_doc "docs/方案/xxx.md"
 //   node src/task.js show T68 | list [--status review] | check
+//   node src/task.js review T68 l2 approved|rejected   (签字/打回，仅 review 态)
+//   node src/task.js abandon T68 S-1                  (弃用原会话，任务回收待重派)
+//   node src/task.js deliver T68 [--repo docs] --rerun-evidence "重跑命令输出原文"
 // 纪律：本脚本是唯一写入口（R1）；一切状态迁移先过门禁（R3）；审计只追加（R4）。
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, existsSync, readFileSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -30,6 +34,34 @@ db.exec('PRAGMA foreign_keys = ON;');
 
 const now = () => new Date().toISOString();
 const args = process.argv.slice(2);
+
+// ---------- git 验真工具（勾稽 4/7/8/9 对用；仓库不在则跳过该项） ----------
+const REPOS = {
+  docs: 'C:\\Users\\zhangyan\\Documents\\deepseek-harness\\default-workspace',
+  java: 'C:\\Users\\zhangyan\\java_workspace\\zz-option-java',
+  vue: 'C:\\Users\\zhangyan\\WebstormProjects\\zz-option-vue',
+};
+function gitIn(repo, gitArgs) {
+  if (!REPOS[repo] || !existsSync(REPOS[repo])) return null;
+  try {
+    return execSync(`git ${gitArgs}`, { cwd: REPOS[repo], encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], timeout: 15000 });
+  } catch { return null; }
+}
+const hasCommit = (repo, h) => (h && h !== 'legacy' ? (gitIn(repo, `cat-file -t ${h}`) ?? '').trim() === 'commit' : true);
+const inOriginMain = (repo, h) => (h && h !== 'legacy' ? gitIn(repo, `merge-base --is-ancestor ${h} origin/main`) !== null : true);
+const showStatFiles = (repo, h) => {
+  const stat = gitIn(repo, `-c core.quotepath=false show --stat --stat-width=800 --stat-name-width=800 --format=%H ${h}`);
+  if (stat == null) return null;
+  const files = [];
+  for (const ln of stat.split(/\r?\n/)) {
+    const m = ln.match(/^\s*(\S.*?)\s+\|\s+\d+/);
+    if (!m) continue;
+    let p = m[1].trim();
+    if (p.includes('=>')) p = p.slice(p.lastIndexOf('=>') + 1).trim().replace(/}$/, '').trim();
+    files.push(p.replace(/\\/g, '/'));
+  }
+  return files;
+};
 
 // ---------- 状态机：11 态 + 2 ----------
 const STATUS = ['backlog','plan','ready','dev','selftest','review','merge_ready','merged','deployed','closed','blocked','cancelled'];
@@ -229,7 +261,15 @@ if (cmd === 'add') {
   const [id, layer, verdict] = rest;
   const o = kv(rest.slice(2));
   if (layer === 'l1') { db.prepare('INSERT INTO task_review(task_id,l1,l1_note) VALUES(?,?,?) ON CONFLICT(task_id) DO UPDATE SET l1=excluded.l1, l1_note=excluded.l1_note').run(id, verdict, o.note ?? null); }
-  else if (layer === 'l2') { db.prepare('INSERT INTO task_review(task_id,l2,l2_at) VALUES(?,?,?) ON CONFLICT(task_id) DO UPDATE SET l2=excluded.l2, l2_at=excluded.l2_at').run(id, verdict, now()); }
+  else if (layer === 'l2') {
+    const t = getTask(id);
+    if (!t) { console.error(`任务 ${id} 不存在`); process.exit(1); }
+    if (!['approved', 'rejected'].includes(verdict)) { console.error('l2 结论只允许 approved（签）| rejected（打回）'); process.exit(1); }
+    if (verdict === 'approved' && t.status !== 'review') { console.error(`[门禁拒绝] 签字仅限待验收 review 态任务，当前 ${ZH[t.status]}`); process.exit(1); }
+    if (verdict === 'rejected' && !o.note) { console.error('打回必须写具体缺项 --note "..."（治理纪律：打回必须写具体缺项）'); process.exit(1); }
+    db.prepare('INSERT INTO task_review(task_id,l2,l2_at) VALUES(?,?,?) ON CONFLICT(task_id) DO UPDATE SET l2=excluded.l2, l2_at=excluded.l2_at').run(id, verdict, now());
+    audit(id, t.status, t.status, o.by ?? '用户', verdict === 'approved' ? '用户签字 sign' : `用户打回 l2-reject：${o.note}`);
+  }
   else if (layer === 'l0') { db.prepare('INSERT INTO task_review(task_id,l0) VALUES(?,?) ON CONFLICT(task_id) DO UPDATE SET l0=excluded.l0').run(id, verdict); }
   else { console.error('用法: task.js review T68 l0|l1|l2 结论 [--note ...]'); process.exit(1); }
   out({ ok: true, id, layer, verdict });
@@ -252,21 +292,127 @@ if (cmd === 'add') {
   out(rows.map(r => ({ id: r.id, 状态: ZH[r.status], title: r.title, owner: r.owner ?? '', priority: r.priority })));
 
 } else if (cmd === 'check') {
-  // 勾稽四查（断链=红灯；输出清单+计数）
-  const broken = { 孤儿任务: [], 无证据验收通过: [], 无修复commit的bug: [], 状态与commit不符: [] };
-  const orphans = db.prepare(`SELECT id,status FROM task WHERE status NOT IN ('backlog','plan','cancelled','closed') AND plan_id IS NULL AND plan_doc IS NULL`).all();
-  orphans.forEach(r => broken['孤儿任务'].push(`${r.id}(${ZH[r.status]}) 无方案挂账 plan_id/plan_doc`));
-  db.prepare('SELECT id,task_id FROM accept_item WHERE passed=1 AND (evidence IS NULL OR evidence=\'\')').all()
-    .forEach(r => broken['无证据验收通过'].push(`${r.id} 任务 ${r.task_id} passed 但无证据`));
-  db.prepare('SELECT id,task_id FROM bug WHERE status=\'fixed\' AND (fix_commit IS NULL OR fix_commit=\'\')').all()
+  // 勾稽 12 对（v2.0 · m01108 拍板；断链=红灯，输出清单+计数）
+  const broken = { 孤儿需求: [], 清单无承接: [], 进度不符: [], 拆解漏改: [], 缺门禁灯: [], 扫描过期: [], commit验真失败: [], 未合并说合并: [], 线上版本不明: [], 无修复commit的bug: [], 修复无承接: [], 产出无账: [] };
+  // 1 需求↔方案：挂需求但无方案且活跃=孤儿需求
+  db.prepare(`SELECT id,status FROM task WHERE status NOT IN ('backlog','plan','cancelled','closed') AND (req_id IS NOT NULL OR req_doc IS NOT NULL) AND plan_id IS NULL AND plan_doc IS NULL`).all()
+    .forEach(r => broken['孤儿需求'].push(`${r.id}(${ZH[r.status]}) 挂需求无方案`));
+  // 2 方案↔任务：活跃任务有方案但文件级清单无拆解项承接
+  db.prepare(`SELECT t.id,t.status,t.plan_doc FROM task t WHERE t.status NOT IN ('backlog','plan','cancelled','closed') AND t.plan_doc IS NOT NULL AND (SELECT count(*) FROM task_item i WHERE i.task_id=t.id)=0`).all()
+    .forEach(r => broken['清单无承接'].push(`${r.id}(${ZH[r.status]}) 方案 ${r.plan_doc} 无拆解项`));
+  // 3 任务↔拆解：终态任务拆解未全 done
+  db.prepare(`SELECT t.id,t.status,(SELECT count(*) FROM task_item i WHERE i.task_id=t.id) AS total,(SELECT count(*) FROM task_item i WHERE i.task_id=t.id AND i.status='done') AS done FROM task t WHERE t.status IN ('merged','deployed','closed')`).all()
+    .forEach(r => { if (r.total > 0 && r.done < r.total) broken['进度不符'].push(`${r.id}(${ZH[r.status]}) 拆解 ${r.done}/${r.total} 未完成即终态`); });
+  // 4 拆解↔git：拆解项声明文件 vs docs 仓库最新 commit 实际改动（声明了没改=漏改）
+  for (const t of db.prepare(`SELECT id FROM task`).all()) {
+    const rows = db.prepare(`SELECT id,files FROM task_item WHERE task_id=? AND files IS NOT NULL AND files!=''`).all(t.id);
+    if (!rows.length) continue;
+    const c = db.prepare(`SELECT commit_hash FROM task_commit WHERE task_id=? AND repo='docs' AND commit_hash!='legacy' ORDER BY at DESC LIMIT 1`).get(t.id);
+    if (!c) continue;
+    const changed = showStatFiles('docs', c.commit_hash);
+    if (changed == null) continue;
+    for (const it of rows) {
+      let declared = [];
+      try { declared = JSON.parse(it.files); } catch { continue; }
+      // 跨端声明：仅 docs: 前缀参与 docs 仓库比对（py:/java:/vue: 端无对应 commit 挂账，跳过——存量诚实边界）
+      const docsDeclared = declared.filter(f => f.startsWith('docs:')).map(f => f.slice(5));
+      if (!docsDeclared.length) continue;
+      const miss = docsDeclared.filter(f => !changed.includes(f) && !changed.some(x => x.endsWith(f)));
+      if (miss.length) broken['拆解漏改'].push(`${t.id}/${it.id} 声明未改：${miss.join('、')}`);
+    }
+  }
+  // 5 开发↔测试：过自测的任务四灯齐
+  db.prepare(`SELECT t.id,t.status,g.compile,g.tests,g.paradigm,g.reconcile FROM task t LEFT JOIN task_gate g ON g.task_id=t.id WHERE t.status IN ('selftest','review','merge_ready','merged','deployed')`).all()
+    .forEach(r => { if (!(r.compile && r.tests && r.paradigm && r.reconcile)) broken['缺门禁灯'].push(`${r.id}(${ZH[r.status]}) 四灯未齐`); });
+  // 6 测试↔扫描：scan 灯含 commit 但不在 origin/main
+  db.prepare(`SELECT task_id,scan FROM task_gate WHERE scan IS NOT NULL AND scan!=''`).all().forEach(r => {
+    const m = String(r.scan).match(/([0-9a-f]{7,40})/i);
+    if (m && !inOriginMain('docs', m[1])) broken['扫描过期'].push(`${r.task_id} scan 凭证 commit ${m[1]} 不在 origin/main（合并前必须全量扫描 P0=0）`);
+  });
+  // 7 提交↔任务：commit hash 在对应仓库验真
+  db.prepare(`SELECT task_id,repo,commit_hash FROM task_commit WHERE commit_hash!='legacy'`).all().forEach(r => {
+    if (!hasCommit(r.repo, r.commit_hash)) broken['commit验真失败'].push(`${r.task_id} ${r.repo} ${r.commit_hash} 在仓库中不存在（伪造/抄错）`);
+  });
+  // 8 提交↔合并：merged 的 merge commit 必须在 origin/main
+  db.prepare(`SELECT t.id,c.commit_hash FROM task t JOIN task_commit c ON c.task_id=t.id AND c.kind='merge' AND c.commit_hash!='legacy' WHERE t.status IN ('merged','deployed','closed')`).all().forEach(r => {
+    if (!inOriginMain(r.repo ?? 'docs', r.commit_hash)) broken['未合并说合并'].push(`${r.id} merge commit ${r.commit_hash} 不在 origin/main`);
+  });
+  // 9 合并↔部署：deployed/closed 的 deploy commit 必须在 origin/main
+  db.prepare(`SELECT t.id,c.repo,c.commit_hash FROM task t JOIN task_commit c ON c.task_id=t.id AND c.kind='deploy' AND c.commit_hash!='legacy' WHERE t.status IN ('deployed','closed')`).all().forEach(r => {
+    if (!inOriginMain(r.repo ?? 'docs', r.commit_hash)) broken['线上版本不明'].push(`${r.id} deploy commit ${r.commit_hash} 不在 origin/main`);
+  });
+  // 10 bug↔任务：fixed 必挂修复 commit（保留）
+  db.prepare(`SELECT id,task_id FROM bug WHERE status='fixed' AND (fix_commit IS NULL OR fix_commit='')`).all()
     .forEach(r => broken['无修复commit的bug'].push(`${r.id} 任务 ${r.task_id} fixed 但无修复 commit`));
-  db.prepare(`SELECT id,status, (SELECT count(*) FROM task_commit c WHERE c.task_id=t.id AND c.kind='merge') AS mc, (SELECT count(*) FROM task_commit c WHERE c.task_id=t.id AND c.kind='deploy') AS dc FROM task t WHERE t.status IN ('merged','deployed','closed')`).all()
-    .forEach(r => {
-      if (r.status === 'merged' && r.mc === 0) broken['状态与commit不符'].push(`${r.id} 已合并但无 merge commit`);
-      if ((r.status === 'deployed' || r.status === 'closed') && r.dc === 0) broken['状态与commit不符'].push(`${r.id} ${ZH[r.status]}但无 deploy commit`);
-    });
+  // 11 bug↔拆解：有修复 commit 的 bug 其任务必须有拆解项承接
+  db.prepare(`SELECT b.id,b.task_id FROM bug b WHERE b.fix_commit IS NOT NULL AND b.fix_commit!=''`).all().forEach(r => {
+    const n = db.prepare('SELECT count(*) AS c FROM task_item WHERE task_id=?').get(r.task_id).c;
+    if (n === 0) broken['修复无承接'].push(`${r.id} 任务 ${r.task_id} 有修复但无拆解项承接`);
+  });
+  // 12 会话↔任务：活跃任务无 owner_session_id 挂账（会话勾稽断）
+  db.prepare(`SELECT id,status,owner FROM task WHERE status IN ('dev','selftest','review','merge_ready') AND (owner_session_id IS NULL OR owner_session_id='')`).all()
+    .forEach(r => broken['产出无账'].push(`${r.id}(${ZH[r.status]}) 无执行会话挂账 owner_session_id`));
   let total = 0; for (const k of Object.keys(broken)) total += broken[k].length;
   out({ 勾稽体检: total === 0 ? 'PASS 无断链' : `红灯 ${total} 条断链`, ...broken });
+
+} else if (cmd === 'deliver') {
+  // deliver 五查（v2.0）：AI 说「完成」必须跑；任一不绿=拒收+缺失清单
+  const o = kv(rest);
+  const id = o._[0];
+  const repo = o.repo || 'docs';
+  const t = getTask(id);
+  if (!t) { console.error(`任务 ${id} 不存在`); process.exit(1); }
+  const missing = [];
+  const checks = {};
+  // 1 完整性清单核查（开发交付清单：四灯+commit 链+拆解+重跑证据）
+  for (const lamp of ['compile', 'tests', 'paradigm', 'reconcile']) {
+    checks[lamp] = Boolean(t[lamp]);
+    if (!t[lamp]) missing.push(`门禁灯 ${lamp} 缺证据原文`);
+  }
+  const commits = db.prepare(`SELECT * FROM task_commit WHERE task_id=? AND repo=? AND commit_hash!='legacy' ORDER BY at`).all(id, repo);
+  checks.commit链 = commits.length > 0;
+  if (!commits.length) missing.push('无 commit 挂账（commit 链）');
+  const items = db.prepare('SELECT * FROM task_item WHERE task_id=?').all(id);
+  checks.拆解项 = items.length > 0;
+  if (!items.length) missing.push('无拆解项（条款×状态矩阵缺失）');
+  // 2 范围比对：docs 仓库最新 commit 实际改动 vs 拆解项 files 声明（越界+漏改）
+  checks.范围比对 = '跳过（无 docs commit）';
+  if (commits.length) {
+    const latest = commits[commits.length - 1].commit_hash;
+    const changed = showStatFiles('docs', latest);
+    if (changed != null) {
+      const declared = new Set();
+      for (const it of items) { try { (JSON.parse(it.files || '[]')).forEach(f => declared.add(f)); } catch {} }
+      const docsDeclared = [...declared].filter(f => f.startsWith('docs:')).map(f => f.slice(5));
+      const extras = changed.filter(f => !docsDeclared.includes(f) && !docsDeclared.some(d => f.endsWith(d)) && /\.(md|js|ps1|py|java|vue|ts|json)$/.test(f));
+      const miss = docsDeclared.filter(f => !changed.includes(f) && !changed.some(x => x.endsWith(f)));
+      checks.范围比对 = { 实际改动文件数: changed.length, 声明数: declared.size, 越界: extras, 漏改: miss };
+      if (extras.length) missing.push(`越界改动未声明：${extras.join('、')}`);
+      if (miss.length) missing.push(`声明未改：${miss.join('、')}`);
+    }
+  }
+  // 3 重跑必跑命令：机器不跨工程代跑（诚实边界），必须贴原文
+  checks.重跑证据 = Boolean(o['rerun-evidence']);
+  if (!o['rerun-evidence']) missing.push('重跑必跑命令的输出原文（--rerun-evidence "..."；必跑命令=docs:doc_health.ps1 / java:check_java_paradigm.ps1+单测 / vue:lint+test）');
+  // 4 对账：reconcile 灯即对账证据（1 已查，此处复核非空且非占位）
+  checks.对账 = Boolean(t.reconcile);
+  // 5 证据核验：commit hash 验真
+  const bad = commits.filter(c => !hasCommit(c.repo, c.commit_hash)).map(c => c.commit_hash);
+  checks.commit验真 = bad.length === 0;
+  if (bad.length) missing.push(`commit 验真失败：${bad.join('、')}`);
+  const pass = missing.length === 0;
+  out({ deliver: pass ? 'PASS 五查全绿，交付可受理' : '拒收：缺失清单如下', id, 缺失清单: missing, 五查: checks });
+  if (!pass) process.exit(2);
+
+} else if (cmd === 'abandon') {
+  const [id, sid] = rest;
+  const t = getTask(id);
+  if (!t) { console.error(`任务 ${id} 不存在`); process.exit(1); }
+  if (!t.owner && !t.owner_session_id) { console.error(`任务 ${id} 无执行会话，无需弃用`); process.exit(1); }
+  db.prepare(`UPDATE task SET owner=NULL, owner_session_id=NULL, status='ready', blocked_reason=?, updated_at=? WHERE id=?`)
+    .run(`原会话弃用（${t.owner ?? t.owner_session_id}，用户指令），待重派`, now(), id);
+  audit(id, t.status, 'ready', sid ? `用户弃用 ${sid}` : '用户弃用', `弃用原会话 ${t.owner ?? t.owner_session_id}，任务回收待重派`);
+  out({ ok: true, id, 回收: '待开工', 原会话: t.owner ?? t.owner_session_id });
 
 } else if (cmd === 'migrate') {
   // 存量迁移（一次性）：读 data/migrate_todo.json 建卡；仅空库允许

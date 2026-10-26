@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T03:32:25.334Z",
+  "generated_at": "2026-10-26T03:38:06.063Z",
   "tasks": [
     {
       "id": "T99",
@@ -2863,8 +2863,370 @@
     }
   ],
   "gates": [],
-  "items": [],
-  "accepts": [],
+  "items": [
+    {
+      "id": "IT-T21-01",
+      "task_id": "T21",
+      "seq": 1,
+      "item": "py md_gateway.py 帧加 sseq/pub_ts（字段顺序约束）",
+      "files": "[\"py:apps/md/management/commands/md_gateway.py\"]",
+      "status": "done",
+      "plan_section": "§8.1"
+    },
+    {
+      "id": "IT-T21-02",
+      "task_id": "T21",
+      "seq": 2,
+      "item": "py greeks_live.py enriched 帧加 esq+recv_at_greeks+calc_ts",
+      "files": "[\"py:apps/md/management/commands/greeks_live.py\"]",
+      "status": "done",
+      "plan_section": "§8.1"
+    },
+    {
+      "id": "IT-T21-03",
+      "task_id": "T21",
+      "seq": 3,
+      "item": "java MdRedisListener.java forward() 旁路记账",
+      "files": "[\"java:market/listener/MdRedisListener.java\"]",
+      "status": "done",
+      "plan_section": "§8.2"
+    },
+    {
+      "id": "IT-T21-04",
+      "task_id": "T21",
+      "seq": 4,
+      "item": "java 新建 MdLatencyTracker.java（记账/sseq 缺口/滑窗/查询）",
+      "files": "[\"java:option/monitor/MdLatencyTracker.java\"]",
+      "status": "done",
+      "plan_section": "§8.2"
+    },
+    {
+      "id": "IT-T21-05",
+      "task_id": "T21",
+      "seq": 5,
+      "item": "java 新建 MdLatencyController.java（两查询接口）",
+      "files": "[\"java:option/controller/MdLatencyController.java\"]",
+      "status": "done",
+      "plan_section": "§8.2"
+    },
+    {
+      "id": "IT-T21-06",
+      "task_id": "T21",
+      "seq": 6,
+      "item": "java MdStreamHeartbeat.java 丢帧/p95 聚合告警",
+      "files": "[\"java:option/task/MdStreamHeartbeat.java\"]",
+      "status": "done",
+      "plan_section": "§8.2"
+    },
+    {
+      "id": "IT-T21-07",
+      "task_id": "T21",
+      "seq": 7,
+      "item": "DB sys_config 插入 10 项 md.latency.* 配置",
+      "files": "[\"java:system/config（DB 10 行）\"]",
+      "status": "done",
+      "plan_section": "§8.2"
+    },
+    {
+      "id": "IT-T21-08",
+      "task_id": "T21",
+      "seq": 8,
+      "item": "vue 新建 op-md-latency/index.vue 监控页",
+      "files": "[\"vue:src/views/option/op-md-latency/index.vue\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-09",
+      "task_id": "T21",
+      "seq": 9,
+      "item": "vue 新建 api md-latency/index.ts",
+      "files": "[\"vue:src/api/option/md-latency/index.ts\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-10",
+      "task_id": "T21",
+      "seq": 10,
+      "item": "vue useRealtimeQuote.ts 单点改造（onFrame 记账）",
+      "files": "[\"vue:src/composables/useRealtimeQuote.ts\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-11",
+      "task_id": "T21",
+      "seq": 11,
+      "item": "vue op-option-contract/index.vue 加 3 列",
+      "files": "[\"vue:src/views/option/op-option-contract/index.vue\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-12",
+      "task_id": "T21",
+      "seq": 12,
+      "item": "vue op-option-contract-vxe/index.vue 加 3 列",
+      "files": "[\"vue:src/views/option/op-option-contract-vxe/index.vue\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-13",
+      "task_id": "T21",
+      "seq": 13,
+      "item": "vue op-future-contract/index.vue 加 3 列",
+      "files": "[\"vue:src/views/option/op-future-contract/index.vue\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-14",
+      "task_id": "T21",
+      "seq": 14,
+      "item": "vue op-future-contract-vxe/index.vue 加 3 列",
+      "files": "[\"vue:src/views/option/op-future-contract-vxe/index.vue\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-15",
+      "task_id": "T21",
+      "seq": 15,
+      "item": "vue op-watchlist/index.vue 加 3 列",
+      "files": "[\"vue:src/views/option/op-watchlist/index.vue\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-16",
+      "task_id": "T21",
+      "seq": 16,
+      "item": "vue router/index.ts 挂载路由",
+      "files": "[\"vue:src/router/index.ts\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-17",
+      "task_id": "T21",
+      "seq": 17,
+      "item": "vue stores/realtime.ts 全局链路指标",
+      "files": "[\"vue:src/stores/realtime.ts\"]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-18",
+      "task_id": "T21",
+      "seq": 18,
+      "item": "菜单核销：实测 sys_menu 无业务菜单，走静态路由",
+      "files": "[]",
+      "status": "done",
+      "plan_section": "§8.3"
+    },
+    {
+      "id": "IT-T21-19",
+      "task_id": "T21",
+      "seq": 19,
+      "item": "方案+索引+todo+总账+出工报告当轮落账",
+      "files": "[\"docs:docs/方案/行情链路延时与连续性可观测方案.md\"]",
+      "status": "done",
+      "plan_section": "§8.4"
+    },
+    {
+      "id": "IT-T21-20",
+      "task_id": "T21",
+      "seq": 20,
+      "item": "java GreeksCalculator.java 无折现 intrinsic（A 方案）",
+      "files": "[\"java:option/greeks/GreeksCalculator.java\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-21",
+      "task_id": "T21",
+      "seq": 21,
+      "item": "java MdLatencyTracker.java 停用 wait/pyToJava/push、口径改",
+      "files": "[\"java:option/monitor/MdLatencyTracker.java\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-22",
+      "task_id": "T21",
+      "seq": 22,
+      "item": "java MdRedisListener.java 泳道串行+PatternTopic+心跳分流",
+      "files": "[\"java:market/listener/MdRedisListener.java\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-23",
+      "task_id": "T21",
+      "seq": 23,
+      "item": "java MdLatencyVO.java 删 3 summary 字段",
+      "files": "[\"java:option/monitor/MdLatencyVO.java\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-24",
+      "task_id": "T21",
+      "seq": 24,
+      "item": "java MdLatencyController.java summary 组装删字段",
+      "files": "[\"java:option/controller/MdLatencyController.java\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-25",
+      "task_id": "T21",
+      "seq": 25,
+      "item": "vue 5 列表页删 greeks 延时列",
+      "files": "[\"vue:src/views/option/*5 页\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-26",
+      "task_id": "T21",
+      "seq": 26,
+      "item": "vue 监控页汇总卡删 3 格",
+      "files": "[\"vue:src/views/option/op-md-latency/index.vue\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-27",
+      "task_id": "T21",
+      "seq": 27,
+      "item": "py md_gateway.py hash 分片订阅+分片发布+60s 心跳",
+      "files": "[\"py:apps/md/management/commands/md_gateway.py\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-28",
+      "task_id": "T21",
+      "seq": 28,
+      "item": "docs 对账报告 §5 更新",
+      "files": "[\"docs:docs/方案/行情链路延时与连续性可观测方案.md\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-29",
+      "task_id": "T21",
+      "seq": 29,
+      "item": "docs 本文档 §17 落账",
+      "files": "[\"docs:docs/方案/行情链路延时与连续性可观测方案.md\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-T21-30",
+      "task_id": "T21",
+      "seq": 30,
+      "item": "DB sys_config 插入「行情分片总数」=5",
+      "files": "[\"java:system/config（DB 1 行）\"]",
+      "status": "done",
+      "plan_section": "§17.5"
+    }
+  ],
+  "accepts": [
+    {
+      "id": "ACC-T21-01",
+      "task_id": "T21",
+      "item_id": "IT-T21-01",
+      "item": "交易时段识别 tradingSession=true",
+      "criterion": "summary 接口",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-02",
+      "task_id": "T21",
+      "item_id": "IT-T21-02",
+      "item": "有真实收帧 framesTotal>0 持续增长",
+      "criterion": "summary 接口",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-03",
+      "task_id": "T21",
+      "item_id": "IT-T21-03",
+      "item": "端到端延时 p50<300ms、p95<1000ms",
+      "criterion": "summary 接口",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-04",
+      "task_id": "T21",
+      "item_id": "IT-T21-04",
+      "item": "无丢帧 lostWindow=0、greeksLostWindow=0",
+      "criterion": "summary 接口",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-05",
+      "task_id": "T21",
+      "item_id": "IT-T21-05",
+      "item": "断流可解释（STALE 均为冷门合约）",
+      "criterion": "onlyAbnormal 接口",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-06",
+      "task_id": "T21",
+      "item_id": "IT-T21-06",
+      "item": "分片链路 5 通道均有帧、5 进程 RUNNING",
+      "criterion": "抓帧+supervisorctl",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-07",
+      "task_id": "T21",
+      "item_id": "IT-T21-07",
+      "item": "CPU java<60%",
+      "criterion": "docker stats",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-08",
+      "task_id": "T21",
+      "item_id": "IT-T21-08",
+      "item": "enriched 链被消费、op_option_contract 持续更新 iv 非空",
+      "criterion": "redis+mysql",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-09",
+      "task_id": "T21",
+      "item_id": "IT-T21-09",
+      "item": "心跳帧 py 日志+抓帧 type=heartbeat≥1",
+      "criterion": "py 分片日志+抓帧",
+      "passed": 0,
+      "evidence": null
+    },
+    {
+      "id": "ACC-T21-10",
+      "task_id": "T21",
+      "item_id": "IT-T21-10",
+      "item": "无异常 java 近 10 分钟 ERROR=0",
+      "criterion": "docker logs",
+      "passed": 0,
+      "evidence": null
+    }
+  ],
   "bugs": [],
   "commits": [
     {
@@ -3216,6 +3578,86 @@
       "kind": "deploy",
       "at": "2026-10-26T02:03:35.386Z",
       "by_session": "存量迁移"
+    },
+    {
+      "id": 83,
+      "task_id": "T21",
+      "repo": "docs",
+      "commit_hash": "1f1489a",
+      "message": "M14 行情链路延时与连续性可观测方案落盘（页面/列表页/汇总三点并入+方案索引+todo T21+总账）",
+      "kind": "first",
+      "at": "2026-10-26T03:36:15.238Z",
+      "by_session": "存量灌注（git log 验真）"
+    },
+    {
+      "id": 84,
+      "task_id": "T21",
+      "repo": "docs",
+      "commit_hash": "5219e96",
+      "message": "M14 审查修复批次落账（方案 §12.4）",
+      "kind": "other",
+      "at": "2026-10-26T03:36:15.238Z",
+      "by_session": "存量灌注（git log 验真）"
+    },
+    {
+      "id": 85,
+      "task_id": "T21",
+      "repo": "docs",
+      "commit_hash": "138b78c",
+      "message": "性能优化 P0 订阅减量+P1 java 直算 greeks 落账（§15）",
+      "kind": "other",
+      "at": "2026-10-26T03:36:15.238Z",
+      "by_session": "存量灌注（git log 验真）"
+    },
+    {
+      "id": 86,
+      "task_id": "T21",
+      "repo": "docs",
+      "commit_hash": "bd5e055",
+      "message": "行情 hash 分片方案部署上线落账（§17.7）",
+      "kind": "other",
+      "at": "2026-10-26T03:36:15.238Z",
+      "by_session": "存量灌注（git log 验真）"
+    },
+    {
+      "id": 87,
+      "task_id": "T21",
+      "repo": "docs",
+      "commit_hash": "ce3ec15",
+      "message": "方案 §17.8 扩容缩容运维 SOP",
+      "kind": "other",
+      "at": "2026-10-26T03:36:15.238Z",
+      "by_session": "存量灌注（git log 验真）"
+    },
+    {
+      "id": 88,
+      "task_id": "T21",
+      "repo": "docs",
+      "commit_hash": "8162fde",
+      "message": "泳道定稿+Redis hash 读值去引号 bug 修复落账（§17.9）",
+      "kind": "other",
+      "at": "2026-10-26T03:36:15.238Z",
+      "by_session": "存量灌注（git log 验真）"
+    },
+    {
+      "id": 89,
+      "task_id": "T21",
+      "repo": "docs",
+      "commit_hash": "63d637e",
+      "message": "py greeks 路径删除+一倍速率模拟压测验证落账（§17.10）",
+      "kind": "other",
+      "at": "2026-10-26T03:36:15.238Z",
+      "by_session": "存量灌注（git log 验真）"
+    },
+    {
+      "id": 90,
+      "task_id": "T21",
+      "repo": "docs",
+      "commit_hash": "17e9199",
+      "message": "期权订阅近月口径修正落账（§17.12）",
+      "kind": "other",
+      "at": "2026-10-26T03:36:15.238Z",
+      "by_session": "存量灌注（git log 验真）"
     },
     {
       "id": 4,
@@ -15591,11 +16033,6 @@
     }
   ],
   "broken": [
-    {
-      "task": "T21",
-      "check": "清单无承接",
-      "msg": "T21(待验收) 方案 docs/方案/行情链路延时与连续性可观测方案.md 无拆解项"
-    },
     {
       "task": "T22",
       "check": "清单无承接",
