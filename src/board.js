@@ -290,6 +290,69 @@ ${warnSessions.length === 0 ? '<span class="ok">✔ 无空转告警</span>' :
 ${groupsHtml || '<div class="sub">本周无会话活动</div>'}</body></html>`;
 writeFileSync(path.join(exportsDir, 'sessionboard.html'), sessHtml);
 
+// ---------- 今日进展页 today.html（首页=站会三问：昨天干了啥/今天在干啥/有什么阻碍） ----------
+const evToday = events.filter(e => { const d = parseT(e.at); return d && dayKey(d) === todayKey(); }).reverse();
+const activeTasks = tasks.filter(t => ACTIVE_STATUS.includes(t.status));
+const startedToday = tasks.filter(t => { const d = parseT(t.started_at); return d && dayKey(d) === todayKey(); });
+const finishedToday = tasks.filter(t => { const d = parseT(t.finished_at); return d && dayKey(d) === todayKey(); });
+const finishedYesterday = tasks.filter(t => { const d = parseT(t.finished_at); return d && dayKey(d) === yKey; });
+const ago = t => { const d = parseT(t); if (!d) return '—'; const m = Math.round((NOW - d.getTime()) / 60000); return m < 60 ? m + ' 分钟前' : Math.round(m / 60) + ' 小时前'; };
+const sessToday = todaySessions.slice().sort((a, b) => String(b.last_active_at).localeCompare(String(a.last_active_at)));
+const stLabel = st => `<span class="st st-${st}">${ZH[st]}</span>`;
+const todayHtml = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>今日进展</title><style>
+body{font-family:"Microsoft YaHei",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#222;max-width:1100px;margin:0 auto}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:#777;font-size:12px;margin-bottom:12px}
+.sum{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.sum .s{background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.sum .s b{font-size:18px;margin-right:4px}.s.red b{color:#d43}.s.green b{color:#187}.s.yellow b{color:#d90}
+h2{font-size:15px;margin:18px 0 8px}
+.sec{background:#fff;border-radius:8px;padding:12px 14px;box-shadow:0 1px 2px rgba(0,0,0,.06);margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{border-bottom:1px solid #eee;padding:6px 8px;text-align:left}
+.r{color:#d43;font-weight:700}.y{color:#d90;font-weight:700}
+.st{font-size:11px;border-radius:3px;padding:1px 6px;margin-left:6px;background:#eef}
+.st-dev{background:#e3f2fd}.st-selftest{background:#e8f5e9}.st-review{background:#fff3e0}.st-merge_ready{background:#f3e5f5}.st-merged{background:#ede7f6}.st-deployed{background:#e0f2f1}.st-blocked{background:#ffebee;color:#c62828}
+.mut{color:#999;font-size:12px}
+.ok{color:#187}
+footer{color:#aaa;font-size:11px;margin-top:12px}
+</style></head><body>
+<h1>今日进展（站会三问）</h1>
+<div class="sub">${new Date().toLocaleString('zh-CN')} · 数据源 zz-agent-taskboard/data/taskboard.db</div>
+<div class="sum">
+<div class="s red"><b>${redCount}</b>阻碍（需处理）</div>
+<div class="s yellow"><b>${yellowCount}</b>待关注</div>
+<div class="s green"><b>${finishedToday.length}</b>今日完成</div>
+<div class="s"><b>${activeTasks.length}</b>进行中</div>
+<div class="s"><b>${startedToday.length}</b>今日开工</div>
+<div class="s"><b>${todaySessions.length}</b>今日活跃会话</div>
+</div>
+<div class="sec"><h2>三问之一：有什么阻碍？（${redCount + yellowCount} 件，按处置指引处理后复绿）</h2>
+${focusItems.length === 0 ? '<span class="ok">✔ 没有阻碍</span>' :
+`<table><tr><th>级</th><th>问题</th><th>处置指引</th></tr>${focusItems.map(f => `<tr><td class="${f.lvl==='红'?'r':'y'}">${f.lvl}</td><td>${esc(f.text)}</td><td>${esc(f.act)}</td></tr>`).join('')}</table>`}
+</div>
+<div class="sec"><h2>三问之二：今天在干啥？（进行中 ${activeTasks.length} 件，按编号倒序）</h2>
+${activeTasks.length === 0 ? '<span class="ok">✔ 当前没有进行中的任务</span>' :
+`<table><tr><th>任务</th><th>标题</th><th>状态</th><th>认领</th><th>最后动作</th></tr>${activeTasks.map(t => `<tr><td>${esc(t.id)}</td><td>${esc(t.title.slice(0, 50))}</td><td>${stLabel(t.status)}</td><td>${esc(t.owner ?? '—')}</td><td class="mut">${ago(t.updated_at)}</td></tr>`).join('')}</table>`}
+</div>
+<div class="sec"><h2>三问之三：今天/昨天完成了啥？</h2>
+<h2 style="margin-top:4px">今日完成 ${finishedToday.length} 件</h2>
+${finishedToday.length === 0 ? '<span class="mut">今天还没有关闭任务</span>' :
+`<table><tr><th>任务</th><th>标题</th><th>完成时间</th></tr>${finishedToday.map(t => `<tr><td>${esc(t.id)}</td><td>${esc(t.title.slice(0, 50))}</td><td class="mut">${esc(t.finished_at)}</td></tr>`).join('')}</table>`}
+<h2>昨日完成 ${finishedYesterday.length} 件</h2>
+${finishedYesterday.length === 0 ? '<span class="mut">昨天没有关闭任务</span>' :
+`<table><tr><th>任务</th><th>标题</th><th>完成时间</th></tr>${finishedYesterday.map(t => `<tr><td>${esc(t.id)}</td><td>${esc(t.title.slice(0, 50))}</td><td class="mut">${esc(t.finished_at)}</td></tr>`).join('')}</table>`}
+</div>
+<div class="sec"><h2>今日活动流（倒序）</h2>
+${evToday.length === 0 ? '<span class="mut">今天还没有任务事件（从明天起开工/交付/验收动作都会自动进流）</span>' :
+`<table><tr><th>时间</th><th>任务</th><th>动作</th><th>执行者</th></tr>${evToday.slice(0, 40).map(e => `<tr><td class="mut">${esc(String(e.at).slice(11, 16))}</td><td>${esc(e.task_id)}</td><td>${esc(e.from_status ? ZH[e.from_status] + ' → ' : '')}${esc(ZH[e.to_status] ?? '')}${e.note ? ' · ' + esc(e.note.slice(0, 60)) : ''}</td><td class="mut">${esc(e.actor ?? '')}</td></tr>`).join('')}${evToday.length > 40 ? `<tr><td colspan="4" class="mut">… 其余 ${evToday.length - 40} 条略</td></tr>` : ''}</table>`}
+</div>
+<div class="sec"><h2>今日活跃会话（${sessToday.length} 个）</h2>
+${sessToday.length === 0 ? '<span class="mut">无</span>' :
+`<table><tr><th>会话</th><th>工作区</th><th>最后活动</th><th>状态</th></tr>${sessToday.slice(0, 15).map(s => `<tr><td>${esc(s.id)}</td><td>${esc(s.workspace ?? '')}</td><td class="mut">${esc(String(s.last_active_at).slice(11, 16))}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td></tr>`).join('')}${sessToday.length > 15 ? `<tr><td colspan="4" class="mut">… 其余 ${sessToday.length - 15} 个见会话看板</td></tr>` : ''}</table>`}
+</div>
+<footer>zz-agent-taskboard · board.js 生成 · 全景看板 → <a href="taskboard.html">taskboard.html</a> · 会话看板 → <a href="sessionboard.html">sessionboard.html</a></footer>
+</body></html>`;
+writeFileSync(path.join(exportsDir, 'today.html'), todayHtml);
+
 // ---------- --deploy：复制到 docs 仓库根（批 1⑤ 迁移用） ----------
 if (process.argv.includes('--deploy')) {
   if (!existsSync(DOCS_ROOT)) {
@@ -297,9 +360,10 @@ if (process.argv.includes('--deploy')) {
     process.exit(1);
   }
   copyFileSync(path.join(exportsDir, 'todo.md'), path.join(DOCS_ROOT, 'todo.md'));
+  copyFileSync(path.join(exportsDir, 'today.html'), path.join(DOCS_ROOT, 'today.html'));
   copyFileSync(path.join(exportsDir, 'taskboard.html'), path.join(DOCS_ROOT, 'taskboard.html'));
   copyFileSync(path.join(exportsDir, 'sessionboard.html'), path.join(DOCS_ROOT, 'sessionboard.html'));
-  console.log(`[board] --deploy：todo.md/taskboard.html/sessionboard.html 已复制到 ${DOCS_ROOT}`);
+  console.log(`[board] --deploy：todo.md/today.html/taskboard.html/sessionboard.html 已复制到 ${DOCS_ROOT}`);
 }
 
 console.log(`[board] 已生成 exports/：tasks.json、todo.md（${tasks.length} 行任务）、taskboard.html（断链 ${broken.length} 条）、sessionboard.html（${sessions.length} 会话）`);
@@ -311,7 +375,7 @@ if (process.argv.includes('--serve')) {
   const port = Number(portArg) || 8970;
   const server = http.createServer((req, res) => {
     const urlPath = decodeURIComponent((req.url || '/').split('?')[0]).replace(/\\/g, '/');
-    const rel = urlPath === '/' ? 'taskboard.html' : urlPath.replace(/^\//, '');
+    const rel = urlPath === '/' ? 'today.html' : urlPath.replace(/^\//, '');
     const file = path.join(exportsDir, rel);
     if (!file.startsWith(exportsDir)) { res.writeHead(403); res.end('forbidden'); return; }
     try {
@@ -324,7 +388,8 @@ if (process.argv.includes('--serve')) {
     }
   });
   server.listen(port, '127.0.0.1', () => {
-    console.log(`[board] 总看板：http://127.0.0.1:${port}/taskboard.html`);
+    console.log(`[board] 今日进展（首页）：http://127.0.0.1:${port}/`);
+    console.log(`[board] 全景看板：http://127.0.0.1:${port}/taskboard.html`);
     console.log(`[board] 会话看板：http://127.0.0.1:${port}/sessionboard.html`);
     console.log('[board] 服务常驻运行中，停止=关闭本进程（Ctrl+C）');
   });
