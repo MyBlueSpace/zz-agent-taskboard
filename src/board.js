@@ -26,7 +26,7 @@ const LAMPS = ['compile','tests','paradigm','reconcile','scan','deploy'];
 const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
 // ---------- 读库 ----------
-const tasks = db.prepare('SELECT * FROM task ORDER BY id').all();
+const tasks = db.prepare('SELECT * FROM task ORDER BY id DESC').all();
 const gates = new Map(db.prepare('SELECT * FROM task_gate').all().map(g => [g.task_id, g]));
 const items = db.prepare('SELECT * FROM task_item ORDER BY task_id, seq').all();
 const accepts = db.prepare('SELECT * FROM accept_item ORDER BY task_id, id').all();
@@ -67,6 +67,57 @@ for (const b of bugs) if (b.status === 'fixed' && !b.fix_commit)
   broken.push({ task: b.task_id, check: '账实相符', msg: `bug ${b.id} 标记 fixed 但无修复 commit` });
 for (const a of accepts) if (a.passed === 1 && !a.evidence)
   broken.push({ task: a.task_id, check: '账实相符', msg: `验收项 ${a.id} 标记通过但无证据 evidence` });
+
+// ---------- 时间工具（兼容迁移「MM-DD」短格式与 ISO） ----------
+const pad = n => String(n).padStart(2, '0');
+const parseT = v => {
+  if (!v) return null;
+  const s = String(v).trim();
+  const iso = new Date(s);
+  if (!isNaN(iso.getTime())) return iso;
+  const m = s.match(/^(\d{1,2})-(\d{1,2})$/);
+  if (m) return new Date(new Date().getFullYear(), Number(m[1]) - 1, Number(m[2]));
+  return null;
+};
+const dayKey = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const todayKey = () => dayKey(new Date());
+const weekStart = (() => { const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() - (d.getDay() === 0 ? 6 : d.getDay() - 1)); return d; })();
+
+// ---------- 今日焦点：需要处理的事，每条带处置指引 ----------
+const NOW = Date.now();
+const HOUR_MS = 3600000;
+const ACTIVE_STATUS = ['ready','dev','selftest','review','merge_ready','merged','deployed'];
+const focusItems = [];
+for (const t of tasks) {
+  if (t.status === 'blocked')
+    focusItems.push({ lvl:'红', text:`${t.id} ${t.title.slice(0,38)} 被阻塞`, act:`原因：${t.blocked_reason ?? '未填'}。处置：你拍板解卡，或退回需求池` });
+}
+for (const b of broken)
+  focusItems.push({ lvl:'红', text:`${b.task} 勾稽断链：${b.msg}`, act:'处置：值班 AI 会话补挂账（task.js set / commit），补齐后复验变绿' });
+for (const b of bugs.filter(x => x.status === 'open'))
+  focusItems.push({ lvl:'红', text:`${b.id}（${b.task}）${b.title.slice(0,38)} 未修复`, act:'处置：派修复会话，两轮即停（fix_rounds>2 上报你）' });
+for (const t of tasks.filter(x => x.status === 'review'))
+  focusItems.push({ lvl:'黄', text:`${t.id} ${t.title.slice(0,38)} 待验收`, act:'处置：L0 复核门禁证据 → L1 Pro 审查（判断段）→ L2 你签字' });
+for (const t of tasks.filter(x => x.status === 'merge_ready'))
+  focusItems.push({ lvl:'黄', text:`${t.id} ${t.title.slice(0,38)} 待合并`, act:'处置：合并窗口内全量扫描 P0=0 → deploy_guard → merge main（需你点头）' });
+for (const t of tasks) {
+  if (!ACTIVE_STATUS.includes(t.status)) continue;
+  const u = parseT(t.updated_at);
+  if (u && NOW - u.getTime() > HOUR_MS)
+    focusItems.push({ lvl:'黄', text:`${t.id} ${t.title.slice(0,38)} 卡门超 1 小时（停在「${ZH[t.status]}」）`, act:'处置：问执行会话进展；无进展→打回或上报你' });
+  const sid = t.owner_session_id;
+  if (sid) {
+    const c = latestCheck.get(sid);
+    if (c && c.last_active_min > 30)
+      focusItems.push({ lvl:'黄', text:`${t.id} 的执行会话 ${sid} 空转 ${c.last_active_min} 分钟`, act:'处置：去该会话问一句「卡哪了」，或收回任务重新派工' });
+  }
+}
+const redCount = focusItems.filter(f => f.lvl === '红').length;
+const yellowCount = focusItems.filter(f => f.lvl === '黄').length;
+// 今天/本周 维度
+const todayClosed = tasks.filter(t => { const d = parseT(t.finished_at); return d && dayKey(d) === todayKey(); });
+const thisWeekClosed = tasks.filter(t => { const d = parseT(t.finished_at); return d && d >= weekStart; });
+const startedThisWeek = tasks.filter(t => { const d = parseT(t.started_at); return d && d >= weekStart; });
 
 // ---------- exports/*.json 快照 ----------
 const snap = {
@@ -136,18 +187,30 @@ h1{font-size:20px;margin:4px 0 2px}.sub{color:#777;font-size:12px;margin-bottom:
 .gj{margin-top:18px;background:#fff;border-radius:8px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .gj h2{font-size:15px;margin:0 0 8px}.gj table{width:100%;border-collapse:collapse;font-size:12px}
 .gj td,.gj th{border-bottom:1px solid #eee;padding:5px 8px;text-align:left}.gj .ok{color:#187}
+.r{color:#d43;font-weight:700}.y{color:#d90;font-weight:700}
+details{background:#fff;border-radius:8px;padding:8px 14px;margin:8px 0;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+summary{cursor:pointer;font-size:14px;font-weight:600;padding:4px 0}
+.focus{background:#fff;border-radius:8px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06);margin-bottom:14px}
+.focus h2{font-size:15px;margin:0 0 8px}
+.focus table{width:100%;border-collapse:collapse;font-size:12px}
+.focus td,.focus th{border-bottom:1px solid #eee;padding:6px 8px;text-align:left}
 footer{color:#aaa;font-size:11px;margin-top:10px}
 </style></head><body>
 <h1>AI 开发治理总看板</h1>
 <div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 数据源 zz-agent-taskboard/data/taskboard.db · 制度权威=zz-option-docs/docs/方案/AI开发治理与任务生命周期管理方案.md</div>
 <div class="sum">
-${['总任务','需求','待开工','开发中','自测中','待验收','待合并','已部署','关闭','阻塞'].map(label => {
-  const map = { '总任务': tasks.length, '需求': tasks.filter(t=>t.status==='backlog').length, '待开工': tasks.filter(t=>t.status==='ready').length, '开发中': tasks.filter(t=>t.status==='dev').length, '自测中': tasks.filter(t=>t.status==='selftest').length, '待验收': tasks.filter(t=>t.status==='review').length, '待合并': tasks.filter(t=>t.status==='merge_ready').length, '已部署': tasks.filter(t=>t.status==='deployed').length, '关闭': tasks.filter(t=>t.status==='closed').length, '阻塞': tasks.filter(t=>t.status==='blocked').length };
-  const cls = label==='阻塞' && map[label] ? ' red' : (label==='关闭' ? ' green' : '');
-  return `<div class="s${cls}"><b>${map[label]}</b>${label}</div>`;
-}).join('')}
+<div class="s red"><b>${redCount}</b>红·需处理</div>
+<div class="s"><b>${yellowCount}</b>黄·需关注</div>
+<div class="s green"><b>${todayClosed.length}</b>今日关闭</div>
+<div class="s green"><b>${thisWeekClosed.length}</b>本周完成</div>
+<div class="s"><b>${startedThisWeek.length}</b>本周开工</div>
+<div class="s"><b>${tasks.length}</b>总任务</div>
 <div class="s"><b>${bugs.filter(b=>b.status==='open').length}</b>BUG 未修</div>
 <div class="s"><b>${broken.length}</b>勾稽断链</div>
+</div>
+<div class="focus"><h2>今日焦点：${redCount + yellowCount} 件需要处理（发现 → 按处置指引处理 → 绿灯复归）</h2>
+${focusItems.length === 0 ? '<span class="ok">✔ 今天没有需要处理的事</span>' :
+`<table><tr><th>级</th><th>问题</th><th>处置指引</th></tr>${focusItems.map(f => `<tr><td class="${f.lvl==='红'?'r':'y'}">${f.lvl}</td><td>${esc(f.text)}</td><td>${esc(f.act)}</td></tr>`).join('')}</table>`}
 </div>
 <div class="board">
 ${STATUS_ORDER.map(st => {
@@ -180,14 +243,51 @@ const sessionRows = visibleSessions.map(s => {
   const st = s.status === 'idle' ? '🟡 空转' : '🟢 活跃';
   return `<tr><td>${esc(s.id)}</td><td>${esc(s.workspace ?? '')}</td><td>${esc(s.model ?? '')}</td><td>${st}</td><td>${min == null ? '—' : min + ' 分钟前'}</td><td>${esc(c?.note ?? '')}</td></tr>`;
 }).join('');
+// 今日/本周/告警/折叠分组
+const todaySessions = sessions.filter(s => { const d = s.last_active_at ? new Date(s.last_active_at) : null; return d && dayKey(d) === todayKey(); });
+const busyIds = new Set(tasks.filter(t => t.owner_session_id).map(t => t.owner_session_id));
+const warnSessions = sessions.filter(s => { const c = latestCheck.get(s.id); return c && c.last_active_min > 30 && (busyIds.has(s.id) || s.status === 'active'); });
+const yKey = dayKey(new Date(Date.now() - 86400000));
+const recent = visibleSessions.map(s => ({ s, d: s.last_active_at ? new Date(s.last_active_at) : null }))
+  .filter(x => x.d && x.d >= weekStart).sort((a, b) => b.d - a.d);
+const groupsHtml = [['今天', recent.filter(x => dayKey(x.d) === todayKey())],
+  ['昨天', recent.filter(x => dayKey(x.d) === yKey)],
+  ['本周更早', recent.filter(x => dayKey(x.d) !== todayKey() && dayKey(x.d) !== yKey)]]
+  .filter(([, l]) => l.length)
+  .map(([gname, l], gi) => `<details ${gi === 0 ? 'open' : ''}><summary>${gname}（${l.length} 个）</summary><table><tr><th>会话</th><th>工作区</th><th>模型</th><th>状态</th><th>最后活动</th></tr>${l.map(({ s }) => {
+    const c = latestCheck.get(s.id);
+    return `<tr><td>${esc(s.id)}</td><td>${esc(s.workspace ?? '')}</td><td>${esc(s.model ?? '')}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td><td>${esc(String(s.last_active_at ?? '').slice(0, 16))}</td></tr>`;
+  }).join('')}</table></details>`).join('');
 const sessHtml = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>会话看板</title><style>
 body{font-family:"Microsoft YaHei",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#222}
 h1{font-size:20px;margin:4px 0 12px}.sub{color:#777;font-size:12px;margin-bottom:12px}
 table{width:100%;border-collapse:collapse;background:#fff;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 td,th{border-bottom:1px solid #eee;padding:7px 10px;text-align:left}
 tr:hover{background:#fafafa}
-</style></head><body><h1>会话看板（AI 员工）</h1><div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 展示 ${visibleSessions.length} 个会话（活跃 + ${ARCHIVE_DAYS} 天内活动）· 已归档隐藏 ${archivedCount} 个 · 空转阈值 30 分钟（meta 表）</div>
-<table><tr><th>会话</th><th>工作区</th><th>模型</th><th>状态</th><th>最后活动</th><th>备注</th></tr>${sessionRows}</table></body></html>`;
+.sum{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.sum .s{background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.sum .s b{font-size:18px;margin-right:4px}.s.red b{color:#d43}.s.green b{color:#187}
+.focus{background:#fff;border-radius:8px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.06);margin-bottom:14px}
+.focus h2{font-size:15px;margin:0 0 8px}.focus .ok{color:#187}
+details{background:#fff;border-radius:8px;padding:8px 14px;margin:8px 0;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+summary{cursor:pointer;font-size:14px;font-weight:600;padding:4px 0}
+h2{font-size:15px;margin:16px 0 8px}
+</style></head><body><h1>会话看板（AI 员工）</h1><div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 在册 ${sessions.length} · 归档隐藏 ${archivedCount} · 今日活动 ${todaySessions.length} · 空转告警 ${warnSessions.length}</div>
+<div class="sum">
+<div class="s${warnSessions.length ? ' red' : ''}"><b>${warnSessions.length}</b>空转告警</div>
+<div class="s green"><b>${todaySessions.length}</b>今日活动</div>
+<div class="s"><b>${sessions.filter(s => s.status === 'active').length}</b>活跃</div>
+<div class="s"><b>${recent.length}</b>本周有活动</div>
+</div>
+<div class="focus"><h2>空转告警（去该会话问一句：卡哪了）</h2>
+${warnSessions.length === 0 ? '<span class="ok">✔ 无空转告警</span>' :
+`<table><tr><th>会话</th><th>工作区</th><th>空转时长</th><th>在册任务</th></tr>${warnSessions.map(s => {
+  const c = latestCheck.get(s.id);
+  const ts = tasks.filter(t => t.owner_session_id === s.id && !['closed','cancelled','backlog'].includes(t.status)).map(t => t.id).join('、');
+  return `<tr><td>${esc(s.id)}</td><td>${esc(s.workspace ?? '')}</td><td>${c?.last_active_min} 分钟</td><td>${esc(ts) || '—'}</td></tr>`;
+}).join('')}</table>`}
+</div>
+<h2>近期会话（按天折叠 · 默认只看今天）</h2>
+${groupsHtml || '<div class="sub">本周无会话活动</div>'}</body></html>`;
 writeFileSync(path.join(exportsDir, 'sessionboard.html'), sessHtml);
 
 // ---------- --deploy：复制到 docs 仓库根（批 1⑤ 迁移用） ----------
