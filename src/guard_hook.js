@@ -8,10 +8,13 @@
 //   3. file_path 命中 task_item.files 清单（该任务的）→ 放行
 //   4. 命中豁免名单（治理工程自身文件/通用纪律文档）→ 放行
 //   5. 其余 → deny，reason 告知模型先补登记（task.js item add）再写
-import { readFileSync } from 'node:fs';
+import { readFileSync, appendFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+// 执行日志：每次被 DSH 调用写一行（验证 hook 加载/审计用；2026-10-26 重启后验证档 B 生效）
+const GUARD_LOG = join(process.env.USERPROFILE || '', '.dsh', 'logs', 'guard_hook.log');
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DB = join(ROOT, 'data', 'taskboard.db');
@@ -25,6 +28,9 @@ try {
 }
 
 const toolName = payload.tool_name || '';
+try {
+  appendFileSync(GUARD_LOG, `${new Date().toISOString()} tool=${toolName} session=${payload.session_id || ''}\n`, 'utf8');
+} catch (e) { /* 日志失败不影响决策 */ }
 if (toolName !== 'write' && toolName !== 'edit') {
   console.log(JSON.stringify({ decision: 'allow' }));
   process.exit(0);
