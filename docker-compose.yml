@@ -1,0 +1,12 @@
+# zz-agent-taskboard 看板静态服务
+# 看板文件 = board.js 生成的 exports/（每次重建即时生效，容器只读挂载）
+services:
+  taskboard:
+    image: nginx:1.27-alpine
+    container_name: zz-agent-taskboard
+    restart: unless-stopped
+    ports:
+      - "8970:80"
+    volumes:
+      - ./exports:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
