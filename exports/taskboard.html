@@ -35,19 +35,19 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
 </style></head><body>
 <nav style="margin:10px 0 14px"><a href="/" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📌 今日进展</a>&nbsp;&nbsp;<a href="/taskboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📋 全景看板</a>&nbsp;&nbsp;<a href="/sessionboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">👥 会话看板</a>&nbsp;&nbsp;<a href="/todo.md" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📝 任务清单</a></nav>
 <h1>AI 开发治理总看板</h1><div class="purpose">本页解决：每张工单现在卡在哪——12 阶段全景档案（编号倒序），按需查阅；红灯=阻塞、灰灯=未报门禁。</div>
-<div class="sub">生成于 2026/10/26 12:04:36 · 数据源 zz-agent-taskboard/data/taskboard.db · 制度权威=zz-option-docs/docs/方案/AI开发治理与任务生命周期管理方案.md</div>
+<div class="sub">生成于 2026/10/26 14:45:50 · 数据源 zz-agent-taskboard/data/taskboard.db · 制度权威=zz-option-docs/docs/方案/AI开发治理与任务生命周期管理方案.md</div>
 <div class="sum">
 <div class="s red"><b>9</b>红·需处理</div>
-<div class="s"><b>19</b>黄·需关注</div>
+<div class="s"><b>22</b>黄·需关注</div>
 <div class="s green"><b>0</b>今日关闭</div>
 <div class="s green"><b>0</b>本周完成</div>
 <div class="s"><b>0</b>本周开工</div>
-<div class="s"><b>130</b>总任务</div>
+<div class="s"><b>134</b>总任务</div>
 <div class="s"><b>0</b>BUG 未修</div>
 <div class="s"><b>0</b>勾稽断链</div>
 </div>
-<div class="focus"><h2>今日焦点：28 件需要处理（发现 → 按处置指引处理 → 绿灯复归）</h2>
-<table><tr><th>级</th><th>问题</th><th>处置指引</th></tr><tr><td class="r">红</td><td>T97 量化数据存储架构方案（K线/因子挖掘/回测/实盘接入） 被阻塞</td><td>原因：方案待拍板6项未决（§15）：①Parquet湖放哪块盘（推荐I:\kline_lake或C热+I冷折中）②归档触发（推荐每日定时先归档再删）③Java写Parquet（推荐CSV spool+Python转）④是否上ClickHouse（推荐C=现在不上+留接口）⑤历史数据补法（推荐A迁移10年日线+B自累积立即做）⑥MySQL保留窗口（推荐维持7/30天）。拍板即可开工。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T73 下单链路安全与一致性加固 被阻塞</td><td>原因：下单链路安全与一致性加固待拍板：分批实施顺序未拍。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T39 九期网手续费保证金自动导入 被阻塞</td><td>原因：阻塞原因未结构化留存（旧 todo 状态列仅「阻塞」二字），待你补充原因或拍板处置。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T31 数据链路性能审视 P0 三件（用户 m00466「做」授权执行，2026-1 被阻塞</td><td>原因：迁移存疑待你复核：标题标注 2026-10-20 已完成且用户 m00466 已授权执行，但旧 todo 状态列为阻塞——若确已完成，说一声我改为已完成并补账。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T24 数据恢复系统功能（三方案待拍板后开发） 被阻塞</td><td>原因：数据恢复系统三方案待拍板（三选一未定），拍板后开发。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T137 K 线湖运维方案落地：MySQL 滚动清理 + 增量归档按钮 + 监控告警 被阻塞</td><td>原因：K 线湖运维方案待拍板（方案文档状态=待拍板，滚动清理+增量归档+监控告警待批）。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T107 K 线存储方案 v2.0（MySQL 热层 + DuckDB/Parquet 被阻塞</td><td>原因：K 线存储方案 v2.0 待拍板（详见 K线存储方案-v2-DuckDB-Parquet.md 待拍板项）。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T106 K 线 CSV 目录迁移 C 盘 → F 盘 被阻塞</td><td>原因：K 线 CSV 目录迁移 C 盘→F 盘待拍板（目标盘与停写窗口未定）。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T104 Python 统一技术栈架构与部署方案（三方并存 + 前端并行工程） 被阻塞</td><td>原因：Python 统一技术栈架构与部署方案待拍板 6 项未决（详见方案文档待拍板章），拍板后进入迁移拆解。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="y">黄</td><td>T21 行情链路延时与连续性可观测（M14）：**已实施完成并上线 + 审查修复批次 待验收</td><td>处置：L0 复核门禁证据 → L1 Pro 审查（判断段）→ L2 你签字</td></tr><tr><td class="y">黄</td><td>T96 期权 Greeks 回补 + CSV 二次复核（冷启动已全部完成） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T76 行情延时彻底解决 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T68 品种代码大写写入端修复 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T37 行情链路 KPI 延时精度修复 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T30 顶栏实时行情判定改造：java `fae7a59`（4 文件+shouldL 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T23 夜盘网关心跳类型崩溃修复（`max(字符串, float)` → `'&gt;'  卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T22 行情落库「缺失语义」根治 + 条目同步全字段 + 模拟推流禁伪造量仓（代码已 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T21 行情链路延时与连续性可观测（M14）：**已实施完成并上线 + 审查修复批次 卡门超 1 小时（停在「待验收」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T201 K 线湖分区键改 trade_date+双物理列（原 T144 编号重复） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T196 三端代码全面审查 → 修复 → 固化（2026-10-26/27 会话） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T19 行情 CPU 整治 M1-M11 明晚 CPU 终审：10-15 晚 21: 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T168 实盘交易网关重构（Java 重写 + 账户枚举 + 回放自动执行） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T141 K 线模块 `nullifyFakeVolume` ERROR（2026-1 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T113 恢复「K 线数据」页面（数据源改 Parquet 湖 legacy 层）+  卡门超 1 小时（停在「已合并」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T112 K 线数据湖重建功能（页面按钮，可反复重建） 卡门超 1 小时（停在「已合并」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T110 K 线湖分区重组（解决 10 万小文件） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T109 Redis 全量快照出口 `md:snapshot:all` + SOD 预 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T108 K 线读取改造：删旧日线表 + Java 接入 DuckDB/Parquet 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr></table>
+<div class="focus"><h2>今日焦点：31 件需要处理（发现 → 按处置指引处理 → 绿灯复归）</h2>
+<table><tr><th>级</th><th>问题</th><th>处置指引</th></tr><tr><td class="r">红</td><td>T97 量化数据存储架构方案（K线/因子挖掘/回测/实盘接入） 被阻塞</td><td>原因：方案待拍板6项未决（§15）：①Parquet湖放哪块盘（推荐I:\kline_lake或C热+I冷折中）②归档触发（推荐每日定时先归档再删）③Java写Parquet（推荐CSV spool+Python转）④是否上ClickHouse（推荐C=现在不上+留接口）⑤历史数据补法（推荐A迁移10年日线+B自累积立即做）⑥MySQL保留窗口（推荐维持7/30天）。拍板即可开工。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T73 下单链路安全与一致性加固 被阻塞</td><td>原因：下单链路安全与一致性加固待拍板：分批实施顺序未拍。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T39 九期网手续费保证金自动导入 被阻塞</td><td>原因：阻塞原因未结构化留存（旧 todo 状态列仅「阻塞」二字），待你补充原因或拍板处置。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T31 数据链路性能审视 P0 三件（用户 m00466「做」授权执行，2026-1 被阻塞</td><td>原因：迁移存疑待你复核：标题标注 2026-10-20 已完成且用户 m00466 已授权执行，但旧 todo 状态列为阻塞——若确已完成，说一声我改为已完成并补账。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T24 数据恢复系统功能（三方案待拍板后开发） 被阻塞</td><td>原因：数据恢复系统三方案待拍板（三选一未定），拍板后开发。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T137 K 线湖运维方案落地：MySQL 滚动清理 + 增量归档按钮 + 监控告警 被阻塞</td><td>原因：K 线湖运维方案待拍板（方案文档状态=待拍板，滚动清理+增量归档+监控告警待批）。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T107 K 线存储方案 v2.0（MySQL 热层 + DuckDB/Parquet 被阻塞</td><td>原因：K 线存储方案 v2.0 待拍板（详见 K线存储方案-v2-DuckDB-Parquet.md 待拍板项）。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T106 K 线 CSV 目录迁移 C 盘 → F 盘 被阻塞</td><td>原因：K 线 CSV 目录迁移 C 盘→F 盘待拍板（目标盘与停写窗口未定）。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="r">红</td><td>T104 Python 统一技术栈架构与部署方案（三方并存 + 前端并行工程） 被阻塞</td><td>原因：Python 统一技术栈架构与部署方案待拍板 6 项未决（详见方案文档待拍板章），拍板后进入迁移拆解。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转</td></tr><tr><td class="y">黄</td><td>T21 行情链路延时与连续性可观测（M14）：**已实施完成并上线 + 审查修复批次 待验收</td><td>处置：L0 复核门禁证据 → L1 Pro 审查（判断段）→ L2 你签字</td></tr><tr><td class="y">黄</td><td>T96 期权 Greeks 回补 + CSV 二次复核（冷启动已全部完成） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T76 行情延时彻底解决 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T68 品种代码大写写入端修复 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T37 行情链路 KPI 延时精度修复 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T30 顶栏实时行情判定改造：java `fae7a59`（4 文件+shouldL 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T23 夜盘网关心跳类型崩溃修复（`max(字符串, float)` → `'&gt;'  卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T22 行情落库「缺失语义」根治 + 条目同步全字段 + 模拟推流禁伪造量仓（代码已 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T21 行情链路延时与连续性可观测（M14）：**已实施完成并上线 + 审查修复批次 卡门超 1 小时（停在「待验收」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T204 的执行会话 S-1148 空转 798 分钟</td><td>处置：去该会话问一句「卡哪了」，或收回任务重新派工</td></tr><tr><td class="y">黄</td><td>T203 的执行会话 S-1173 空转 381 分钟</td><td>处置：去该会话问一句「卡哪了」，或收回任务重新派工</td></tr><tr><td class="y">黄</td><td>T201 K 线湖分区键改 trade_date+双物理列（原 T144 编号重复） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T196 三端代码全面审查 → 修复 → 固化（2026-10-26/27 会话） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T19 行情 CPU 整治 M1-M11 明晚 CPU 终审：10-15 晚 21: 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T168 实盘交易网关重构（Java 重写 + 账户枚举 + 回放自动执行） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T141 K 线模块 `nullifyFakeVolume` ERROR（2026-1 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T113 恢复「K 线数据」页面（数据源改 Parquet 湖 legacy 层）+  卡门超 1 小时（停在「已合并」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T112 K 线数据湖重建功能（页面按钮，可反复重建） 卡门超 1 小时（停在「已合并」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T110 K 线湖分区重组（解决 10 万小文件） 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T109 Redis 全量快照出口 `md:snapshot:all` + SOD 预 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T108 K 线读取改造：删旧日线表 + Java 接入 DuckDB/Parquet 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr><tr><td class="y">黄</td><td>T-TEST-GUARD 测试guard 卡门超 1 小时（停在「开发中」）</td><td>处置：问执行会话进展；无进展→打回或上报你</td></tr></table>
 </div>
 <div class="board">
 <div class="col"><h3>需求<span class="n">21</span></h3><div class="card">
@@ -407,7 +407,7 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
       <div class="detsec"><b>🔗 commit 链</b><div class="dim">无 commit 挂账（存量 legacy 除外）</div></div>
       <div class="detsec"><b>🐞 bug</b><div class="dim">无 bug</div></div>
     </details>
-  </div></div><div class="col"><h3>方案<span class="n">0</span></h3></div><div class="col"><h3>待开工<span class="n">0</span></h3></div><div class="col"><h3>开发中<span class="n">15</span></h3><div class="card">
+  </div></div><div class="col"><h3>方案<span class="n">0</span></h3></div><div class="col"><h3>待开工<span class="n">0</span></h3></div><div class="col"><h3>开发中<span class="n">19</span></h3><div class="card">
     <div class="tid">T96 <span class="pri p高">高</span></div>
     <div class="ttl">期权 Greeks 回补 + CSV 二次复核（冷启动已全部完成）</div>
     <div class="meta">未认领</div>
@@ -517,6 +517,57 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     
     <div class="stats">拆解 0/0 · 验收 0/0</div>
     <div class="docs">豁免：历史遗留存量断链（2026-10-28 用户拍板 C 方案）</div>
+    
+    
+    <details class="det"><summary>详情：拆解/验收/证据/commit/bug</summary>
+      <div class="detsec"><b>📐 拆解项（条款×状态）</b><div class="dim">无拆解（方案文件级清单未灌注）</div></div>
+      <div class="detsec"><b>✔ 验收项</b><div class="dim">无验收项</div></div>
+      <div class="detsec"><b>🔦 门禁证据</b><div><span class="lamp gray" title="compile: ">c</span> compile：未填</div><div><span class="lamp gray" title="tests: ">t</span> tests：未填</div><div><span class="lamp gray" title="paradigm: ">p</span> paradigm：未填</div><div><span class="lamp gray" title="reconcile: ">r</span> reconcile：未填</div><div><span class="lamp gray" title="scan: ">s</span> scan：未填</div><div><span class="lamp gray" title="deploy: ">d</span> deploy：未填</div></div>
+      <div class="detsec"><b>🔗 commit 链</b><div class="dim">无 commit 挂账（存量 legacy 除外）</div></div>
+      <div class="detsec"><b>🐞 bug</b><div class="dim">无 bug</div></div>
+    </details>
+  </div><div class="card">
+    <div class="tid">T204 <span class="pri p高">高</span></div>
+    <div class="ttl">AI 稳定性与上下文治理（bili 上下文治理参数+AGENTS 三层瘦身）</div>
+    <div class="meta">张岩</div>
+    <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp idle"></span></div>
+    <div class="squal">👥 AI稳定性差与上下文过长解决方案 · 🟢 100K · 压缩25 · 15.0M</div>
+    <div class="stats">拆解 0/0 · 验收 0/0</div>
+    <div class="docs"></div>
+    
+    
+    <details class="det"><summary>详情：拆解/验收/证据/commit/bug</summary>
+      <div class="detsec"><b>📐 拆解项（条款×状态）</b><div class="dim">无拆解（方案文件级清单未灌注）</div></div>
+      <div class="detsec"><b>✔ 验收项</b><div class="dim">无验收项</div></div>
+      <div class="detsec"><b>🔦 门禁证据</b><div><span class="lamp gray" title="compile: ">c</span> compile：未填</div><div><span class="lamp gray" title="tests: ">t</span> tests：未填</div><div><span class="lamp gray" title="paradigm: ">p</span> paradigm：未填</div><div><span class="lamp gray" title="reconcile: ">r</span> reconcile：未填</div><div><span class="lamp gray" title="scan: ">s</span> scan：未填</div><div><span class="lamp gray" title="deploy: ">d</span> deploy：未填</div></div>
+      <div class="detsec"><b>🔗 commit 链</b><div class="dim">无 commit 挂账（存量 legacy 除外）</div></div>
+      <div class="detsec"><b>🐞 bug</b><div class="dim">无 bug</div></div>
+    </details>
+  </div><div class="card">
+    <div class="tid">T203 <span class="pri p高">高</span></div>
+    <div class="ttl">AI 开发治理体系落地（任务台账+看板+档A巡检+档B watchdog）</div>
+    <div class="meta">张岩</div>
+    <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp idle"></span></div>
+    <div class="squal">👥 AI开发多任务调度最佳实践 · 🟢 122K · 压缩196 · 147.0M</div>
+    <div class="stats">拆解 0/0 · 验收 0/0</div>
+    <div class="docs"></div>
+    
+    
+    <details class="det"><summary>详情：拆解/验收/证据/commit/bug</summary>
+      <div class="detsec"><b>📐 拆解项（条款×状态）</b><div class="dim">无拆解（方案文件级清单未灌注）</div></div>
+      <div class="detsec"><b>✔ 验收项</b><div class="dim">无验收项</div></div>
+      <div class="detsec"><b>🔦 门禁证据</b><div><span class="lamp gray" title="compile: ">c</span> compile：未填</div><div><span class="lamp gray" title="tests: ">t</span> tests：未填</div><div><span class="lamp gray" title="paradigm: ">p</span> paradigm：未填</div><div><span class="lamp gray" title="reconcile: ">r</span> reconcile：未填</div><div><span class="lamp gray" title="scan: ">s</span> scan：未填</div><div><span class="lamp gray" title="deploy: ">d</span> deploy：未填</div></div>
+      <div class="detsec"><b>🔗 commit 链</b><div class="dim">无 commit 挂账（存量 legacy 除外）</div></div>
+      <div class="detsec"><b>🐞 bug</b><div class="dim">无 bug</div></div>
+    </details>
+  </div><div class="card">
+    <div class="tid">T202 <span class="pri p高">高</span></div>
+    <div class="ttl">K线分桶异常排查（DCE.jm2612-P-1380 bar 30 秒 vs 15 秒，三次启动超时）</div>
+    <div class="meta">张岩</div>
+    <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp live"></span></div>
+    <div class="squal">👥 K线翻桶异常与CPU卡顿诊断 · 🟢 78K · 压缩38 · 6.3M</div>
+    <div class="stats">拆解 0/0 · 验收 0/0</div>
+    <div class="docs"></div>
     
     
     <details class="det"><summary>详情：拆解/验收/证据/commit/bug</summary>
@@ -657,6 +708,23 @@ footer{color:#aaa;font-size:11px;margin-top:10px}
     
     <details class="det"><summary>详情：拆解/验收/证据/commit/bug</summary>
       <div class="detsec"><b>📐 拆解项（条款×状态）</b><div class="dim">无拆解（方案文件级清单未灌注）</div></div>
+      <div class="detsec"><b>✔ 验收项</b><div class="dim">无验收项</div></div>
+      <div class="detsec"><b>🔦 门禁证据</b><div><span class="lamp gray" title="compile: ">c</span> compile：未填</div><div><span class="lamp gray" title="tests: ">t</span> tests：未填</div><div><span class="lamp gray" title="paradigm: ">p</span> paradigm：未填</div><div><span class="lamp gray" title="reconcile: ">r</span> reconcile：未填</div><div><span class="lamp gray" title="scan: ">s</span> scan：未填</div><div><span class="lamp gray" title="deploy: ">d</span> deploy：未填</div></div>
+      <div class="detsec"><b>🔗 commit 链</b><div class="dim">无 commit 挂账（存量 legacy 除外）</div></div>
+      <div class="detsec"><b>🐞 bug</b><div class="dim">无 bug</div></div>
+    </details>
+  </div><div class="card">
+    <div class="tid">T-TEST-GUARD <span class="pri p中">中</span></div>
+    <div class="ttl">测试guard</div>
+    <div class="meta">未认领</div>
+    <div class="lamps"><span class="lamp gray" title="compile: ">c</span><span class="lamp gray" title="tests: ">t</span><span class="lamp gray" title="paradigm: ">p</span><span class="lamp gray" title="reconcile: ">r</span><span class="lamp gray" title="scan: ">s</span><span class="lamp gray" title="deploy: ">d</span><span class="sesslamp "></span></div>
+    
+    <div class="stats">拆解 0/1 · 验收 0/0</div>
+    <div class="docs"></div>
+    
+    
+    <details class="det"><summary>详情：拆解/验收/证据/commit/bug</summary>
+      <div class="detsec"><b>📐 拆解项（条款×状态）</b><div>⬜ 清单内文件</div></div>
       <div class="detsec"><b>✔ 验收项</b><div class="dim">无验收项</div></div>
       <div class="detsec"><b>🔦 门禁证据</b><div><span class="lamp gray" title="compile: ">c</span> compile：未填</div><div><span class="lamp gray" title="tests: ">t</span> tests：未填</div><div><span class="lamp gray" title="paradigm: ">p</span> paradigm：未填</div><div><span class="lamp gray" title="reconcile: ">r</span> reconcile：未填</div><div><span class="lamp gray" title="scan: ">s</span> scan：未填</div><div><span class="lamp gray" title="deploy: ">d</span> deploy：未填</div></div>
       <div class="detsec"><b>🔗 commit 链</b><div class="dim">无 commit 挂账（存量 legacy 除外）</div></div>

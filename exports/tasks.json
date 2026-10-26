@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T04:04:36.334Z",
+  "generated_at": "2026-10-26T06:45:50.929Z",
   "tasks": [
     {
       "id": "T99",
@@ -1386,6 +1386,72 @@
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.830Z",
       "updated_at": "2026-10-26T02:15:38.997Z"
+    },
+    {
+      "id": "T204",
+      "title": "AI 稳定性与上下文治理（bili 上下文治理参数+AGENTS 三层瘦身）",
+      "status": "dev",
+      "epic": "治理",
+      "priority": "高",
+      "owner": "张岩",
+      "owner_session_id": "S-1148",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-10-26T06:44:23.808Z",
+      "updated_at": "2026-10-26T06:44:46.854Z"
+    },
+    {
+      "id": "T203",
+      "title": "AI 开发治理体系落地（任务台账+看板+档A巡检+档B watchdog）",
+      "status": "dev",
+      "epic": "治理",
+      "priority": "高",
+      "owner": "张岩",
+      "owner_session_id": "S-1173",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-10-26T06:44:23.595Z",
+      "updated_at": "2026-10-26T06:44:46.401Z"
+    },
+    {
+      "id": "T202",
+      "title": "K线分桶异常排查（DCE.jm2612-P-1380 bar 30 秒 vs 15 秒，三次启动超时）",
+      "status": "dev",
+      "epic": "K线",
+      "priority": "高",
+      "owner": "张岩",
+      "owner_session_id": "S-1202",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-10-26T06:44:28.925Z",
+      "updated_at": "2026-10-26T06:44:45.952Z"
     },
     {
       "id": "T201",
@@ -2860,10 +2926,41 @@
       "finished_at": null,
       "created_at": "2026-10-26T02:03:34.916Z",
       "updated_at": "2026-10-26T02:03:34.916Z"
+    },
+    {
+      "id": "T-TEST-GUARD",
+      "title": "测试guard",
+      "status": "dev",
+      "epic": null,
+      "priority": "中",
+      "owner": null,
+      "owner_session_id": "S-TEST-GUARD",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-10-26 04:07:52",
+      "updated_at": "2026-10-26 04:07:52"
     }
   ],
   "gates": [],
   "items": [
+    {
+      "id": "IT-TEST-GUARD",
+      "task_id": "T-TEST-GUARD",
+      "seq": 0,
+      "item": "清单内文件",
+      "files": "[\"docs:/docs/x.md\"]",
+      "status": "pending",
+      "plan_section": null
+    },
     {
       "id": "IT-T196-01",
       "task_id": "T196",
@@ -6283,7 +6380,7 @@
       "role": null,
       "created_at": "2026-10-26T02:50:33.517Z",
       "last_active_at": "2026-10-26T02:22:39.473Z",
-      "status": "active"
+      "status": "idle"
     },
     {
       "id": "S-1187",
@@ -6293,7 +6390,7 @@
       "role": null,
       "created_at": "2026-10-26T02:50:33.517Z",
       "last_active_at": "2026-10-26T02:28:28.911Z",
-      "status": "active"
+      "status": "idle"
     },
     {
       "id": "S-1188",
@@ -6303,7 +6400,7 @@
       "role": null,
       "created_at": "2026-10-26T02:50:33.517Z",
       "last_active_at": "2026-10-26T02:40:30.098Z",
-      "status": "active"
+      "status": "idle"
     },
     {
       "id": "S-1189",
@@ -6313,7 +6410,7 @@
       "role": null,
       "created_at": "2026-10-26T02:50:33.517Z",
       "last_active_at": "2026-10-26T02:46:31.265Z",
-      "status": "active"
+      "status": "idle"
     },
     {
       "id": "S-119",
@@ -6323,6 +6420,106 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.804Z",
       "last_active_at": "2026-10-11T01:57:17.443Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1190",
+      "dsh_id": "41b9a2c1-021f-4e9d-bf7f-d30b682a5db1",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T02:54:00.701Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1191",
+      "dsh_id": "8b09aba5-a71f-4e23-95d6-51628b8f4219",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T02:59:00.721Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1192",
+      "dsh_id": "af15d4da-a527-417b-a7a4-d69c05e5d3ee",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T03:04:10.497Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1193",
+      "dsh_id": "99f7f649-e3c5-461c-9173-b2202cfebc4f",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T03:10:19.032Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1194",
+      "dsh_id": "f08b71b7-bca3-4bd9-a364-5468b0f1f398",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T03:15:56.643Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1195",
+      "dsh_id": "3a43e939-12c2-4070-bb75-5941b5a299f3",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T03:20:56.642Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1196",
+      "dsh_id": "d8452584-f303-4dec-a476-a44c1ed979f9",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T03:42:26.464Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1197",
+      "dsh_id": "bc5ef80f-cc52-4e14-b5bd-1f2dc30b1738",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T04:28:08.542Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1198",
+      "dsh_id": "6e34c08a-83cc-4516-bb2d-6e30d4dd8e06",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T04:42:34.950Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1199",
+      "dsh_id": "14b095a2-a710-46ef-852c-351ae28b152c",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T04:54:35.639Z",
       "status": "idle"
     },
     {
@@ -6344,6 +6541,56 @@
       "created_at": "2026-10-26T02:05:40.804Z",
       "last_active_at": "2026-10-11T02:13:46.920Z",
       "status": "idle"
+    },
+    {
+      "id": "S-1200",
+      "dsh_id": "63fd4122-2c4f-4d36-888a-e1e8df44ce83",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T06:00:11.814Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1201",
+      "dsh_id": "3556d24a-1e10-45fb-82fb-796eee15e6e7",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T06:05:32.249Z",
+      "status": "idle"
+    },
+    {
+      "id": "S-1202",
+      "dsh_id": "session-334f3252-915c-451a-9bf8-6170aa42f543",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T06:18:29.973Z",
+      "status": "active"
+    },
+    {
+      "id": "S-1203",
+      "dsh_id": "27a4ab0f-3b86-4ca5-a813-bc526b1b02e3",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T06:26:41.849Z",
+      "status": "active"
+    },
+    {
+      "id": "S-1204",
+      "dsh_id": "0000964c-a958-493f-a0d2-bd593545d431",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-10-26T06:44:04.824Z",
+      "last_active_at": "2026-10-26T06:32:45.131Z",
+      "status": "active"
     },
     {
       "id": "S-121",
@@ -16084,6 +16331,16 @@
       "created_at": "2026-10-26T02:05:40.819Z",
       "last_active_at": "2026-10-24T16:45:19.590Z",
       "status": "idle"
+    },
+    {
+      "id": "S-TEST-GUARD",
+      "dsh_id": "session-test-guard-0000",
+      "workspace": "test",
+      "model": null,
+      "role": null,
+      "created_at": null,
+      "last_active_at": null,
+      "status": "active"
     }
   ],
   "broken": []
