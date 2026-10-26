@@ -1,0 +1,9 @@
+# 本机数据库（唯一真相库，不入 git；跨机走 exports/*.json 快照）
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# 运行日志
+*.log
+node_modules/
