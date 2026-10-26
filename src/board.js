@@ -29,7 +29,7 @@ const LAMPS = ['compile','tests','paradigm','reconcile','scan','deploy'];
 const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
 // ---------- 读库 ----------
-const tasks = db.prepare('SELECT * FROM task ORDER BY id DESC').all();
+const tasks = db.prepare("SELECT * FROM task ORDER BY COALESCE(updated_at, created_at, '') DESC, id DESC").all();
 const gates = new Map(db.prepare('SELECT * FROM task_gate').all().map(g => [g.task_id, g]));
 const items = db.prepare('SELECT * FROM task_item ORDER BY task_id, seq').all();
 const accepts = db.prepare('SELECT * FROM accept_item ORDER BY task_id, id').all();
@@ -255,7 +255,11 @@ writeFileSync(path.join(exportsDir, 'taskboard.html'), boardHtml);
 const ARCHIVE_DAYS = 7;
 const ARCHIVE_MS = ARCHIVE_DAYS * 86400000;
 const nowTs = Date.now();
+// 会话过滤口径（2026-10-26 m02962）：系统 checkpoint / mnemon 后台会话不上看板
+const SKIP_TITLE_RE = /Bounded completed checkpoint|^(?:Run local USER\.md compaction|Execute this remember request|这是一个探测任务)/i;
+const skipSess = s => SKIP_TITLE_RE.test(stats.get(s.id)?.title ?? '');
 const visibleSessions = sessions.filter(s => {
+  if (skipSess(s)) return false;
   if (s.status === 'active') return true;
   const at = s.last_active_at ? new Date(s.last_active_at).getTime() : 0;
   return nowTs - at <= ARCHIVE_MS;
@@ -294,7 +298,12 @@ const fmtSize = v => {
 // 今日/本周/告警/折叠分组
 const todaySessions = sessions.filter(s => { const d = s.last_active_at ? new Date(s.last_active_at) : null; return d && dayKey(d) === todayKey(); });
 const busyIds = new Set(tasks.filter(t => t.owner_session_id).map(t => t.owner_session_id));
-const warnSessions = sessions.filter(s => { const c = latestCheck.get(s.id); return c && c.last_active_min > 30 && (busyIds.has(s.id) || s.status === 'active'); });
+const warnSessions = sessions.filter(s => {
+  const c = latestCheck.get(s.id);
+  if (!c || !(c.last_active_min > 30) || !(busyIds.has(s.id) || s.status === 'active')) return false;
+  const d = s.last_active_at ? new Date(s.last_active_at) : null; // 只告警「今天还在干却在空转」的；历史存量不算
+  return d && dayKey(d) === todayKey();
+});
 const yKey = dayKey(new Date(Date.now() - 86400000));
 const recent = visibleSessions.map(s => ({ s, d: s.last_active_at ? new Date(s.last_active_at) : null }))
   .filter(x => x.d).sort((a, b) => b.d - a.d);
@@ -351,8 +360,28 @@ const startedToday = tasks.filter(t => { const d = parseT(t.started_at); return 
 const finishedToday = tasks.filter(t => { const d = parseT(t.finished_at); return d && dayKey(d) === todayKey(); });
 const finishedYesterday = tasks.filter(t => { const d = parseT(t.finished_at); return d && dayKey(d) === yKey; });
 const ago = t => { const d = parseT(t); if (!d) return '—'; const m = Math.round((NOW - d.getTime()) / 60000); return m < 60 ? m + ' 分钟前' : Math.round(m / 60) + ' 小时前'; };
+// 三问之二分区：今日有动作 vs 存量（近 24h 无动作）；标题清洗（去 markdown 反引号）；执行方（人/会话/未认领）
+const isTestTask = t => /^T-TEST/i.test(t.id);
+const cleanTitle = s => String(s ?? '').replace(/`/g, '').trim();
+const sessLabel = sid => { const st = stats.get(sid); const t = st?.title ? String(st.title) : ''; return t ? t.slice(0, 20) : sid; };
+const whoExec = t => t.owner ? t.owner : (t.owner_session_id ? sessLabel(t.owner_session_id) : '未认领');
+const activeTasksReal = activeTasks.filter(t => !isTestTask(t));
+const RECENT_MS = 3 * 3600 * 1000; // 「今天在干啥」=近 3 小时有动作；凌晨批量迁移/历史存量折叠
+const todayActive = activeTasksReal.filter(t => { const d = parseT(t.updated_at); return d && (Date.now() - d.getTime()) <= RECENT_MS; });
+const olderActive = activeTasksReal.filter(t => { const d = parseT(t.updated_at); return !(d && (Date.now() - d.getTime()) <= RECENT_MS); });
 const sessToday = todaySessions.slice().sort((a, b) => String(b.last_active_at).localeCompare(String(a.last_active_at)));
+// 会话执行看板（m02962）：今日活跃会话 + 挂着在册任务的会话，空转告警排最前
+const warnIds = new Set(warnSessions.map(s => s.id));
+const execSessions = [...new Set([...sessToday.map(s => s.id), ...busyIds])]
+  .map(id => sessions.find(s => s.id === id))
+  .filter(s => s && !skipSess(s))
+  .sort((a, b) => {
+    const wa = warnIds.has(a.id) ? 0 : 1, wb = warnIds.has(b.id) ? 0 : 1;
+    if (wa !== wb) return wa - wb;
+    return String(b.last_active_at).localeCompare(String(a.last_active_at));
+  });
 const stLabel = st => `<span class="st st-${st}">${ZH[st]}</span>`;
+const shortId = s => String(s.dsh_id ?? s.id).replace(/^session-/, '').slice(0, 8);
 const todayHtml = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>今日进展</title><style>
 body{font-family:"Microsoft YaHei",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#222}
 h1{font-size:20px;margin:4px 0 2px}.sub{color:#777;font-size:12px;margin-bottom:12px}
@@ -378,32 +407,38 @@ footer{color:#aaa;font-size:11px;margin-top:12px}
 <div class="s yellow"><b>${yellowCount}</b>待关注</div>
 <div class="s green"><b>${finishedToday.length}</b>今日完成</div>
 <div class="s"><b>${activeTasks.length}</b>进行中</div>
-<div class="s"><b>${startedToday.length}</b>今日开工</div>
+<div class="s"><b>${todayActive.length}</b>近3h动作</div>
 <div class="s"><b>${todaySessions.length}</b>今日活跃会话</div>
 </div>
 <div class="sec"><h2>三问之一：有什么阻碍？（${redCount + yellowCount} 件，按处置指引处理后复绿）</h2>
 ${focusItems.length === 0 ? '<span class="ok">✔ 没有阻碍</span>' :
 `<table><tr><th>级</th><th>问题</th><th>处置指引</th></tr>${focusItems.map(f => `<tr><td class="${f.lvl==='红'?'r':'y'}">${f.lvl}</td><td>${esc(f.text)}</td><td>${esc(f.act)}</td></tr>`).join('')}</table>`}
 </div>
-<div class="sec"><h2>三问之二：今天在干啥？（进行中 ${activeTasks.length} 件，按编号倒序）</h2>
-${activeTasks.length === 0 ? '<span class="ok">✔ 当前没有进行中的任务</span>' :
-`<table><tr><th>任务</th><th>标题</th><th>状态</th><th>认领</th><th>最后动作</th></tr>${activeTasks.map(t => `<tr><td>${esc(t.id)}</td><td>${esc(t.title.slice(0, 50))}</td><td>${stLabel(t.status)}</td><td>${esc(t.owner ?? '—')}</td><td class="mut">${ago(t.updated_at)}</td></tr>`).join('')}</table>`}
+<div class="sec"><h2>三问之二：今天在干啥？（近 3 小时有动作 ${todayActive.length} 件 / 进行中 ${activeTasksReal.length} 件，按最近更新倒序）</h2>
+${activeTasksReal.length === 0 ? '<span class="ok">✔ 当前没有进行中的任务</span>' :
+`<table><tr><th>任务</th><th>标题</th><th>状态</th><th>执行</th><th>最近动作</th></tr>${todayActive.map(t => `<tr><td style="white-space:nowrap">${esc(t.id)}</td><td title="${esc(cleanTitle(t.title))}" style="max-width:560px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(cleanTitle(t.title))}</td><td style="white-space:nowrap">${stLabel(t.status)}</td><td style="white-space:nowrap">${esc(whoExec(t))}</td><td class="mut" style="white-space:nowrap">${ago(t.updated_at)}</td></tr>`).join('')}${olderActive.length ? `<tr><td colspan="5" class="mut">另有 ${olderActive.length} 件存量进行中（近 3 小时无动作）→ 见 <a href="taskboard.html">全景看板</a></td></tr>` : ''}</table>`}
 </div>
 <div class="sec"><h2>三问之三：今天/昨天完成了啥？</h2>
-<h2 style="margin-top:4px">今日完成 ${finishedToday.length} 件</h2>
-${finishedToday.length === 0 ? '<span class="mut">今天还没有关闭任务</span>' :
-`<table><tr><th>任务</th><th>标题</th><th>完成时间</th></tr>${finishedToday.map(t => `<tr><td>${esc(t.id)}</td><td>${esc(t.title.slice(0, 50))}</td><td class="mut">${esc(t.finished_at)}</td></tr>`).join('')}</table>`}
-<h2>昨日完成 ${finishedYesterday.length} 件</h2>
-${finishedYesterday.length === 0 ? '<span class="mut">昨天没有关闭任务</span>' :
-`<table><tr><th>任务</th><th>标题</th><th>完成时间</th></tr>${finishedYesterday.map(t => `<tr><td>${esc(t.id)}</td><td>${esc(t.title.slice(0, 50))}</td><td class="mut">${esc(t.finished_at)}</td></tr>`).join('')}</table>`}
+${finishedToday.length + finishedYesterday.length === 0 ? '<span class="mut">今天和昨天都没有关闭任务——关闭任务时 finished_at 会自动进这里</span>' : ''}
+${finishedToday.length ? `<h3 class="mut">今日完成 ${finishedToday.length} 件</h3><table><tr><th>任务</th><th>标题</th><th>完成时间</th></tr>${finishedToday.map(t => `<tr><td style="white-space:nowrap">${esc(t.id)}</td><td title="${esc(cleanTitle(t.title))}" style="max-width:560px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(cleanTitle(t.title))}</td><td class="mut" style="white-space:nowrap">${esc(String(t.finished_at ?? '').slice(0, 16).replace('T', ' '))}</td></tr>`).join('')}</table>` : ''}
+${finishedYesterday.length ? `<h3 class="mut">昨日完成 ${finishedYesterday.length} 件</h3><table><tr><th>任务</th><th>标题</th><th>完成时间</th></tr>${finishedYesterday.map(t => `<tr><td style="white-space:nowrap">${esc(t.id)}</td><td title="${esc(cleanTitle(t.title))}" style="max-width:560px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(cleanTitle(t.title))}</td><td class="mut" style="white-space:nowrap">${esc(String(t.finished_at ?? '').slice(0, 16).replace('T', ' '))}</td></tr>`).join('')}</table>` : ''}
 </div>
 <div class="sec"><h2>今日活动流（倒序）</h2>
 ${evToday.length === 0 ? '<span class="mut">今天还没有任务事件（从明天起开工/交付/验收动作都会自动进流）</span>' :
 `<table><tr><th>时间</th><th>任务</th><th>动作</th><th>执行者</th></tr>${evToday.slice(0, 40).map(e => `<tr><td class="mut">${esc(String(e.at).slice(11, 16))}</td><td>${esc(e.task_id)}</td><td>${esc(e.from_status ? ZH[e.from_status] + ' → ' : '')}${esc(ZH[e.to_status] ?? '')}${e.note ? ' · ' + esc(e.note.slice(0, 60)) : ''}</td><td class="mut">${esc(e.actor ?? '')}</td></tr>`).join('')}${evToday.length > 40 ? `<tr><td colspan="4" class="mut">… 其余 ${evToday.length - 40} 条略</td></tr>` : ''}</table>`}
 </div>
-<div class="sec"><h2>今日活跃会话（${sessToday.length} 个）</h2>
-${sessToday.length === 0 ? '<span class="mut">无</span>' :
-`<table><tr><th>会话</th><th>名称（工作区·任务）</th><th>最后活动</th><th>状态</th></tr>${sessToday.slice(0, 15).map(s => `<tr><td>${esc(String(s.dsh_id ?? s.id).slice(0, 8))}</td><td>${esc(sessName(s))}</td><td class="mut">${esc(String(s.last_active_at).slice(11, 16))}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td></tr>`).join('')}${sessToday.length > 15 ? `<tr><td colspan="4" class="mut">… 其余 ${sessToday.length - 15} 个见会话看板</td></tr>` : ''}</table>`}
+<div class="sec"><h2>会话执行看板（执行中 ${execSessions.length} 个 · 空转告警 ${warnSessions.length} 个）</h2>
+${execSessions.length === 0 ? '<span class="mut">无</span>' :
+`<table><tr><th>会话</th><th>名称（工作区·任务）</th><th>执行任务</th><th>进度</th><th>水位</th><th>压缩</th><th>Token</th><th>最后活动</th><th>状态</th></tr>${execSessions.slice(0, 25).map(s => {
+  const c = latestCheck.get(s.id); const st = stats.get(s.id); const o = taskBySession.get(s.id);
+  // 执行任务：优先取会话直接挂账 task_id（多会话挂同一任务），否则按任务 owner_session_id 反查
+  const linked = s.task_id ? [s.task_id] : (o && o.ids.length ? o.ids : []);
+  const taskIds = linked.length ? linked.slice(0, 4).join(',') + (linked.length > 4 ? '…' : '') : '—';
+  const linkedTask = s.task_id ? tasks.find(t => t.id === s.task_id) : null;
+  const prog = o && (o.inprog || o.done || o.rounds) ? `在册 ${o.inprog} · 完成 ${o.done}${o.rounds ? ' · 返工 ' + o.rounds : ''}` : (linkedTask ? `任务${ZH[linkedTask.status] ?? linkedTask.status}` : '—');
+  const m = c?.last_active_min;
+  return `<tr><td>${esc(shortId(s))}</td><td>${esc(String(st?.title ?? sessName(s)).slice(0, 32))}</td><td>${esc(taskIds)}</td><td class="mut">${esc(prog)}</td><td>${waterLamp(st)}</td><td class="mut">${st?.fold_count ?? '—'}</td><td class="mut">${st?.context_tokens != null ? fmtTok(st.context_tokens) : '—'}</td><td class="mut">${m == null ? '—' : (m <= 0 ? '刚刚' : m < 60 ? m + ' 分钟前' : Math.round(m / 60) + ' 小时前')}</td><td>${warnIds.has(s.id) ? '🟡 空转告警' : '🟢 活跃'}</td></tr>`;
+}).join('')}${execSessions.length > 25 ? `<tr><td colspan="9" class="mut">… 其余 ${execSessions.length - 25} 个见会话看板</td></tr>` : ''}</table>`}
 </div>
 <footer>zz-agent-taskboard · board.js 生成 · 全景看板 → <a href="taskboard.html">taskboard.html</a> · 会话看板 → <a href="sessionboard.html">sessionboard.html</a></footer>
 </body></html>`;

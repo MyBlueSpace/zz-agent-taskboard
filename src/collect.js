@@ -32,6 +32,14 @@ const onlyWs = opt('workspace', 'all');
 const nowIso = () => new Date().toISOString();
 const idleWarnMin = Number(db.prepare("SELECT value FROM meta WHERE key='idle_warn_min'").get()?.value ?? 30);
 
+// 会话过滤口径（2026-10-26 用户拍板 m02946/m02962）：
+//   排除系统 checkpoint（title「Bounded completed checkpoint (untrusted…」）——非用户创建的上下文快照
+//   排除 mnemon 后台系统会话（USER.md 压缩 / remember 执行 / 探测任务）——非用户创建、非子代理
+//   保留 session- 前缀用户会话 + 子代理会话（title 为「你是…」前缀的派生子代理）
+const CHECKPOINT_RE = /Bounded completed checkpoint/i;
+const SYSTEM_RE = /^(?:Run local USER\.md compaction|Execute this remember request|这是一个探测任务)/i;
+const isSkippedTitle = t => !!t && (CHECKPOINT_RE.test(t) || SYSTEM_RE.test(t));
+
 // 工作区目录名 → 别名（实测 ~/.dsh/sessions 下的真实目录名）
 const WS_ALIAS = {
   '--C-Users-zhangyan-.dsh-dsh_wechat--': 'dsh_wechat',
@@ -66,6 +74,8 @@ const idByKey = new Map();
 for (const r of db.prepare('SELECT id, dsh_id, workspace FROM session').all()) {
   idByKey.set(`${r.dsh_id}|${r.workspace}`, r.id);
 }
+// 历史标题（bili 未返回时用库内 title 判过滤，防 checkpoint 会话因 bili 缺位漏网）
+const oldTitles = new Map(db.prepare('SELECT session_id, title FROM session_stat').all().map(r => [r.session_id, r.title]));
 
 let nextSeq = Number((db.prepare("SELECT COALESCE(MAX(CAST(substr(id,3) AS INTEGER)),0) AS m FROM session WHERE id LIKE 'S-%'").get()?.m ?? 0)) + 1;
 
@@ -147,16 +157,19 @@ const upsertStat = db.prepare(`
 `);
 
 let statMatched = 0;
+let skipped = 0;
 db.exec('BEGIN');
 try {
   for (const r of rows) {
     const key = `${r.dsh_id}|${r.workspace}`;
     let id = idByKey.get(key);
     if (!id) { id = `S-${nextSeq++}`; idByKey.set(key, id); }
+    const b = statByUuid.get(String(r.dsh_id).replace(/^session-/, ''));
+    const title = b?.title ?? oldTitles.get(id) ?? null;
+    if (isSkippedTitle(title)) { skipped++; continue; } // 系统 checkpoint/后台会话：不写库、不上看板
     const status = r.idle ? 'idle' : 'active';
     upsert.run(id, r.dsh_id, r.workspace, r.last_active_at, status, nowIso());
     insertCheck.run(id, nowIso(), r.last_active_min, `size=${r.size_kb}KB`);
-    const b = statByUuid.get(String(r.dsh_id).replace(/^session-/, ''));
     if (b) {
       statMatched++;
       upsertStat.run(id, b.title ?? null, b.contextBest?.tokens ?? b.contextTokens ?? null,
@@ -171,5 +184,6 @@ try {
   throw e;
 }
 
-console.log(`[collect] 已写库：session upsert ${rows.length} 条 + session_check 追加 ${rows.length} 条 + session_stat upsert ${statMatched} 条（bili 匹配 ${statByUuid.size - statMatched} 条未对上 dsh_id）`);
+console.log(`[collect] 已写库：session upsert ${rows.length - skipped} 条 + session_check 追加 ${rows.length - skipped} 条 + session_stat upsert ${statMatched} 条（bili 匹配 ${statByUuid.size - statMatched} 条未对上 dsh_id）`);
+console.log(`[collect] 过滤跳过 ${skipped} 条（系统 checkpoint / mnemon 后台会话，不写库不上看板）`);
 db.close();
