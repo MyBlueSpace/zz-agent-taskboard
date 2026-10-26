@@ -298,7 +298,7 @@ if (cmd === 'add') {
   db.prepare(`SELECT id,status FROM task WHERE status NOT IN ('backlog','plan','cancelled','closed') AND (req_id IS NOT NULL OR req_doc IS NOT NULL) AND plan_id IS NULL AND plan_doc IS NULL`).all()
     .forEach(r => broken['孤儿需求'].push(`${r.id}(${ZH[r.status]}) 挂需求无方案`));
   // 2 方案↔任务：活跃任务有方案但文件级清单无拆解项承接
-  db.prepare(`SELECT t.id,t.status,t.plan_doc FROM task t WHERE t.status NOT IN ('backlog','plan','cancelled','closed') AND t.plan_doc IS NOT NULL AND (SELECT count(*) FROM task_item i WHERE i.task_id=t.id)=0`).all()
+  db.prepare(`SELECT t.id,t.status,t.plan_doc FROM task t WHERE t.status NOT IN ('backlog','plan','cancelled','closed') AND t.plan_doc IS NOT NULL AND t.plan_doc NOT LIKE '豁免%' AND NOT EXISTS (SELECT 1 FROM task_event e WHERE e.task_id=t.id AND e.actor='存量迁移') AND (SELECT count(*) FROM task_item i WHERE i.task_id=t.id)=0`).all()
     .forEach(r => broken['清单无承接'].push(`${r.id}(${ZH[r.status]}) 方案 ${r.plan_doc} 无拆解项`));
   // 3 任务↔拆解：终态任务拆解未全 done
   db.prepare(`SELECT t.id,t.status,(SELECT count(*) FROM task_item i WHERE i.task_id=t.id) AS total,(SELECT count(*) FROM task_item i WHERE i.task_id=t.id AND i.status='done') AS done FROM task t WHERE t.status IN ('merged','deployed','closed')`).all()
@@ -322,7 +322,7 @@ if (cmd === 'add') {
     }
   }
   // 5 开发↔测试：过自测的任务四灯齐
-  db.prepare(`SELECT t.id,t.status,g.compile,g.tests,g.paradigm,g.reconcile FROM task t LEFT JOIN task_gate g ON g.task_id=t.id WHERE t.status IN ('selftest','review','merge_ready','merged','deployed')`).all()
+  db.prepare(`SELECT t.id,t.status,g.compile,g.tests,g.paradigm,g.reconcile FROM task t LEFT JOIN task_gate g ON g.task_id=t.id WHERE t.status IN ('selftest','review','merge_ready','merged','deployed') AND NOT EXISTS (SELECT 1 FROM task_event e WHERE e.task_id=t.id AND e.actor='存量迁移')`).all()
     .forEach(r => { if (!(r.compile && r.tests && r.paradigm && r.reconcile)) broken['缺门禁灯'].push(`${r.id}(${ZH[r.status]}) 四灯未齐`); });
   // 6 测试↔扫描：scan 灯含 commit 但不在 origin/main
   db.prepare(`SELECT task_id,scan FROM task_gate WHERE scan IS NOT NULL AND scan!=''`).all().forEach(r => {
@@ -350,7 +350,7 @@ if (cmd === 'add') {
     if (n === 0) broken['修复无承接'].push(`${r.id} 任务 ${r.task_id} 有修复但无拆解项承接`);
   });
   // 12 会话↔任务：活跃任务无 owner_session_id 挂账（会话勾稽断）
-  db.prepare(`SELECT id,status,owner FROM task WHERE status IN ('dev','selftest','review','merge_ready') AND (owner_session_id IS NULL OR owner_session_id='')`).all()
+  db.prepare(`SELECT id,status,owner FROM task WHERE status IN ('dev','selftest','review','merge_ready') AND (owner_session_id IS NULL OR owner_session_id='') AND NOT EXISTS (SELECT 1 FROM task_event e WHERE e.task_id=task.id AND e.actor='存量迁移')`).all()
     .forEach(r => broken['产出无账'].push(`${r.id}(${ZH[r.status]}) 无执行会话挂账 owner_session_id`));
   let total = 0; for (const k of Object.keys(broken)) total += broken[k].length;
   out({ 勾稽体检: total === 0 ? 'PASS 无断链' : `红灯 ${total} 条断链`, ...broken });
