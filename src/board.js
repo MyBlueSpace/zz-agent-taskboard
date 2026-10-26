@@ -90,10 +90,10 @@ const ACTIVE_STATUS = ['ready','dev','selftest','review','merge_ready','merged',
 const focusItems = [];
 for (const t of tasks) {
   if (t.status === 'blocked')
-    focusItems.push({ lvl:'红', text:`${t.id} ${t.title.slice(0,38)} 被阻塞`, act:`原因：${t.blocked_reason ?? '未填'}。处置：按原因逐项拍板（多数方案已附推荐，可直接「按推荐」）→ 值班 AI 把任务移到待开工并派工` });
+    focusItems.push({ lvl:'红', text:`${t.id} ${t.title.slice(0,38)} 被阻塞`, act:`原因：${t.blocked_reason ?? '未填'}。处置：按原因逐项拍板（多数方案已附推荐，回「按推荐」即可）→ 拍板后 AI 当场移「待开工」并派工，报账自动流转` });
 }
 for (const b of broken)
-  focusItems.push({ lvl:'红', text:`${b.task} 勾稽断链：${b.msg}`, act:'处置：值班 AI 会话补挂账（task.js set / commit），补齐后复验变绿' });
+  focusItems.push({ lvl:'红', text:`${b.task} 勾稽断链：${b.msg}`, act:'处置：任意会话执行 task.js set/commit 补挂账（或对会话说一声，AI 来补），补齐后复验变绿' });
 for (const b of bugs.filter(x => x.status === 'open'))
   focusItems.push({ lvl:'红', text:`${b.id}（${b.task}）${b.title.slice(0,38)} 未修复`, act:'处置：派修复会话，两轮即停（fix_rounds>2 上报你）' });
 for (const t of tasks.filter(x => x.status === 'review'))
@@ -195,9 +195,10 @@ summary{cursor:pointer;font-size:14px;font-weight:600;padding:4px 0}
 .focus table{width:100%;border-collapse:collapse;font-size:12px}
 .focus td,.focus th{border-bottom:1px solid #eee;padding:6px 8px;text-align:left}
 footer{color:#aaa;font-size:11px;margin-top:10px}
+.purpose{color:#555;font-size:13px;background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:6px 12px;margin:2px 0 14px}
 </style></head><body>
 <nav style="margin:10px 0 14px"><a href="/" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📌 今日进展</a>&nbsp;&nbsp;<a href="/taskboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📋 全景看板</a>&nbsp;&nbsp;<a href="/sessionboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">👥 会话看板</a>&nbsp;&nbsp;<a href="/todo.md" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📝 任务清单</a></nav>
-<h1>AI 开发治理总看板</h1>
+<h1>AI 开发治理总看板</h1><div class="purpose">本页解决：每张工单现在卡在哪——12 阶段全景档案（编号倒序），按需查阅；红灯=阻塞、灰灯=未报门禁。</div>
 <div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 数据源 zz-agent-taskboard/data/taskboard.db · 制度权威=zz-option-docs/docs/方案/AI开发治理与任务生命周期管理方案.md</div>
 <div class="sum">
 <div class="s red"><b>${redCount}</b>红·需处理</div>
@@ -244,6 +245,28 @@ const sessionRows = visibleSessions.map(s => {
   const st = s.status === 'idle' ? '🟡 空转' : '🟢 活跃';
   return `<tr><td>${esc(s.id)}</td><td>${esc(s.workspace ?? '')}</td><td>${esc(s.model ?? '')}</td><td>${st}</td><td>${min == null ? '—' : min + ' 分钟前'}</td><td>${esc(c?.note ?? '')}</td></tr>`;
 }).join('');
+// 会话质量聚合：名下任务/完成/返工
+const taskBySession = new Map();
+for (const t of tasks) {
+  if (!t.owner_session_id) continue;
+  if (!taskBySession.has(t.owner_session_id)) taskBySession.set(t.owner_session_id, { inprog: 0, done: 0, rounds: 0, ids: [] });
+  const o = taskBySession.get(t.owner_session_id);
+  if (['closed','cancelled'].includes(t.status)) o.done++; else if (t.status !== 'backlog') o.inprog++;
+  o.rounds += t.fix_rounds || 0;
+  if (!['closed','cancelled','backlog'].includes(t.status)) o.ids.push(t.id);
+}
+const sessName = s => {
+  const o = taskBySession.get(s.id);
+  const ws = String(s.workspace ?? '').includes('dsh_wechat') ? 'wechat' : 'docs';
+  const ids = o && o.ids.length ? o.ids.slice(0, 3).join(',') + (o.ids.length > 3 ? '…' : '') : '无任务';
+  return ws + ' · ' + ids;
+};
+const fmtSize = v => {
+  if (v == null || v === '') return '—';
+  const m = String(v).match(/\d+/); const n = m ? Number(m[0]) : 0;
+  if (!n) return '—';
+  return n > 1048576 ? (n / 1048576).toFixed(1) + 'MB' : n > 1024 ? Math.round(n / 1024) + 'KB' : n + 'B';
+};
 // 今日/本周/告警/折叠分组
 const todaySessions = sessions.filter(s => { const d = s.last_active_at ? new Date(s.last_active_at) : null; return d && dayKey(d) === todayKey(); });
 const busyIds = new Set(tasks.filter(t => t.owner_session_id).map(t => t.owner_session_id));
@@ -255,9 +278,12 @@ const groupsHtml = [['今天', recent.filter(x => dayKey(x.d) === todayKey())],
   ['昨天', recent.filter(x => dayKey(x.d) === yKey)],
   ['更早（7 天内）', recent.filter(x => dayKey(x.d) !== todayKey() && dayKey(x.d) !== yKey)]]
   .filter(([, l]) => l.length)
-  .map(([gname, l], gi) => `<details ${gi === 0 ? 'open' : ''}><summary>${gname}（${l.length} 个）</summary><table><tr><th>会话</th><th>工作区</th><th>模型</th><th>状态</th><th>最后活动</th></tr>${l.map(({ s }) => {
+  .map(([gname, l], gi) => `<details ${gi === 0 ? 'open' : ''}><summary>${gname}（${l.length} 个）</summary><table><tr><th>会话</th><th>名称（工作区·任务）</th><th>模型</th><th>状态</th><th>活跃度</th><th>在册</th><th>完成</th><th>返工</th><th>体量</th></tr>${l.map(({ s }) => {
     const c = latestCheck.get(s.id);
-    return `<tr><td>${esc(s.id)}</td><td>${esc(s.workspace ?? '')}</td><td>${esc(s.model ?? '')}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td><td>${esc(String(s.last_active_at ?? '').slice(0, 16))}</td></tr>`;
+    const o = taskBySession.get(s.id);
+    const m = c?.last_active_min;
+    const act = m == null ? '—' : (m <= 30 ? `🟢 ${m} 分钟前` : `🟡 空转 ${m} 分钟`);
+    return `<tr><td>${esc(String(s.dsh_id ?? s.id).slice(0, 8))}</td><td>${esc(sessName(s))}</td><td>${esc(s.model ?? '')}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td><td>${act}</td><td>${o ? o.inprog : 0}</td><td>${o ? o.done : 0}</td><td>${o && o.rounds ? o.rounds : 0}</td><td>${fmtSize(c?.note)}</td></tr>`;
   }).join('')}</table></details>`).join('');
 const sessHtml = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>会话看板</title><style>
 body{font-family:"Microsoft YaHei",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#222}
@@ -272,8 +298,9 @@ tr:hover{background:#fafafa}
 details{background:#fff;border-radius:8px;padding:8px 14px;margin:8px 0;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 summary{cursor:pointer;font-size:14px;font-weight:600;padding:4px 0}
 h2{font-size:15px;margin:16px 0 8px}
+.purpose{color:#555;font-size:13px;background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:6px 12px;margin:2px 0 14px}
 </style></head><body><nav style="margin:10px 0 14px"><a href="/" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📌 今日进展</a>&nbsp;&nbsp;<a href="/taskboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📋 全景看板</a>&nbsp;&nbsp;<a href="/sessionboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">👥 会话看板</a>&nbsp;&nbsp;<a href="/todo.md" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📝 任务清单</a></nav>
-<h1>会话看板（AI 员工）</h1><div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 在册 ${sessions.length} · 归档隐藏 ${archivedCount} · 今日活动 ${todaySessions.length} · 空转告警 ${warnSessions.length}</div>
+<h1>会话看板（AI 员工）</h1><div class="purpose">本页解决：AI 员工干没干活、干得怎么样——每个会话五列质量（活跃度/在册任务/完成/返工/体量），🟡 空转=去问一句「卡哪了」。</div><div class="sub">生成于 ${new Date().toLocaleString('zh-CN')} · 在册 ${sessions.length} · 归档隐藏 ${archivedCount} · 今日活动 ${todaySessions.length} · 空转告警 ${warnSessions.length}</div>
 <div class="sum">
 <div class="s${warnSessions.length ? ' red' : ''}"><b>${warnSessions.length}</b>空转告警</div>
 <div class="s green"><b>${todaySessions.length}</b>今日活动</div>
@@ -282,10 +309,9 @@ h2{font-size:15px;margin:16px 0 8px}
 </div>
 <div class="focus"><h2>空转告警（去该会话问一句：卡哪了）</h2>
 ${warnSessions.length === 0 ? '<span class="ok">✔ 无空转告警</span>' :
-`<table><tr><th>会话</th><th>工作区</th><th>空转时长</th><th>在册任务</th></tr>${warnSessions.map(s => {
+`<table><tr><th>会话</th><th>名称（工作区·任务）</th><th>空转时长</th></tr>${warnSessions.map(s => {
   const c = latestCheck.get(s.id);
-  const ts = tasks.filter(t => t.owner_session_id === s.id && !['closed','cancelled','backlog'].includes(t.status)).map(t => t.id).join('、');
-  return `<tr><td>${esc(s.id)}</td><td>${esc(s.workspace ?? '')}</td><td>${c?.last_active_min} 分钟</td><td>${esc(ts) || '—'}</td></tr>`;
+  return `<tr><td>${esc(String(s.dsh_id ?? s.id).slice(0, 8))}</td><td>${esc(sessName(s))}</td><td>${c?.last_active_min} 分钟</td></tr>`;
 }).join('')}</table>`}
 </div>
 <h2>近期会话（按天折叠 · 默认只看今天）</h2>
@@ -302,8 +328,9 @@ const ago = t => { const d = parseT(t); if (!d) return '—'; const m = Math.rou
 const sessToday = todaySessions.slice().sort((a, b) => String(b.last_active_at).localeCompare(String(a.last_active_at)));
 const stLabel = st => `<span class="st st-${st}">${ZH[st]}</span>`;
 const todayHtml = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>今日进展</title><style>
-body{font-family:"Microsoft YaHei",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#222;max-width:1100px;margin:0 auto}
+body{font-family:"Microsoft YaHei",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#222}
 h1{font-size:20px;margin:4px 0 2px}.sub{color:#777;font-size:12px;margin-bottom:12px}
+.purpose{color:#555;font-size:13px;background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:6px 12px;margin:2px 0 14px}
 .sum{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.sum .s{background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .sum .s b{font-size:18px;margin-right:4px}.s.red b{color:#d43}.s.green b{color:#187}.s.yellow b{color:#d90}
 h2{font-size:15px;margin:18px 0 8px}
@@ -318,7 +345,7 @@ td,th{border-bottom:1px solid #eee;padding:6px 8px;text-align:left}
 footer{color:#aaa;font-size:11px;margin-top:12px}
 </style></head><body>
 <nav style="margin:10px 0 14px"><a href="/" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📌 今日进展</a>&nbsp;&nbsp;<a href="/taskboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📋 全景看板</a>&nbsp;&nbsp;<a href="/sessionboard.html" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">👥 会话看板</a>&nbsp;&nbsp;<a href="/todo.md" style="background:#fff;border:1px solid #d0d7de;border-radius:6px;padding:6px 14px;color:#1f2328;text-decoration:none;font-size:14px;font-weight:600">📝 任务清单</a></nav>
-<h1>今日进展（站会三问）</h1>
+<h1>今日进展（站会三问）</h1><div class="purpose">本页解决：今天有没有事要处理——每天开屏第一眼。有红黄→按处置指引逐条处理；全绿→不用管。</div>
 <div class="sub">${new Date().toLocaleString('zh-CN')} · 数据源 zz-agent-taskboard/data/taskboard.db</div>
 <div class="sum">
 <div class="s red"><b>${redCount}</b>阻碍（需处理）</div>
@@ -350,7 +377,7 @@ ${evToday.length === 0 ? '<span class="mut">今天还没有任务事件（从明
 </div>
 <div class="sec"><h2>今日活跃会话（${sessToday.length} 个）</h2>
 ${sessToday.length === 0 ? '<span class="mut">无</span>' :
-`<table><tr><th>会话</th><th>工作区</th><th>最后活动</th><th>状态</th></tr>${sessToday.slice(0, 15).map(s => `<tr><td>${esc(s.id)}</td><td>${esc(s.workspace ?? '')}</td><td class="mut">${esc(String(s.last_active_at).slice(11, 16))}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td></tr>`).join('')}${sessToday.length > 15 ? `<tr><td colspan="4" class="mut">… 其余 ${sessToday.length - 15} 个见会话看板</td></tr>` : ''}</table>`}
+`<table><tr><th>会话</th><th>名称（工作区·任务）</th><th>最后活动</th><th>状态</th></tr>${sessToday.slice(0, 15).map(s => `<tr><td>${esc(String(s.dsh_id ?? s.id).slice(0, 8))}</td><td>${esc(sessName(s))}</td><td class="mut">${esc(String(s.last_active_at).slice(11, 16))}</td><td>${s.status === 'idle' ? '🟡 空转' : '🟢 活跃'}</td></tr>`).join('')}${sessToday.length > 15 ? `<tr><td colspan="4" class="mut">… 其余 ${sessToday.length - 15} 个见会话看板</td></tr>` : ''}</table>`}
 </div>
 <footer>zz-agent-taskboard · board.js 生成 · 全景看板 → <a href="taskboard.html">taskboard.html</a> · 会话看板 → <a href="sessionboard.html">sessionboard.html</a></footer>
 </body></html>`;
