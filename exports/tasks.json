@@ -1,6 +1,468 @@
 {
-  "generated_at": "2026-10-26T09:18:37.432Z",
+  "generated_at": "2026-11-01T17:18:43.585Z",
   "tasks": [
+    {
+      "id": "T227",
+      "title": "btc5m: redeemable 赢单到账验证 + 余额 2 秒轮询长跑限流观察",
+      "status": "plan",
+      "epic": null,
+      "priority": "中",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T17:18:39.597Z",
+      "updated_at": "2026-11-01T17:18:39.598Z"
+    },
+    {
+      "id": "T226",
+      "title": "btc5m: 平仓 place_close 在 prod 真实持仓上验证（唯一未在真钱跑过的账目环节）",
+      "status": "plan",
+      "epic": null,
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T17:18:39.446Z",
+      "updated_at": "2026-11-01T17:18:39.446Z"
+    },
+    {
+      "id": "T221",
+      "title": "btc5m: 策略选择器方案 §11 六项待拍板（默认档位/新策略上prod/方向锁/配置表/状态路由/tag推送）",
+      "status": "backlog",
+      "epic": null,
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": "docs/方案/2026-11-01-BTC5m-策略选择器与新策略整合方案.md",
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T06:32:02.572Z",
+      "updated_at": "2026-11-01T06:32:18.518Z"
+    },
+    {
+      "id": "T220",
+      "title": "btc5m: 复盘增强 P1 三件（校准曲线/拒单记录/持有反事实）",
+      "status": "backlog",
+      "epic": null,
+      "priority": "中",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": "docs/报告/2026-11-01-gengar项目Review与自研对照.md",
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T06:32:07.099Z",
+      "updated_at": "2026-11-01T06:32:18.421Z"
+    },
+    {
+      "id": "T219",
+      "title": "btc5m: 每 N 轮账实对账（journal 净额 vs 真实 USDC 余额）",
+      "status": "backlog",
+      "epic": null,
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": "docs/报告/2026-11-01-gengar项目Review与自研对照.md",
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T06:32:06.966Z",
+      "updated_at": "2026-11-01T06:32:18.330Z"
+    },
+    {
+      "id": "T218",
+      "title": "btc5m: 订单链路加 USDC 余额判据（成交/结算时余额比对为真相）",
+      "status": "backlog",
+      "epic": null,
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": "docs/报告/2026-11-01-gengar项目Review与自研对照.md",
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T06:32:06.807Z",
+      "updated_at": "2026-11-01T06:32:18.227Z"
+    },
+    {
+      "id": "T225",
+      "title": "btc5m: 修既有 flaky chart_series 时间戳敏感用例",
+      "status": "backlog",
+      "epic": null,
+      "priority": "低",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T06:32:07.315Z",
+      "updated_at": "2026-11-01T06:32:07.316Z"
+    },
+    {
+      "id": "T222",
+      "title": "btc5m: /review 部署 prod + 入场标签文案与默认值修正",
+      "status": "backlog",
+      "epic": null,
+      "priority": "中",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T06:32:07.213Z",
+      "updated_at": "2026-11-01T06:32:07.213Z"
+    },
+    {
+      "id": "T224",
+      "title": "btc5m: move_edge 参数建议 A1-A5 待用户判断后回测/实盘验证",
+      "status": "backlog",
+      "epic": null,
+      "priority": "中",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T06:32:02.959Z",
+      "updated_at": "2026-11-01T06:32:02.959Z"
+    },
+    {
+      "id": "T223",
+      "title": "btc5m: 轮次断流飞书告警 + 连续失败日志降噪（待用户拍板，源于 2026-11-01 官方缺市事故）",
+      "status": "backlog",
+      "epic": null,
+      "priority": "中",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-11-01T06:32:02.838Z",
+      "updated_at": "2026-11-01T06:32:02.839Z"
+    },
+    {
+      "id": "T217",
+      "title": "btc5min 部署到 hk-r1 作为新生产环境，并把环境事实写入工程 AGENTS.md",
+      "status": "backlog",
+      "epic": null,
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-10-30T08:03:28.826Z",
+      "updated_at": "2026-10-30T08:03:28.826Z"
+    },
+    {
+      "id": "T216",
+      "title": "Java 容器 CPU 治理（盘中 116-169% 单核，行情链 CPU 第一大头）",
+      "status": "backlog",
+      "epic": null,
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-10-29T02:24:03.960Z",
+      "updated_at": "2026-10-29T02:24:03.960Z"
+    },
+    {
+      "id": "T215",
+      "title": "行情延时监控按交易所增加「合约数量」列（后端 symbolCount + 前端表格列与口径）",
+      "status": "dev",
+      "epic": null,
+      "priority": "中",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": null,
+      "approved_by": null,
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": null,
+      "finished_at": null,
+      "created_at": "2026-10-29T02:24:03.736Z",
+      "updated_at": "2026-10-29T02:24:03.736Z"
+    },
+    {
+      "id": "T214",
+      "title": "修复15例既有红测试并纠正daysLeft时间敏感计算",
+      "status": "merged",
+      "epic": "质量",
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": "S-2141",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": "2026-10-28T00:00:00Z",
+      "approved_by": null,
+      "branch": "t214-fix-red-tests",
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "2026-10-27T07:29:19.670Z",
+      "finished_at": null,
+      "created_at": "2026-10-27T07:28:34.905Z",
+      "updated_at": "2026-10-27T07:33:59.379Z"
+    },
+    {
+      "id": "T212",
+      "title": "P1 存量债务清理：拆箱/死存储/自我重复/波动率算法镜像",
+      "status": "merged",
+      "epic": null,
+      "priority": "高",
+      "owner": null,
+      "owner_session_id": null,
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": "2026-10-27T05:51:11.715Z",
+      "approved_by": "用户",
+      "branch": null,
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "2026-10-27T05:51:11.381Z",
+      "finished_at": null,
+      "created_at": "2026-10-27T05:10:55.386Z",
+      "updated_at": "2026-10-27T05:51:17.358Z"
+    },
+    {
+      "id": "T210",
+      "title": "全模块消除从合约代码解析字段，改为取数据自带字段（含 R29 红线与第17段门禁）",
+      "status": "merged",
+      "epic": null,
+      "priority": "高",
+      "owner": "deepseek-flash",
+      "owner_session_id": "S-CURRENT",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": "2026-10-27T12:08:22",
+      "approved_by": null,
+      "branch": "main",
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "2026-10-27T04:08:22.909Z",
+      "finished_at": null,
+      "created_at": "2026-10-27T03:48:53.309Z",
+      "updated_at": "2026-10-27T04:13:07.735Z"
+    },
+    {
+      "id": "T209",
+      "title": "live/option 域 3 个请求体 DTO 补约束注解（T207 批次 3）",
+      "status": "merged",
+      "epic": "质量",
+      "priority": "中",
+      "owner": "zhangyan",
+      "owner_session_id": "S-1161",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": "2026-10-26T16:10:00.000Z",
+      "approved_by": null,
+      "branch": "t205-batch-bcd",
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "2026-10-26T15:48:24.507Z",
+      "finished_at": null,
+      "created_at": "2026-10-26T11:10:44.842Z",
+      "updated_at": "2026-10-26T15:55:08.138Z"
+    },
+    {
+      "id": "T205",
+      "title": "P1 存量清债：316 条静态扫描告警分批修复",
+      "status": "merged",
+      "epic": "质量",
+      "priority": "中",
+      "owner": "zhangyan",
+      "owner_session_id": "session-c1806833-8d39-494c-85d4-6ab12ce85a2b",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": "2026-10-26 用户 m01652「208签205a」批准 T205 批次A 按方案A子批序 A5→A2→A7→A4→A3→A8→A1 开工（跳过A6）",
+      "approved_by": "用户",
+      "branch": "t205-batch-bcd",
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "2026-10-26T00:00:00+08:00",
+      "finished_at": null,
+      "created_at": "2026-10-26T09:30:18.094Z",
+      "updated_at": "2026-10-26T15:31:50.862Z"
+    },
+    {
+      "id": "T208",
+      "title": "kline 域 4 个请求体 DTO 补约束注解（T207 批次 2）",
+      "status": "merged",
+      "epic": "质量",
+      "priority": "中",
+      "owner": "会话@10-26",
+      "owner_session_id": "S-T208",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": "2026-10-26T11:30:00Z",
+      "approved_by": "用户 m01432「207 签 T207 批次 2 T205 同时开工」",
+      "branch": "t208-kline-dto-constraints",
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "2026-10-26T11:19:22.950Z",
+      "finished_at": null,
+      "created_at": "2026-10-26T11:10:44.716Z",
+      "updated_at": "2026-10-26T11:41:49.487Z"
+    },
+    {
+      "id": "T207",
+      "title": "请求体 DTO 补业务约束注解，使 @Valid 真正生效",
+      "status": "merged",
+      "epic": "质量",
+      "priority": "中",
+      "owner": "zhangyan",
+      "owner_session_id": "session-c1806833-8d39-494c-85d4-6ab12ce85a2b",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": "2026-10-28T00:00:00.000Z",
+      "approved_by": "zhangyan",
+      "branch": "t207-dto-constraints",
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "2026-10-26T10:57:40.350Z",
+      "finished_at": null,
+      "created_at": "2026-10-26T10:03:35.208Z",
+      "updated_at": "2026-10-26T11:10:15.225Z"
+    },
+    {
+      "id": "T206",
+      "title": "补齐 18 个 Controller 方法的 @Valid 参数校验，使 ValidationTest 转绿",
+      "status": "merged",
+      "epic": "质量",
+      "priority": "中",
+      "owner": "zhangyan",
+      "owner_session_id": "session-c1806833-8d39-494c-85d4-6ab12ce85a2b",
+      "req_id": null,
+      "plan_id": null,
+      "req_doc": null,
+      "plan_doc": null,
+      "approved_at": "2026-10-26T18:05:00+08:00",
+      "approved_by": "user",
+      "branch": "t206-controller-valid",
+      "blocked_reason": null,
+      "fix_rounds": 0,
+      "started_at": "2026-10-26T10:02:39.578Z",
+      "finished_at": null,
+      "created_at": "2026-10-26T09:31:20.821Z",
+      "updated_at": "2026-10-26T10:05:07.093Z"
+    },
     {
       "id": "T196",
       "title": "三端代码全面审查 → 修复 → 固化（2026-10-26/27 会话）",
@@ -13,15 +475,15 @@
       "plan_id": null,
       "req_doc": null,
       "plan_doc": "docs/方案/代码扫描工具链规范.md",
-      "approved_at": null,
-      "approved_by": null,
+      "approved_at": "2026-10-26T09:17:58.915Z",
+      "approved_by": "用户",
       "branch": null,
       "blocked_reason": null,
       "fix_rounds": 0,
       "started_at": "10-27",
       "finished_at": null,
       "created_at": "2026-10-26T02:03:35.371Z",
-      "updated_at": "2026-10-26T09:18:18.536Z"
+      "updated_at": "2026-10-26T09:39:34.540Z"
     },
     {
       "id": "T197",
@@ -2972,6 +3434,94 @@
       "deploy": "N/A - 开发态交付，按用户口径（前端 vite dev / 后端不进容器验证）本轮不做 docker 部署",
       "scope": null,
       "scope_files": null
+    },
+    {
+      "task_id": "T206",
+      "compile": "main 576aad6 基线可编译；本次改动 mvn -B -Dtest=ValidationTest test 编译通过并执行 5 用例",
+      "tests": "Tests run: 828, Failures: 9, Errors: 6, Skipped: 2（基线 fd4780a 为 10F+6E，减少的 1F 即本项 ValidationTest；其余 9F+6E 为既有红：AuthControllerTest 6E、KlineBackfillProcessorTest 7F、KlineGreeksBackfillServiceImplTest 2F）",
+      "paradigm": "=== RESULT: PASS === exit=0（check_java_paradigm.ps1 -RepoPath java-t206，提交时 gate PASS）",
+      "reconcile": "N/A —— 本次改动为参数校验注解，不涉及任何业务数值/计算口径，无数值对账需求",
+      "scan": "L2 全量扫描凭证 last-pass.json commit=576aad6 P0=0；T206 改动为 10 个 Controller 纯注解新增（@Valid + import），不含逻辑分支，未新增 P0/P1 风险面",
+      "deploy": "N/A —— 本轮按用户要求仅在开发分支验证，未部署容器；改动随 main 后续正常发布流程生效",
+      "scope": "PASS (10 files / 4 dirs) —— pre-commit scope 门禁实测通过",
+      "scope_files": null
+    },
+    {
+      "task_id": "T207",
+      "compile": "cd C:\\Users\\zhangyan\\worktrees\\java-t206 && mvn -B -q -DskipTests test-compile -> exit=0",
+      "tests": "mvn -B -Dtest=BacktestDtoConstraintTest,ValidationTest test -> Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, BUILD SUCCESS, exit=0（BacktestDtoConstraintTest 17/17 新用例全绿，ValidationTest 5/5 无回退）",
+      "paradigm": "check_java_paradigm.ps1 -RepoPath C:\\Users\\zhangyan\\worktrees\\java-t206 -> === RESULT: PASS === exit=0，15 段全 OK(new):0（12-15 段存量豁免 28/9/1/2 处均无新增）",
+      "reconcile": "N/A 本次仅新增参数约束注解与单测，不改任何业务计算与查询数值；ValidationTest 5/5 全绿证明既有 18 处 @Valid 未回退",
+      "scan": null,
+      "deploy": null,
+      "scope": null,
+      "scope_files": null
+    },
+    {
+      "task_id": "T208",
+      "compile": "mvn -B -q -DskipTests test-compile exit=0 @ worktree java-t206 / t208-kline-dto-constraints / 0a7bb39",
+      "tests": "Tests run: 21, Failures: 0, Errors: 0, Skipped: 0（KlineDtoConstraintTest 16 例 + ValidationTest 5 例）@ .t208-test2.log",
+      "paradigm": "RESULT: PASS，15 段全 OK(new)=0，附 [scope] PASS (3 files / 2 dirs) @ check_java_paradigm.ps1",
+      "reconcile": "N/A：本轮只补 Bean Validation 注解与单测，无业务数值/口径变更，不涉及接口数值对账",
+      "scan": null,
+      "deploy": null,
+      "scope": null,
+      "scope_files": null
+    },
+    {
+      "task_id": "T205",
+      "compile": "PASS — mvn -B -q -DskipTests compile exit=0（worktree java-bcd@aa04997，分支 t205-batch-bcd）",
+      "tests": "861 run / 9F / 6E — 失败类与基线 fd4780a(828/10F/6E) 完全一致（AuthControllerTest 6E 因 objectMapper 装配缺失、KlineBackfillProcessorTest 7F、KlineGreeksBackfillServiceImplTest 2F），批次B/C/D 未新增失败",
+      "paradigm": "PASS — check_java_paradigm.ps1 -RepoPath 15 段全通过；三批提交 pre-commit 各跑一次均 [gate] PASS",
+      "reconcile": "N/A — 批次B/C/D 为只读视图改造（record/类 accessor 返回 unmodifiable 视图 + 2 处 POJO 字段注解豁免），无业务数值与接口口径改动",
+      "scan": "PASS 全量 L2 扫描（-Mode full -JavaPath java-bcd，自动加载 spotbugs-exclude.xml）：RESULT=PASS，P0=0，newP1=18（基线 316 → 批次A后 253 → 批次B/C/D 后 18），newP2=795，newP3=1591，total=2404，knownDebt=0；三条 SpotBugs 规则在自有业务代码内归零，残留 19 条全部为框架/脚手架自带；凭证 .ai/scan/last-pass.json commit=aa04997（== java main tip）",
+      "deploy": "N/A — 开发阶段按用户偏好（m00583）不走容器部署验证",
+      "scope": "PASS — 15 files/9 dirs 拆 3 批提交：8658c55(5文件/3目录)、fe67ccb(4文件/3目录)、aa04997(6文件/3目录)，每批 [scope] PASS、[gate] PASS",
+      "scope_files": null
+    },
+    {
+      "task_id": "T209",
+      "compile": "mvn -B -q -DskipTests compile → exit=0（worktree java-bcd @5606944）",
+      "tests": "mvn -B -Dtest=LiveDtoConstraintTest test → Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, BUILD SUCCESS；含反向锁定「只有 strategyCode/accountId/symbols 三字段有注解、其余可空字段不报错」",
+      "paradigm": "check_java_paradigm.ps1 -RepoPath → 15 段全 OK(new):0，=== RESULT: PASS ===，exit=0",
+      "reconcile": "N/A：本轮仅新增校验注解与单测，无业务计算/接口返回值/数值口径变化，无可对账项",
+      "scan": "check_code_scan.ps1 -Mode full → RESULT: PASS, P0=0, newP1=18（与上一基线 aa04997 持平，无新增）, total=2404, exit=0；凭证 .ai/scan/last-pass.json commit=5606944 == origin/main tip",
+      "deploy": "N/A：本轮未部署，按 AGENTS 开发阶段本地验证约定，部署验证待交付阶段",
+      "scope": "[scope] PASS (2 files / 2 dirs) — git commit 预提交钩子实测输出",
+      "scope_files": null
+    },
+    {
+      "task_id": "T210",
+      "compile": "mvn -B -q -DskipTests test-compile exit=0（worktree java-bcd，tip af0dd6a）",
+      "tests": "改造相关测试全绿：BacktestEngineTest 2/2、ExpiryForceCloseTest 1/1、ContractFieldResolverTest 15/15、FactorValueTernaryTest 全绿；SimContextComboFallbackTest 1 例为基线既有红（12817d9 同错，已实测）",
+      "paradigm": "check_java_paradigm.ps1 -RepoPath 16 段 RESULT: PASS exit=0；第12段 OK(new)=0，存量欠债 9 处（白名单 28→5）",
+      "reconcile": "N/A：本轮为纯重构（字段来源由解析改为取数据自带），未改动任何业务计算公式与数值口径，无需数值对账",
+      "scan": "check_code_scan.ps1 -Mode full RESULT: PASS exit=0；newP0=0 newP1=13 total=2420 commit=af0dd6a；本轮自引入 7 条 P1 已全部清零",
+      "deploy": "N/A：本轮为代码重构，未部署容器（用户既定：开发阶段用 vite dev，容器只在正式交付阶段用）",
+      "scope": "90 文件 / 21 目录，超出 12/4 门禁；已存在 .githooks/scope-allow 授权大范围改动",
+      "scope_files": null
+    },
+    {
+      "task_id": "T212",
+      "compile": "mvn -B -q -DskipTests compile -> exit=0",
+      "tests": "mvn -B -Dtest=子集 test -> Tests run: 105, Failures: 0, Errors: 0; KlineIntegrityCheckerTest 32 例全绿",
+      "paradigm": "scripts/check_java_paradigm.ps1 -RepoPath java-bcd -> 16 段 === RESULT: PASS === exit=0",
+      "reconcile": "本轮改动为纯重构（拆箱表达式、抽 QuoteFieldFiller/VolatilityMath 唯一实现），不改变任何业务数值；ComboMarginInBacktestTest(1)+OptionMarginInBacktestTest(2)+OptionMarginEngineTest(20)+MarginEnricherTest(7)+RealtimeMarginResolverTest(5) 共 35 例数值断言全绿，重构前后输出一致",
+      "scan": "scripts/check_code_scan.ps1 -Mode full -> RESULT: PASS, P0=0, newP1=6(均为Form/VO记债务), receipt commit=af8e861",
+      "deploy": null,
+      "scope": "首次 e412dd1 13 files/8 dirs 走 scope-allow 授权; 后续 eb43693/af8e861 各 1 file",
+      "scope_files": null
+    },
+    {
+      "task_id": "T214",
+      "compile": "mvn -B test 全量 869 例 BUILD SUCCESS（编译随测试一同通过），exit=0",
+      "tests": "Tests run: 869, Failures: 0, Errors: 0, Skipped: 2（修前 9F/6E）",
+      "paradigm": "check_java_paradigm.ps1 -RepoPath 16 段 === RESULT: PASS === exit=0",
+      "reconcile": "本次仅改测试与 daysLeft 自然日求差，无业务数值口径变化；OpportunityCalculatorTest 31 例全绿",
+      "scan": null,
+      "deploy": null,
+      "scope": null,
+      "scope_files": null
     }
   ],
   "items": [
@@ -3082,6 +3632,78 @@
       "files": null,
       "status": "pending",
       "plan_section": "§5"
+    },
+    {
+      "id": "IT-6",
+      "task_id": "T205",
+      "seq": 1,
+      "item": "批次A 真实缺陷与规范违规 80 条（NPE/死存储/冗余判空/空捕获/@Transactional缺rollbackFor/手建线程池/CPD重复码/前端lint）",
+      "files": "[java:com/youlai/boot/**,vue:src/**]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-7",
+      "task_id": "T205",
+      "seq": 2,
+      "item": "批次B EI_EXPOSE_REP2 构造器存外部可变引用 111 条（防御性拷贝或不可变化）",
+      "files": "[java:com/youlai/boot/**]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-8",
+      "task_id": "T205",
+      "seq": 3,
+      "item": "批次C EI_EXPOSE_REP getter返回内部可变引用 67 条（返回拷贝或改不可变类型）",
+      "files": "[java:com/youlai/boot/**]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-9",
+      "task_id": "T205",
+      "seq": 4,
+      "item": "批次D EQ_DOESNT_OVERRIDE_EQUALS 58 条（子类定义equals未覆盖父类，契约破缺）",
+      "files": "[java:com/youlai/boot/**]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-10",
+      "task_id": "T206",
+      "seq": 1,
+      "item": "18 处 @RequestBody 加 @Valid：BacktestController#submit/#saveSource、BacktestPlanController#update/#create、FactorController#compute/#create/#updateStatus/#saveSource、FactorEvalController#submit、WalkForwardController#run、KlineHvRecalculateController#recalc、KlineQualityController#check/#repair/#backfillGreeks、LiveReplayController#start、LiveStrategyController#update/#create、ChainSyncController#optionDiff；并核查各 Request 类已带约束注解（否则 @Valid 空转）",
+      "files": "[java:src/main/java/com/youlai/boot/backtest,java:src/main/java/com/youlai/boot/factor,java:src/main/java/com/youlai/boot/kline,java:src/main/java/com/youlai/boot/live,java:src/main/java/com/youlai/boot/market]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-11",
+      "task_id": "T207",
+      "seq": 1,
+      "item": "批次1 backtest/factor 域 9 个 DTO 补 @NotNull/@NotBlank/@Min 等约束（BacktestRunSubmitRequest/StrategySourceSaveRequest/BacktestPlanSaveRequest/FactorComputeSubmitRequest/FactorCreateRequest/FactorStatusRequest/FactorSourceRequest/FactorEvalSubmitRequest/WalkForwardRequest）",
+      "files": "[src/main/java/com/youlai/boot/backtest/model/,src/main/java/com/youlai/boot/backtest/controller/]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-12",
+      "task_id": "T208",
+      "seq": 1,
+      "item": "批次2 kline 域 4 个 DTO 补约束（KlineHvRecalculateParams/KlineQualityCheckCommand/KlineRepairCommand/KlineGreeksBackfillParams），注意这些参数均 required=false 需按业务判必填",
+      "files": "[src/main/java/com/youlai/boot/kline/]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-13",
+      "task_id": "T209",
+      "seq": 1,
+      "item": "批次3 live/option 域 3 个 DTO 补约束（LiveReplayService.ReplayRequest/LiveStrategySaveRequest/option.model.query.SyncConditions）",
+      "files": "[src/main/java/com/youlai/boot/live/,src/main/java/com/youlai/boot/option/model/query/]",
+      "status": "done",
+      "plan_section": null
     },
     {
       "id": "IT-T21-01",
@@ -3352,6 +3974,213 @@
       "files": "[\"java:system/config（DB 1 行）\"]",
       "status": "done",
       "plan_section": "§17.5"
+    },
+    {
+      "id": "IT-14",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "数据载体补字段：Quote/Bar/Fill 补 exchange+monthCode+期权元数据，StrategyContext 增 optionClass/strike/underlyingSymbol/contractMonths 四个 default 方法",
+      "files": "[backtest/api/Quote.java,backtest/api/Bar.java,backtest/engine/Fill.java,backtest/api/StrategyContext.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-15",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "backtest 引擎去解析：SimContext 删全部私有解析改走 contractMeta；BacktestEngine 到期判断取 monthCode；MatchingEngine 成交随带 Quote 字段",
+      "files": "[backtest/engine/SimContext.java,backtest/engine/BacktestEngine.java,backtest/engine/MatchingEngine.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-16",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "ParquetFeed 缺列容错：改为 DESCRIBE 探测列集 + NULL 兜底，兼容多套历史 Parquet 布局",
+      "files": "[backtest/engine/ParquetFeed.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-17",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "backtest/spec 去解析：Instrument/Universe/Entry 删自建正则与 indexOf(.)",
+      "files": "[backtest/spec/Instrument.java,backtest/spec/Universe.java,backtest/spec/Entry.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-18",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "backtest/run 去解析：fillContractFields 优先取 Fill 字段再退回因子表",
+      "files": "[backtest/run/BacktestRunService.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-19",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "kline/live/option/trade 四处去解析：KlineConsistencyServiceImpl、KlineTradingDayResolver、ReplayBarSource、LiveReplayService、ChainSyncServiceImpl、TradingCalendarService、InfoStatKeyParser",
+      "files": "[kline/service/impl/KlineConsistencyServiceImpl.java,live/replay/ReplayBarSource.java,option/service/impl/ChainSyncServiceImpl.java,trade/service/support/InfoStatKeyParser.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-20",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "测试同步：3 个测试改真实合约字段，删除 SimContextMonthOfTest（靶点已不存在）",
+      "files": "[src/test/java/com/youlai/boot/backtest/engine/ExpiryForceCloseTest.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-21",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "R29 红线 + 第17段门禁：禁止从合约代码解析任何字段",
+      "files": "[scripts/check_java_paradigm.ps1,docs/方案/AGENTS细则-红线卡.md]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-22",
+      "task_id": "T210",
+      "seq": 0,
+      "item": "Python P5 与 vue P6：行情/K线发布帧补齐结构化字段；前端删 symbol 字符串切分",
+      "files": "[apps/md/management/commands/md_gateway.py]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-23",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "SpotBugs 3 处拆箱：KlineIntegrityChecker:505 / KlineImportLogServiceImpl:65 / LiveStrategyService:100",
+      "files": "[src/main/java/com/youlai/boot/kline/quality/KlineIntegrityChecker.java,src/main/java/com/youlai/boot/kline/service/impl/KlineImportLogServiceImpl.java,src/main/java/com/youlai/boot/live/service/LiveStrategyService.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-24",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "ComboMatrixServiceImpl:362 DLS_DEAD_LOCAL_STORE（buildWays 的 mult 死存储）",
+      "files": "[src/main/java/com/youlai/boot/option/service/impl/ComboMatrixServiceImpl.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-25",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "CPD：QuoteSnapshotConsumer/QuoteFieldApplier 两份 41 行重复 → 抽 QuoteFieldFiller + QuoteFieldHolder",
+      "files": "[src/main/java/com/youlai/boot/option/model/entity/QuoteFieldHolder.java,src/main/java/com/youlai/boot/option/service/support/QuoteFieldFiller.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-26",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "CPD：HvRatio2060Factor/VolChange520Factor 50 行镜像 → 抽 VolatilityMath",
+      "files": "[src/main/java/com/youlai/boot/backtest/factor/builtin/VolatilityMath.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-27",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "CPD：合约 Form/VO 六条字段镜像（记债务：注解不同无法合并，抽基类净收益仅 6→1）",
+      "files": "[]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-28",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "SpotBugs 3 处拆箱：KlineIntegrityChecker:505 / KlineImportLogServiceImpl:65 / LiveStrategyService:100",
+      "files": "[src/main/java/com/youlai/boot/kline/quality/KlineIntegrityChecker.java,src/main/java/com/youlai/boot/kline/service/impl/KlineImportLogServiceImpl.java,src/main/java/com/youlai/boot/live/service/LiveStrategyService.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-29",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "ComboMatrixServiceImpl:362 DLS_DEAD_LOCAL_STORE（buildWays 的 mult 死存储）",
+      "files": "[src/main/java/com/youlai/boot/option/service/impl/ComboMatrixServiceImpl.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-30",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "CPD：QuoteSnapshotConsumer/QuoteFieldApplier 两份 41 行重复 → 抽 QuoteFieldFiller + QuoteFieldHolder",
+      "files": "[src/main/java/com/youlai/boot/option/model/entity/QuoteFieldHolder.java,src/main/java/com/youlai/boot/option/service/support/QuoteFieldFiller.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-31",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "CPD：HvRatio2060Factor/VolChange520Factor 50 行镜像 → 抽 VolatilityMath",
+      "files": "[src/main/java/com/youlai/boot/backtest/factor/builtin/VolatilityMath.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-32",
+      "task_id": "T212",
+      "seq": 0,
+      "item": "CPD：合约 Form/VO 六条字段镜像（记债务：注解不同无法合并，抽基类净收益仅 6→1）",
+      "files": "[]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-33",
+      "task_id": "T214",
+      "seq": 1,
+      "item": "AuthControllerTest 6 errors 修复（ObjectMapper 自建实例 + MockMvc 真实响应断言）",
+      "files": "[src/test/java/com/youlai/boot/AuthControllerTest.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-34",
+      "task_id": "T214",
+      "seq": 2,
+      "item": "KlineBackfillProcessorTest 7 failures 修复（补 contractLookup 桩 + 夹具带 productCode/instrumentType）",
+      "files": "[src/test/java/com/youlai/boot/kline/backfill/KlineBackfillProcessorTest.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-35",
+      "task_id": "T214",
+      "seq": 3,
+      "item": "KlineGreeksBackfillServiceImplTest 2 failures 修复（补 batchUpdateGreeks 桩）",
+      "files": "[src/test/java/com/youlai/boot/kline/service/impl/KlineGreeksBackfillServiceImplTest.java]",
+      "status": "done",
+      "plan_section": null
+    },
+    {
+      "id": "IT-36",
+      "task_id": "T214",
+      "seq": 4,
+      "item": "OpportunityCalculator.daysLeft 改自然日求差，消除时间敏感抖动",
+      "files": "[src/main/java/com/youlai/boot/option/service/support/OpportunityCalculator.java]",
+      "status": "done",
+      "plan_section": null
     }
   ],
   "accepts": [
@@ -3879,6 +4708,226 @@
       "by_session": "存量迁移"
     },
     {
+      "id": 104,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "d986747",
+      "message": "A5: CPD 重复代码 9 条 + @Transactional rollbackFor 5 条",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:21.243Z",
+      "by_session": null
+    },
+    {
+      "id": 105,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "c70265e",
+      "message": "A2: 清理19处只写不读的死存储与无调用重载（7 文件 +6/-30）",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:21.405Z",
+      "by_session": null
+    },
+    {
+      "id": 106,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "9a82527",
+      "message": "A7-kline: SpotBugs 异常杂项 kline 域 4 文件",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:21.580Z",
+      "by_session": null
+    },
+    {
+      "id": 107,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "d90710b",
+      "message": "A7-backtest: 构造器抛异常/空指针/格式化串 4 文件",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:21.757Z",
+      "by_session": null
+    },
+    {
+      "id": 108,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "e96a864",
+      "message": "A7-2: 捕获范围收窄与死存储清理 4 文件",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:21.905Z",
+      "by_session": null
+    },
+    {
+      "id": 109,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "23b533c",
+      "message": "A7-3: SpotBugs 杂项收尾 3 文件 +11/-3",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:22.069Z",
+      "by_session": null
+    },
+    {
+      "id": 110,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "bc7359f",
+      "message": "A4: Path.getFileName 可空 NPE 防护 7 处",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:22.223Z",
+      "by_session": null
+    },
+    {
+      "id": 111,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "a07b644",
+      "message": "A3: 装箱后立即拆箱 9 处改同类型缺省值",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:22.365Z",
+      "by_session": null
+    },
+    {
+      "id": 112,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "3519722",
+      "message": "A8: 申报费规则查找改用命中标志收尾",
+      "kind": "refactor",
+      "at": "2026-10-26T13:01:22.505Z",
+      "by_session": null
+    },
+    {
+      "id": 113,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "2790bec",
+      "message": "A8 修正: 申报费组查找改用 Stream findFirst，消除自引入的 DB_DUPLICATE_BRANCHES",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:22.658Z",
+      "by_session": null
+    },
+    {
+      "id": 114,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "d1c5825",
+      "message": "refactor(option,kline,backtest): 批次A 清理19处死存储与无调用重载 + 合并 main",
+      "kind": "refactor",
+      "at": "2026-10-26T13:01:22.829Z",
+      "by_session": null
+    },
+    {
+      "id": 115,
+      "task_id": "T205",
+      "repo": "vue",
+      "commit_hash": "b756728",
+      "message": "A1: 前端 ESLint 9 条 error 清零（vue/block-order 6 + no-useless-assignment 2 + no-unused-vars 1）",
+      "kind": "fix",
+      "at": "2026-10-26T13:01:22.993Z",
+      "by_session": null
+    },
+    {
+      "id": 116,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "8658c55",
+      "message": "refactor(backtest): 参数与结果模型补显式只读访问器（批1 5 文件）",
+      "kind": "refactor",
+      "at": "2026-10-26T15:31:31.612Z",
+      "by_session": null
+    },
+    {
+      "id": 117,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "fe67ccb",
+      "message": "refactor(backtest,validate): 敏感度/校验/窗口结果类补只读访问器（批2 4 文件）",
+      "kind": "refactor",
+      "at": "2026-10-26T15:31:31.785Z",
+      "by_session": null
+    },
+    {
+      "id": 118,
+      "task_id": "T205",
+      "repo": "java",
+      "commit_hash": "aa04997",
+      "message": "refactor(live,option): 引擎与期权支撑类补只读视图（批3 6 文件）+ 合并 main",
+      "kind": "merge",
+      "at": "2026-10-26T15:31:31.958Z",
+      "by_session": null
+    },
+    {
+      "id": 99,
+      "task_id": "T206",
+      "repo": "java",
+      "commit_hash": "99cf5f1",
+      "message": "fix(validation): 18 处 @RequestBody 补齐 @Valid，ValidationTest 转绿",
+      "kind": "fix",
+      "at": "2026-10-26T09:51:23.980Z",
+      "by_session": null
+    },
+    {
+      "id": 100,
+      "task_id": "T206",
+      "repo": "java",
+      "commit_hash": "99cf5f1",
+      "message": "ff 合入 main：576aad6..99cf5f1（T206 分支 t206-controller-valid）",
+      "kind": "merge",
+      "at": "2026-10-26T10:02:39.396Z",
+      "by_session": null
+    },
+    {
+      "id": 101,
+      "task_id": "T207",
+      "repo": "java",
+      "commit_hash": "522e6a0",
+      "message": "fix(validation): 回测域 6 个请求体 DTO 补约束注解，@Valid 由空转转为真校验",
+      "kind": "fix",
+      "at": "2026-10-26T11:04:12.036Z",
+      "by_session": null
+    },
+    {
+      "id": 102,
+      "task_id": "T207",
+      "repo": "java",
+      "commit_hash": "522e6a0",
+      "message": "merge: t207-dto-constraints 合入 main（回测域 6 个 DTO 补约束注解，@Valid 由空转转为真校验）",
+      "kind": "merge",
+      "at": "2026-10-26T11:10:14.714Z",
+      "by_session": null
+    },
+    {
+      "id": 103,
+      "task_id": "T208",
+      "repo": "java",
+      "commit_hash": "0a7bb39",
+      "message": "feat(kline,validate): K线域4个请求体补字段约束，7类非法入参改由400拦截",
+      "kind": "merge",
+      "at": "2026-10-26T11:19:09.733Z",
+      "by_session": null
+    },
+    {
+      "id": 119,
+      "task_id": "T209",
+      "repo": "java",
+      "commit_hash": "5606944",
+      "message": "feat(live,validate): 实盘策略请求体补关键字段约束并加 8 例生效性测试",
+      "kind": "fix",
+      "at": "2026-10-26T15:48:24.319Z",
+      "by_session": null
+    },
+    {
+      "id": 120,
+      "task_id": "T209",
+      "repo": "java",
+      "commit_hash": "5606944",
+      "message": "merge: T209 live 域 LiveStrategySaveRequest 补 3 约束 + 8 例测试，fast-forward 合入 main",
+      "kind": "merge",
+      "at": "2026-10-26T15:55:07.989Z",
+      "by_session": null
+    },
+    {
       "id": 83,
       "task_id": "T21",
       "repo": "docs",
@@ -3957,6 +5006,136 @@
       "kind": "other",
       "at": "2026-10-26T03:36:15.238Z",
       "by_session": "存量灌注（git log 验真）"
+    },
+    {
+      "id": 121,
+      "task_id": "T210",
+      "repo": "java",
+      "commit_hash": "d42c0bf",
+      "message": "refactor(kernel,factor): 合约字段一律取自数据源，因子值收敛为三元组",
+      "kind": "feat",
+      "at": "2026-10-27T04:08:08.055Z",
+      "by_session": null
+    },
+    {
+      "id": 122,
+      "task_id": "T210",
+      "repo": "java",
+      "commit_hash": "895f93b",
+      "message": "refactor(kernel): 全模块消除从合约代码解析字段，改为取数据自带字段",
+      "kind": "feat",
+      "at": "2026-10-27T04:08:08.189Z",
+      "by_session": null
+    },
+    {
+      "id": 123,
+      "task_id": "T210",
+      "repo": "java",
+      "commit_hash": "2d701ff",
+      "message": "chore(scan): BacktestRunService 构造器注入的 Mapper 属设计意图，收入 SpotBugs 排除集",
+      "kind": "chore",
+      "at": "2026-10-27T04:08:08.339Z",
+      "by_session": null
+    },
+    {
+      "id": 124,
+      "task_id": "T210",
+      "repo": "java",
+      "commit_hash": "af0dd6a",
+      "message": "fix(backtest): rawParams 对外只读，消除本轮引入的 EI_EXPOSE_REP",
+      "kind": "fix",
+      "at": "2026-10-27T04:08:08.510Z",
+      "by_session": null
+    },
+    {
+      "id": 125,
+      "task_id": "T210",
+      "repo": "java",
+      "commit_hash": "c5ee001",
+      "message": "chore(repo): 清理历史误提交的 4 个临时提交信息文件（main tip）",
+      "kind": "merge",
+      "at": "2026-10-27T04:13:07.332Z",
+      "by_session": null
+    },
+    {
+      "id": 126,
+      "task_id": "T212",
+      "repo": "java",
+      "commit_hash": "e412dd1",
+      "message": "fix(option,backtest): 清理13条P1既有债务，行情填充与波动率计算各收口到唯一实现",
+      "kind": "fix",
+      "at": "2026-10-27T05:11:40.064Z",
+      "by_session": null
+    },
+    {
+      "id": 127,
+      "task_id": "T212",
+      "repo": "java",
+      "commit_hash": "eb43693",
+      "message": "fix(kline): 检核告警行数的三元表达式统一为 Long，消除拆箱再装箱",
+      "kind": "fix",
+      "at": "2026-10-27T05:11:40.211Z",
+      "by_session": null
+    },
+    {
+      "id": 128,
+      "task_id": "T212",
+      "repo": "java",
+      "commit_hash": "e412dd1",
+      "message": "fix(option,backtest): 清理13条P1既有债务，行情填充与波动率计算各收口到唯一实现",
+      "kind": "fix",
+      "at": "2026-10-27T05:21:31.484Z",
+      "by_session": null
+    },
+    {
+      "id": 129,
+      "task_id": "T212",
+      "repo": "java",
+      "commit_hash": "eb43693",
+      "message": "fix(kline): 检核告警行数的三元表达式统一为 Long，消除拆箱再装箱",
+      "kind": "fix",
+      "at": "2026-10-27T05:21:31.680Z",
+      "by_session": null
+    },
+    {
+      "id": 130,
+      "task_id": "T212",
+      "repo": "java",
+      "commit_hash": "af8e861",
+      "message": "fix(kline): 基准字段不一致告警的行数改用局部 long，消除拆箱再装箱",
+      "kind": "fix",
+      "at": "2026-10-27T05:21:31.824Z",
+      "by_session": null
+    },
+    {
+      "id": 131,
+      "task_id": "T212",
+      "repo": "java",
+      "commit_hash": "af8e861",
+      "message": "P1 债务清理收官：13 条修 7 记债 6，main=af8e861",
+      "kind": "merge",
+      "at": "2026-10-27T05:51:16.864Z",
+      "by_session": null
+    },
+    {
+      "id": 132,
+      "task_id": "T214",
+      "repo": "java",
+      "commit_hash": "3ada0aa",
+      "message": "test: 修复15例既有红测试并纠正daysLeft时间敏感计算",
+      "kind": "test",
+      "at": "2026-10-27T07:29:11.837Z",
+      "by_session": null
+    },
+    {
+      "id": 133,
+      "task_id": "T214",
+      "repo": "java",
+      "commit_hash": "3ada0aa",
+      "message": "test: 修复15例既有红测试并纠正daysLeft时间敏感计算",
+      "kind": "merge",
+      "at": "2026-10-27T07:33:59.215Z",
+      "by_session": null
     },
     {
       "id": 4,
@@ -4445,6 +5624,70 @@
       "l1_note": null,
       "l2": "approved",
       "l2_at": "2026-10-26T09:17:58.915Z"
+    },
+    {
+      "task_id": "T206",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-26T10:05:06.695Z"
+    },
+    {
+      "task_id": "T207",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-26T11:10:14.544Z"
+    },
+    {
+      "task_id": "T208",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-26T11:41:49.065Z"
+    },
+    {
+      "task_id": "T205",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-26T15:30:30.222Z"
+    },
+    {
+      "task_id": "T209",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-26T15:55:02.562Z"
+    },
+    {
+      "task_id": "T210",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-27T04:13:07.146Z"
+    },
+    {
+      "task_id": "T212",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-27T05:51:11.712Z"
+    },
+    {
+      "task_id": "T214",
+      "l0": null,
+      "l1": null,
+      "l1_note": null,
+      "l2": "approved",
+      "l2_at": "2026-10-27T07:33:58.879Z"
     }
   ],
   "sessions": [
@@ -6990,6 +8233,17 @@
       "task_id": null
     },
     {
+      "id": "S-1216",
+      "dsh_id": "session-c1806833-8d39-494c-85d4-6ab12ce85a2b",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T07:59:11.387Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-122",
       "dsh_id": "c7dec953-190f-4b95-9b7e-7d59f58789f6",
       "workspace": "default-workspace",
@@ -6997,6 +8251,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T02:23:46.954Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1223",
+      "dsh_id": "session-e290406c-0d6e-4bd3-b180-b33172c48190",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T08:48:37.180Z",
       "status": "idle",
       "task_id": null
     },
@@ -7023,6 +8288,28 @@
       "task_id": null
     },
     {
+      "id": "S-1244",
+      "dsh_id": "4e296177-783b-4cfa-9347-d2fe5a1a01c4",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T12:48:21.464Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1249",
+      "dsh_id": "session-e3df7489-0895-4f1f-b4a9-ddc630504b6a",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:14:37.775Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-125",
       "dsh_id": "0346ce6b-1058-44c1-b2eb-82542cba0501",
       "workspace": "default-workspace",
@@ -7030,6 +8317,61 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T02:59:55.761Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1254",
+      "dsh_id": "0ac01cb3-60e1-4263-b170-3607c5583553",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:24:58.307Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1255",
+      "dsh_id": "54ada21a-375f-4e81-9d1b-f82de6a6dba0",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:24:58.362Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1256",
+      "dsh_id": "66d39b6b-3b52-4519-816d-9687c66ae999",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:24:58.387Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1257",
+      "dsh_id": "c52c8b2a-4714-4659-b6e7-4f6d4f7e5c67",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:24:58.413Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1258",
+      "dsh_id": "d76d658e-c494-4411-be7e-d38358e8a560",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:24:58.339Z",
       "status": "idle",
       "task_id": null
     },
@@ -7045,6 +8387,61 @@
       "task_id": null
     },
     {
+      "id": "S-1262",
+      "dsh_id": "326f368b-ebf0-438e-8a12-f740fdd96869",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:34:04.759Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1263",
+      "dsh_id": "3cff9afd-7b92-4e47-a553-016293ad9d62",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:34:04.729Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1264",
+      "dsh_id": "557e918c-4f24-46f9-82db-b999db2811fb",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:34:04.790Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1265",
+      "dsh_id": "be37ac1b-7200-465a-b8fd-bc13499c6ccf",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:34:04.160Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1266",
+      "dsh_id": "e2590c0d-58f5-410b-be74-a44ec6b117e7",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T13:34:04.686Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-127",
       "dsh_id": "686a6e94-59cb-489d-9c1f-02210e72d00d",
       "workspace": "default-workspace",
@@ -7052,6 +8449,28 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T03:57:51.105Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1275",
+      "dsh_id": "session-3d1bd2b8-b976-4134-93ae-38a4e0a62f29",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T14:46:44.630Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1276",
+      "dsh_id": "90644171-fc47-4c65-9e00-e5ebad530e5c",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T14:56:16.578Z",
       "status": "idle",
       "task_id": null
     },
@@ -7067,6 +8486,17 @@
       "task_id": null
     },
     {
+      "id": "S-1282",
+      "dsh_id": "5bb576d2-9b7f-4e69-a6f4-e2073ac6c940",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T15:31:41.197Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-129",
       "dsh_id": "fbe59b99-a83f-46a0-8fb3-85de769fcc5d",
       "workspace": "default-workspace",
@@ -7074,6 +8504,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T04:07:56.600Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1291",
+      "dsh_id": "session-4f0e0df4-c238-4908-89e3-842364ca81ac",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-26T16:31:40.274Z",
       "status": "idle",
       "task_id": null
     },
@@ -7122,6 +8563,28 @@
       "task_id": null
     },
     {
+      "id": "S-1323",
+      "dsh_id": "session-9c35de09-b150-4e00-8dda-e95db738ac4b",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-27T01:25:22.236Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1328",
+      "dsh_id": "session-f874c8e3-9959-41bf-bec6-3e34ac855715",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-27T02:02:26.247Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-133",
       "dsh_id": "dede8722-10b3-43a8-b098-df04d4f2bd05",
       "workspace": "default-workspace",
@@ -7140,6 +8603,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T04:58:16.607Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1341",
+      "dsh_id": "session-1de42b36-c279-4f1d-8a09-c1f750018c04",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-27T03:58:57.206Z",
       "status": "idle",
       "task_id": null
     },
@@ -7166,6 +8640,17 @@
       "task_id": null
     },
     {
+      "id": "S-1367",
+      "dsh_id": "a828c22f-0be4-4e8a-a399-877e25ee75c6",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-27T06:17:31.326Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-137",
       "dsh_id": "01bc2633-9367-4566-aa80-15ff55e30e04",
       "workspace": "default-workspace",
@@ -7173,6 +8658,28 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T05:17:38.974Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1375",
+      "dsh_id": "session-9b53fc5c-6fa0-4cc9-aa5b-144b005609f8",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T00:22:33.342Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1376",
+      "dsh_id": "session-3e92ed95-e1c1-4b1a-b7da-b8f6a2305c99",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T00:23:11.742Z",
       "status": "idle",
       "task_id": null
     },
@@ -7199,6 +8706,28 @@
       "task_id": null
     },
     {
+      "id": "S-1398",
+      "dsh_id": "03636558-e2dd-4de4-9387-f8635e926be1",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T06:04:54.753Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1399",
+      "dsh_id": "98fc97bf-284e-4d7f-87e9-4bd1bf3ccaad",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T06:04:54.729Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-14",
       "dsh_id": "ac3e8a0f-9f56-413a-9fa4-f663dab3fad4",
       "workspace": "default-workspace",
@@ -7221,6 +8750,105 @@
       "task_id": null
     },
     {
+      "id": "S-1400",
+      "dsh_id": "fc01cc66-239f-4890-8af2-f1d37c028fed",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T06:04:54.706Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1402",
+      "dsh_id": "085eeb17-5617-4b9c-8074-023909916866",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T06:45:50.986Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1403",
+      "dsh_id": "43227c67-b144-49a3-9804-b1d39838f6b2",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T06:45:50.954Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1404",
+      "dsh_id": "03d8436c-2cf2-4979-a047-8f2b3e414e0a",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T06:46:16.040Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1405",
+      "dsh_id": "b43d85c0-a078-49a8-91e2-3c46033f8efb",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T06:46:15.989Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1406",
+      "dsh_id": "f138cc1d-679b-4053-b83c-b23aff284582",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T06:46:16.011Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1407",
+      "dsh_id": "a26fca4a-2967-4006-88ff-44a57855e314",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T07:20:01.037Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1408",
+      "dsh_id": "045557a7-6d7c-41d7-95ef-09ead53e92d8",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.489Z",
+      "last_active_at": "2026-10-28T07:23:23.584Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1409",
+      "dsh_id": "dd1ca531-7861-4b64-abb1-01c6638f1974",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T07:23:23.601Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-141",
       "dsh_id": "c70b86ed-a239-454c-b9c8-74babc970c07",
       "workspace": "default-workspace",
@@ -7232,6 +8860,61 @@
       "task_id": null
     },
     {
+      "id": "S-1410",
+      "dsh_id": "1f569e61-dfac-4a82-ad80-349d84c2c77d",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T07:24:26.713Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1411",
+      "dsh_id": "a7e561b3-adce-4fe1-8ffe-dbbd34d5161f",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T07:24:15.391Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1412",
+      "dsh_id": "f5df0925-871a-4fff-8cd5-c46a2c98f84c",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T07:24:15.413Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1413",
+      "dsh_id": "session-1e34362d-295d-4359-afc7-ec0904108eca",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T07:52:53.749Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1419",
+      "dsh_id": "dc7d1f6c-9f7d-427c-bc97-f7d3376ef200",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T08:43:42.293Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-142",
       "dsh_id": "d92f7105-c086-4431-822d-4264708e5190",
       "workspace": "default-workspace",
@@ -7239,6 +8922,39 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T05:20:26.339Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1421",
+      "dsh_id": "f60ff1af-a4a8-4443-b802-73307994e559",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T08:51:35.410Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1423",
+      "dsh_id": "session-01b4a4f9-02cf-47ea-b9cb-7b5ecdd99ef1",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T09:19:40.962Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1427",
+      "dsh_id": "session-d1acba5a-af65-4eac-8acb-0684774e50a2",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T09:38:51.944Z",
       "status": "idle",
       "task_id": null
     },
@@ -7265,6 +8981,28 @@
       "task_id": null
     },
     {
+      "id": "S-1444",
+      "dsh_id": "session-5c7c4728-16a0-44eb-bf43-70bdbeeec1e2",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T12:56:47.718Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1446",
+      "dsh_id": "session-172e2625-debe-4284-bcad-e84dd65f7a8d",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T13:06:34.422Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-145",
       "dsh_id": "session-b99184bb-24ad-48b0-98be-d8ce9b42456f",
       "workspace": "default-workspace",
@@ -7287,6 +9025,17 @@
       "task_id": null
     },
     {
+      "id": "S-1466",
+      "dsh_id": "session-e7a9b4ec-b943-4c33-9e2a-746e3484aca0",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-28T18:37:24.758Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-147",
       "dsh_id": "bad6f796-75de-4a44-b40c-98c0f5f5e8ec",
       "workspace": "default-workspace",
@@ -7294,6 +9043,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T05:37:59.001Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1475",
+      "dsh_id": "session-cb522cf6-50c6-4d8d-a96f-bee485272271",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-29T01:10:05.447Z",
       "status": "idle",
       "task_id": null
     },
@@ -7309,6 +9069,17 @@
       "task_id": null
     },
     {
+      "id": "S-1489",
+      "dsh_id": "ab93360c-decf-45ec-abc2-9aff72340b04",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-29T03:44:24.997Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-149",
       "dsh_id": "93469714-4a32-4730-ad2e-f659be7ca9cf",
       "workspace": "default-workspace",
@@ -7316,6 +9087,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T05:40:52.035Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1497",
+      "dsh_id": "session-c734dc80-249b-4e55-97e2-b710eadbeea9",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-29T08:03:32.505Z",
       "status": "idle",
       "task_id": null
     },
@@ -7338,6 +9120,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T05:40:52.049Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1503",
+      "dsh_id": "session-6094a3c2-7015-4be2-8c54-d5620c259539",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-29T09:25:09.555Z",
       "status": "idle",
       "task_id": null
     },
@@ -7386,6 +9179,28 @@
       "task_id": null
     },
     {
+      "id": "S-1542",
+      "dsh_id": "session-8ce7d61a-d967-4604-8e3e-b492a4d91bf6",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-30T01:37:27.732Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1546",
+      "dsh_id": "session-0f133c95-de2d-44e8-bd35-5003e31917bb",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-30T02:37:57.195Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-155",
       "dsh_id": "0c46a0a2-5086-4cc0-9178-6e143075a99a",
       "workspace": "default-workspace",
@@ -7408,6 +9223,17 @@
       "task_id": null
     },
     {
+      "id": "S-1568",
+      "dsh_id": "session-f120116c-88fe-4746-9486-184235f5f1f3",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-30T06:10:44.388Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-157",
       "dsh_id": "ee8928ea-bea7-4869-8182-ea7685f6ec46",
       "workspace": "default-workspace",
@@ -7415,6 +9241,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T06:22:36.627Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1571",
+      "dsh_id": "820ea93d-6b18-48f8-a9db-895cea34c5fd",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-30T06:25:25.505Z",
       "status": "idle",
       "task_id": null
     },
@@ -7430,6 +9267,17 @@
       "task_id": null
     },
     {
+      "id": "S-1589",
+      "dsh_id": "session-6648638d-2c72-4fc4-8923-5d0793f0b16d",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-30T09:31:21.208Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-159",
       "dsh_id": "8640ee0a-909a-408b-a0d8-af2066ee0abc",
       "workspace": "default-workspace",
@@ -7437,6 +9285,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T06:24:05.740Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1594",
+      "dsh_id": "9cc8a0f9-cc24-4748-b5cf-bfbe51088cea",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-30T11:05:33.945Z",
       "status": "idle",
       "task_id": null
     },
@@ -7463,6 +9322,17 @@
       "task_id": null
     },
     {
+      "id": "S-1608",
+      "dsh_id": "session-d3f42e90-0367-43a5-87f0-e31c2408f3fe",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-30T13:52:59.085Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-161",
       "dsh_id": "798b2c6b-0a36-4342-9b2b-e94d2b395714",
       "workspace": "default-workspace",
@@ -7470,6 +9340,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T06:24:21.281Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1613",
+      "dsh_id": "46b1a4e8-5612-4ba7-ad23-102d90731df6",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-30T14:22:38.457Z",
       "status": "idle",
       "task_id": null
     },
@@ -7485,6 +9366,17 @@
       "task_id": null
     },
     {
+      "id": "S-1621",
+      "dsh_id": "session-327c39d5-8fdd-42e0-aea4-93360fe8e9c3",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-31T02:53:31.496Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-163",
       "dsh_id": "4f1de58c-567b-4639-8aa5-f29eb6beb8cd",
       "workspace": "default-workspace",
@@ -7496,6 +9388,17 @@
       "task_id": null
     },
     {
+      "id": "S-1638",
+      "dsh_id": "session-c383c27e-2941-4595-b0bb-2d36e1e5928f",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-31T08:54:23.430Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
       "id": "S-164",
       "dsh_id": "d7ca0c16-6202-4488-883a-ab03d1488c92",
       "workspace": "default-workspace",
@@ -7503,6 +9406,17 @@
       "role": null,
       "created_at": "2026-10-26T02:05:40.805Z",
       "last_active_at": "2026-10-11T06:25:41.863Z",
+      "status": "idle",
+      "task_id": null
+    },
+    {
+      "id": "S-1647",
+      "dsh_id": "session-7d90d00d-201c-4f7c-bcd1-3fb22e299588",
+      "workspace": "default-workspace",
+      "model": null,
+      "role": null,
+      "created_at": "2026-11-01T06:32:23.490Z",
+      "last_active_at": "2026-10-31T10:51:05.516Z",
       "status": "idle",
       "task_id": null
     },
@@ -17704,5 +19618,11 @@
       "task_id": null
     }
   ],
-  "broken": []
+  "broken": [
+    {
+      "task": "T215",
+      "check": "产出无账",
+      "msg": "T215(开发中) 无执行会话挂账 owner_session_id"
+    }
+  ]
 }
